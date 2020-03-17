@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/korea"
+        android:icon="@android:drawable/presence_online"
+        android:title="KOREA" />
+    <item
+        android:id="@+id/world"
+        android:icon="@android:drawable/ic_notification_clear_all"
+        android:title="WORLD" />
+    <item
+        android:id="@+id/mask"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="MASK" />
+
+    <item
+        android:id="@+id/help"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="HELP" />
+
+
+</menu>
