@@ -19,6 +19,7 @@ class FragmentKorea : Fragment() {
     val TAG = "Main Activity"
     var coList: ArrayList<Item> = arrayListOf()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -47,7 +48,6 @@ class FragmentKorea : Fragment() {
                 //newsList.add(mNews)
             }
              */
-            val FragmentKorea=FragmentKorea()
             val temp : ArrayList<Item> = arrayListOf()
             val title = infectedNum.select("strong.tit").text()
             val num = infectedNum.select("span.num").text()
@@ -60,13 +60,13 @@ class FragmentKorea : Fragment() {
 
         override fun onPostExecute(result: ArrayList<Item>) {
             //문서제목 출력
+
             super.onPostExecute(result)
         }
     }
 
 
     companion object {
-
         fun newInstance(): FragmentKorea {
             val FragmentKorea = FragmentKorea()
             FragmentKorea.coList=MyAsyncTask().execute("http://ncov.mohw.go.kr").get()
@@ -79,11 +79,11 @@ class FragmentKorea : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var a= inflater.inflate(R.layout.fragment_korea, container, false)
-        val FragmentKorea = FragmentKorea()
-        Log.d("Ddddddddddddddddddddd",FragmentKorea.coList.toString())
-
-        //a.koreatext.setText(FragmentKorea.coList.toString())
-       // a.koreatext.setText("dd")
+        for(data in coList)
+        {
+            Log.e("cocococococo",data.toString())
+        }
+        a.koreatext.setText(coList.toString())
         return a
     }
     data class Item(val title: String, val num:String, val before: String)
