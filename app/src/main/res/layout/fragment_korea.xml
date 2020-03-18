@@ -5,11 +5,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/koreatext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="korea"
-        android:textSize="50dp"
+        android:textSize="20dp"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
