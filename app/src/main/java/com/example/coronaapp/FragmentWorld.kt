@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_world.*
 import kotlinx.android.synthetic.main.fragment_world.view.*
 import org.jsoup.Jsoup
 import java.io.IOException
@@ -29,7 +28,7 @@ class FragmentWorld : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var a = inflater.inflate(R.layout.fragment_world, container, false)
-        a.worldtext.text = coronaList.toString()
+        //a.worldtext.text = coronaList.toString()
 
         return a
         //return inflater.inflate(R.layout.fragment_world, container, false)
@@ -67,7 +66,7 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // ь
                 newDeaths = datum.select("td")[4].text().trim()
                 totalRecovered = datum.select("td")[5].text().trim()
 
-                var total = Information(country,totalCases,newCases,totalDeaths,newDeaths,totalRecovered)
+                var total = Information(country,totalCases,newCases,newDeaths,totalDeaths,totalRecovered)
                 infoList.add(total)
                 //Log.d(totalCases,"ыки")
             }
