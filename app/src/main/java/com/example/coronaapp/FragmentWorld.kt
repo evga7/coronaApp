@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_mask.view.textView2
+import kotlinx.android.synthetic.main.fragment_world.*
+import kotlinx.android.synthetic.main.fragment_world.view.*
 import org.jsoup.Jsoup
 import java.io.IOException
 
 class FragmentWorld : Fragment() {
-
     val url = "https://www.worldometers.info/coronavirus/"
     var coronaList = ArrayList<Information>()
 
@@ -29,8 +29,8 @@ class FragmentWorld : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var a = inflater.inflate(R.layout.fragment_world, container, false)
-        var b = a.textView2
-        b.text = "11"
+        a.worldtext.text = coronaList.toString()
+
         return a
         //return inflater.inflate(R.layout.fragment_world, container, false)
 
@@ -76,7 +76,6 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
             Log.d("안됨","안딤")
             e.printStackTrace()
         }
-
         return infoList
     }
 
@@ -91,4 +90,5 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
 }
 
 data class Information(val country:String, val totalCases:String, val newCases : String, val totalDeaths : String, val newDeaths : String, val totalRecovered : String)
+
 
