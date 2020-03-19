@@ -26,15 +26,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"></LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:orientation="vertical"
+                android:background="#679FCC"
                 >
 
                 <TextView
@@ -59,10 +57,22 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/round_corners"
                 android:orientation="vertical">
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,8 +85,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:textSize="20dp"
-                        android:textStyle="bold"
-                         />
+                        android:textStyle="bold" />
+
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -96,8 +106,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:textSize="20dp"
-                        android:layout_marginRight="20dp" />
+                        android:layout_marginRight="20dp"
+                        android:textSize="20dp" />
 
                 </LinearLayout>
 
@@ -110,10 +120,10 @@
                         android:id="@+id/cureText1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
                         android:layout_marginLeft="20dp"
-                        android:textStyle="bold"
-                         />
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -124,8 +134,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
-                        android:textSize="20dp"
                         android:gravity="right"
+                        android:textSize="20dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -133,9 +143,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:textSize="20dp"
                         android:layout_marginRight="20dp"
-                        android:textColor="#4A65F2" />
+                        android:textColor="#4A65F2"
+                        android:textSize="20dp" />
 
                 </LinearLayout>
 
@@ -150,8 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:textSize="20dp"
-                        android:textStyle="bold"
-                         />
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="0dp"
@@ -173,8 +182,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:layout_marginRight="20dp"
-                        android:textSize="20dp"
-                        android:textColor="#64F473" />
+                        android:textColor="#64F473"
+                        android:textSize="20dp" />
 
                 </LinearLayout>
 
@@ -189,8 +198,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:textSize="20dp"
-                        android:textStyle="bold"
-                         />
+                        android:textStyle="bold" />
+
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -209,9 +218,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="20dp"
                         android:layout_marginBottom="50dp"
-                        android:textColor="#FF0000" />
+                        android:textColor="#FF0000"
+                        android:textSize="20dp" />
 
                 </LinearLayout>
 
