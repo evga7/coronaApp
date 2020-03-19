@@ -1,84 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <TableLayout
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000000"
-        android:padding = "8dp"
-        android:layout_margin="8dp"
-        android:stretchColumns="*"
-        >
+        android:layout_height="wrap_content"
+        android:text="help"
+        android:textSize="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:background="#ffffff"
-
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:gravity="center"
-                android:text="국가"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:gravity="center"
-                android:text="확진자"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:gravity="center"
-                android:text="새로운 확진자"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:gravity="center"
-                android:text="새로운 사망자"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:gravity="center"
-                android:text="총 사망자"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:gravity="center"
-                android:text="회복"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="15sp" />
-
-        </TableRow>
-
-    </TableLayout>
-
-</LinearLayout>
-
+</RelativeLayout>

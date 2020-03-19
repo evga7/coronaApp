@@ -17,11 +17,11 @@ class FragmentWorld : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        try {
-            coronaList = WorldCrawling().execute(url).get()
-        }catch (e : IOException) {
-            e.printStackTrace();
-        }
+//        try {
+//            coronaList = WorldCrawling().execute(url).get()
+//        }catch (e : IOException) {
+//            e.printStackTrace();
+//        }
 
     }
 
