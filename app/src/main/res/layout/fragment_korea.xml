@@ -28,6 +28,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:orientation="vertical"
                 >
@@ -205,6 +210,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:textSize="20dp"
+                        android:layout_marginBottom="50dp"
                         android:textColor="#FF0000" />
 
                 </LinearLayout>
@@ -214,18 +220,46 @@
             <org.eazegraph.lib.charts.BarChart
                 android:id="@+id/coronaChart"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                app:egLegendTextSize="10dp"
-                android:padding="10dp"
+
+                android:focusable="auto"
                 app:egBarWidth="20dp"
+                app:egEmptyDataText="dd"
                 app:egEnableScroll="true"
                 app:egFixedBarWidth="true"
-                app:egLegendHeight="40dp"
-                app:egShowDecimal="true" />
+                app:egLegendHeight="@dimen/cardview_compat_inset_shadow"
+                app:egShowDecimal="true"
+                app:egShowValues="true">
+
+            </org.eazegraph.lib.charts.BarChart>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/coChartText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/coChartText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/coChartText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
 
         </LinearLayout>

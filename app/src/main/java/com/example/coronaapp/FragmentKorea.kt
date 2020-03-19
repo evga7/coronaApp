@@ -107,7 +107,10 @@ class FragmentKorea : Fragment() {
         barChar=koreaFragView.coronaChart
         barChar.clearChart()
         for (i in 5..7)
-        barChar.addBar(BarModel(coList[i].title+" "+coList[i].before,coList[i].num.replace(",","").toFloat(), 0xFF56B7F1.toInt()))
+        barChar.addBar(BarModel("",coList[i].before.substringAfter('(').substringBefore('%').toFloat(), 0xFF56B7F1.toInt()))
+        koreaFragView.coChartText1.setText("  "+coList[5].title+"\n"+coList[5].num+"명")
+        koreaFragView.coChartText2.setText(coList[6].title+"\n    "+coList[6].num+"명")
+        koreaFragView.coChartText3.setText(coList[7].title+"\n"+coList[7].num+"명")
         barChar.startAnimation()
 
         return koreaFragView
