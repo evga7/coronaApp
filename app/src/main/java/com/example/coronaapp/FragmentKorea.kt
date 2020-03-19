@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_korea.*
 import kotlinx.android.synthetic.main.fragment_korea.view.*
+import org.eazegraph.lib.charts.BarChart
+import org.eazegraph.lib.models.BarModel
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
@@ -18,6 +19,7 @@ class FragmentKorea : Fragment() {
     val weburl = "http://ncov.mohw.go.kr"
     val TAG = "Main Activity"
     var coList: ArrayList<Item> = arrayListOf()
+    val infoMainText = String()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +36,10 @@ class FragmentKorea : Fragment() {
 
         override fun doInBackground(vararg params: String?): ArrayList<Item> {
             val doc: Document = Jsoup.connect("$weburl").get()
-            val elts: Elements = doc.select("div.container")
+            val elts: Elements = doc.select("div.live_left")
             val livenum = elts.select("ul.liveNum")
+            val chartD= elts.select("div.chart_d")
+            val mainInfoText =elts.select("span.livedate").text()
             val infectedNum=livenum.select("li")
             //Log.d("testtttttttt",infectedNum.text())
             /*
@@ -49,11 +53,17 @@ class FragmentKorea : Fragment() {
             }
              */
             val temp : ArrayList<Item> = arrayListOf()
-            val title = infectedNum.select("strong.tit").text()
-            val num = infectedNum.select("span.num").text()
-            val before = infectedNum.select("span.before").text()
-            var mNews = Item(title, num,before)
-            temp.add(mNews)
+            infectedNum.forEachIndexed{index,elem->
+                val title = infectedNum[index].select("strong.tit").text()
+                val num = infectedNum[index].select("span.num").text()
+                val before = infectedNum[index].select("span.before").text()
+                var mNews = Item(title, num,before)
+                temp.add(mNews)
+            }
+            temp.add(Item(mainInfoText.toString(),"",""))
+            temp.add(Item(chartD.select("p.numinfo1").select("span.num_tit").text(),chartD.select("p.numinfo1").select("span.num_rnum").text().substringBefore("명"),chartD.select("p.numinfo1").select("span.num_rnum").text().substringAfter("명")))
+            temp.add(Item(chartD.select("p.numinfo2").select("span.num_tit").text(),chartD.select("p.numinfo2").select("span.num_rnum").text().substringBefore("명"),chartD.select("p.numinfo2").select("span.num_rnum").text().substringAfter("명")))
+            temp.add(Item(chartD.select("p.numinfo3").select("span.num_tit").text(),chartD.select("p.numinfo3").select("span.num_rnum").text().substringBefore("명"),chartD.select("p.numinfo3").select("span.num_rnum").text().substringAfter("명")))
             return temp
             //return doc.title()
         }
@@ -78,13 +88,29 @@ class FragmentKorea : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var a= inflater.inflate(R.layout.fragment_korea, container, false)
-        for(data in coList)
-        {
-            Log.e("cocococococo",data.toString())
-        }
-        a.koreatext.setText(coList.toString())
-        return a
+        var koreaFragView= inflater.inflate(R.layout.fragment_korea, container, false)
+        coList
+        koreaFragView.infoText.setText(coList[4].title)
+        koreaFragView.infectedText1.setText(coList[0].title)
+        koreaFragView.infectedText2.setText(coList[0].num.substring(4))
+        koreaFragView.infectedText3.setText(coList[0].before.substring(5))
+        koreaFragView.cureText1.setText(coList[1].title)
+        koreaFragView.cureText2.setText(coList[1].num)
+        koreaFragView.cureText3.setText(coList[1].before)
+        koreaFragView.careText1.setText(coList[2].title)
+        koreaFragView.careText2.setText(coList[2].num)
+        koreaFragView.careText3.setText(coList[2].before)
+        koreaFragView.deadText1.setText(coList[3].title)
+        koreaFragView.deadText2.setText(coList[3].num)
+        koreaFragView.deadText3.setText(coList[3].before)
+        val barChar : BarChart
+        barChar=koreaFragView.coronaChart
+        barChar.clearChart()
+        for (i in 5..7)
+        barChar.addBar(BarModel(coList[i].title+" "+coList[i].before,coList[i].num.replace(",","").toFloat(), 0xFF56B7F1.toInt()))
+        barChar.startAnimation()
+
+        return koreaFragView
     }
     data class Item(val title: String, val num:String, val before: String)
 }
