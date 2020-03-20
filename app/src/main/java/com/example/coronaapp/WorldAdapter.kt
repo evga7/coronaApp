@@ -8,21 +8,18 @@ import kotlinx.android.synthetic.main.world_list.view.*
 class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter<WorldAdapter.WorldViewHolder>() {
 
     var items: MutableList<Information> = mutableListOf(
-        Information("china","80,928"+"\n"+"123","+34","+8","3,245","70,420"),
-                Information("aa","bb","cc","dd","ee","ff"),
-    Information("aa","bb","cc","dd","ee","ff"),
-    Information("aa","bb","cc","dd","ee","ff"),
-    Information("aa","bb","cc","dd","ee","ff")
+        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
+        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100")
 
     )
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = worldItems.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WorldViewHolder(parent)
 
     //items -> textview
     override fun onBindViewHolder(holder: WorldViewHolder, pos: Int) {
-        holder.bind(items[pos])
+        holder.bind(worldItems[pos])
     }
 
 
@@ -30,17 +27,13 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
         LayoutInflater.from(parent?.context).inflate(R.layout.world_list, parent, false)) {
         val country = itemView.country
         val totalCases= itemView.totalCases
-        val newCases= itemView.newCases
         val totalDeaths= itemView.totalDeaths
-        val newDeaths = itemView.newDeaths
         val totalRecovered = itemView.totalRecovered
 
         fun bind(listInfo:Information){
             country?.text = listInfo.country
             totalCases?.text = listInfo.totalCases
-            newCases?.text = listInfo.newCases
             totalDeaths?.text = listInfo.totalDeaths
-            newDeaths?.text = listInfo.newDeaths
             totalRecovered?.text = listInfo.totalRecovered
         }
 

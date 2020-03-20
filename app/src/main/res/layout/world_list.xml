@@ -10,12 +10,13 @@
             android:layout_height="match_parent"
             android:layout_margin="8dp"
             android:padding="8dp"
+            android:stretchColumns="*"
             >
 
             <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
             <TextView
                 android:id="@+id/country"
@@ -33,13 +34,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/newCases"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/totalDeaths"
@@ -49,13 +43,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="17sp" />
 
-            <TextView
-                android:id="@+id/newDeaths"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/totalRecovered"

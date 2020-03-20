@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_world.*
@@ -21,11 +20,11 @@ class FragmentWorld : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        try {
-//            coronaList = WorldCrawling().execute(url).get()
-//        }catch (e : IOException) {
-//            e.printStackTrace();
-//        }
+        try {
+            coronaList = WorldCrawling().execute(url).get()
+        }catch (e : IOException) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -56,12 +55,9 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
     override fun doInBackground(vararg params: String?): ArrayList<Information> {
 
         try{
-            Log.d(params[0].toString(),"왜안되는고야")
-
             val doc = Jsoup.connect(params[0]).get()
             //val data = doc.select("#main_table_countries > tbody > tr")
             val data = doc.select("#main_table_countries_yesterday > tbody > tr")
-            Log.d(data.toString(),"모")
             var country :String
             var totalCases : String
             var newCases : String
@@ -80,7 +76,7 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
                 newDeaths = datum.select("td")[4].text().trim()
                 totalRecovered = datum.select("td")[5].text().trim()
 
-                var total = Information(country,totalCases,newCases,newDeaths,totalDeaths,totalRecovered)
+                var total = Information(country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths,totalRecovered)
                 infoList.add(total)
 
                 cnt++
