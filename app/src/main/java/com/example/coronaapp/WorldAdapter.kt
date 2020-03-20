@@ -9,17 +9,23 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
 
     var items: MutableList<Information> = mutableListOf(
         Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
+        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
+        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
+        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
+        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
+        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
+        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
         ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100")
 
     )
 
-    override fun getItemCount(): Int = worldItems.size
+    override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WorldViewHolder(parent)
 
     //items -> textview
     override fun onBindViewHolder(holder: WorldViewHolder, pos: Int) {
-        holder.bind(worldItems[pos])
+        holder.bind(items[pos])
     }
 
 

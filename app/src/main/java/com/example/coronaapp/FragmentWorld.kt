@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_world.*
@@ -20,11 +21,11 @@ class FragmentWorld : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        try {
-            coronaList = WorldCrawling().execute(url).get()
-        }catch (e : IOException) {
-            e.printStackTrace();
-        }
+//        try {
+//            coronaList = WorldCrawling().execute(url).get()
+//        }catch (e : IOException) {
+//            e.printStackTrace();
+//        }
 
 
     }
@@ -37,7 +38,9 @@ class FragmentWorld : Fragment() {
         val worldRecyclerView = rootView.findViewById(R.id.worldrecyclerview) as RecyclerView
         worldRecyclerView.layoutManager = LinearLayoutManager(activity)
         worldRecyclerView.adapter = WorldAdapter(coronaList)
-
+        worldRecyclerView.addItemDecoration(
+            DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+        )
         return rootView
         //return inflater.inflate(R.layout.fragment_world, container, false)
 
