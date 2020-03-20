@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_world.view.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_world.*
 import org.jsoup.Jsoup
 import java.io.IOException
+import java.time.LocalDate
 
 class FragmentWorld : Fragment() {
     val url = "https://www.worldometers.info/coronavirus/"
@@ -23,14 +27,19 @@ class FragmentWorld : Fragment() {
 //            e.printStackTrace();
 //        }
 
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        var a = inflater.inflate(R.layout.fragment_world, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_world, container, false)
         //a.worldtext.text = coronaList.toString()
 
-        return a
+        val worldRecyclerView = rootView.findViewById(R.id.worldrecyclerview) as RecyclerView
+        worldRecyclerView.layoutManager = LinearLayoutManager(activity)
+        worldRecyclerView.adapter = WorldAdapter(coronaList)
+
+        return rootView
         //return inflater.inflate(R.layout.fragment_world, container, false)
 
     }
@@ -47,16 +56,21 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
     override fun doInBackground(vararg params: String?): ArrayList<Information> {
 
         try{
-            //val doc = Jsoup.connect("https://www.worldometers.info/coronavirus/").get()
-            val doc = Jsoup.connect(params[0]).get()
-            val data = doc.select("#main_table_countries > tbody > tr")
+            Log.d(params[0].toString(),"왜안되는고야")
 
+            val doc = Jsoup.connect(params[0]).get()
+            //val data = doc.select("#main_table_countries > tbody > tr")
+            val data = doc.select("#main_table_countries_yesterday > tbody > tr")
+            Log.d(data.toString(),"모")
             var country :String
             var totalCases : String
             var newCases : String
             var totalDeaths : String
             var newDeaths : String
             var totalRecovered : String
+
+            // 임시 cnt
+            var cnt :Int = 0
 
             for (datum in data){
                 country = datum.select("td")[0].text().trim()
@@ -68,7 +82,12 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
 
                 var total = Information(country,totalCases,newCases,newDeaths,totalDeaths,totalRecovered)
                 infoList.add(total)
-                //Log.d(totalCases,"모")
+
+                cnt++
+
+                if (cnt == 10){
+                    break
+                }
             }
 
         }catch (e : IOException) {
@@ -88,6 +107,6 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
 
 }
 
-data class Information(val country:String, val totalCases:String, val newCases : String, val totalDeaths : String, val newDeaths : String, val totalRecovered : String)
+//data class Information(val country:String, val totalCases:String, val newCases : String, val totalDeaths : String, val newDeaths : String, val totalRecovered : String)
 
 
