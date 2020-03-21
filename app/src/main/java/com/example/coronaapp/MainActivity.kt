@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
                 // 맵 보이기
                 val fragment = FragmentMask(getPharmacy.getPharmacyList(), userLatLng)
+
                 addFragment(fragment)
 
                 Log.d("order", "ItemSelectedListener")
@@ -74,10 +75,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
             .commit()
         Log.d("order", "addFragment 끝")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
 

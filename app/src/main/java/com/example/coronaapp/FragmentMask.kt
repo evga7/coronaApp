@@ -21,19 +21,15 @@ import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 import kotlinx.android.synthetic.main.fragment_mask.*
 import java.util.ArrayList
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 
-class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLL: LatLng) : Fragment(), OnMapReadyCallback, CoroutineScope {
+class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLL: LatLng) : Fragment(), OnMapReadyCallback {
 
     // 확인할, 확인이 필요한 권한의 목록 생성
     var permission_list = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
-
-    lateinit var job: Job
 
     // 네이버 맵뷰
     private lateinit var mapView: MapView
@@ -54,14 +50,9 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLL: LatLng) : Fragment(), On
     // 사용자의 위도와 경도
     private var userLatLng: LatLng = uLL
 
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
-
     // 초기화 리소스들이 들어가는 곳
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        job = Job()
 
         // 사용자의 위치를 가져옴 (미구현)
         //건대사거리
@@ -94,11 +85,8 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLL: LatLng) : Fragment(), On
     // NaverMap 객체가 준비되면 onMapReady 콜백 메서드가 호출됨. 비동기.
     override fun onMapReady(naverMap: NaverMap) {
 
-        GlobalScope.launch {
-            delay(5000)
-        }
-
         Log.d("order", "onMapReady 시작!!")
+        naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
         // 위치 오버레이 객체를 지정하고 지도에 띄움. (위치오버레이 == 유저)
         locationOverlay = naverMap.locationOverlay
@@ -122,6 +110,8 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLL: LatLng) : Fragment(), On
                 return infoWindow.marker?.tag as CharSequence? ?: ""
             }
         }
+
+        //naverMap.
 
         val markers = mutableListOf<Marker>()
         array!!.forEach {
@@ -267,7 +257,6 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLL: LatLng) : Fragment(), On
     override fun onDestroy() {
         super.onDestroy()
         mapView.onDestroy()
-        job.cancel()
         Log.d("order", "onDestroy")
     }
 
