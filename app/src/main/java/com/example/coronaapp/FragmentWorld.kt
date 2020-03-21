@@ -10,7 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import kotlinx.android.synthetic.main.fragment_world.*
+import kotlinx.android.synthetic.main.fragment_world.view.*
 import org.jsoup.Jsoup
 import java.io.IOException
 import java.time.LocalDate
@@ -35,12 +40,35 @@ class FragmentWorld : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_world, container, false)
         //a.worldtext.text = coronaList.toString()
 
+        // pie chart
+        val pieChart = ArrayList<PieEntry>()
+        pieChart.add(PieEntry(500f,"Green"))
+        pieChart.add(PieEntry(500f,"Yellow"))
+        pieChart.add(PieEntry(500f,"Red"))
+
+
+        val dataSet = PieDataSet(pieChart,"ex")
+        dataSet.sliceSpace = 3f
+        dataSet.selectionShift = 5f
+
+        val data = PieData(dataSet)
+        data.setValueTextSize(5f)
+        rootView.piechart.data = data
+        rootView.piechart.invalidate()
+
+        //rootView.piechart.setUsePercentValues(true)
+        //rootView.piechart.isDrawHoleEnabled = false
+        //rootView.piechart.description.isEnabled = false
+        //rootView.piechart.animateXY(100, 100)
+         // RecyclerView
+
         val worldRecyclerView = rootView.findViewById(R.id.worldrecyclerview) as RecyclerView
         worldRecyclerView.layoutManager = LinearLayoutManager(activity)
         worldRecyclerView.adapter = WorldAdapter(coronaList)
         worldRecyclerView.addItemDecoration(
             DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         )
+
         return rootView
         //return inflater.inflate(R.layout.fragment_world, container, false)
 
@@ -108,8 +136,4 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // ì
 
 }
 
-fun makeChart(){
-
-
-}
 
