@@ -64,13 +64,15 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
             var country :String
             var totalCases : String
             var newCases : String
-            var totalDeaths : String
+            var totalDeaths :String
             var newDeaths : String
             var totalRecovered : String
 
             // 임시 cnt
             var cnt :Int = 0
+            // 테이블 title
 
+            infoList.add(Information("국가","확진자","사망자","회복"))
             for (datum in data){
                 country = datum.select("td")[0].text().trim()
                 totalCases = datum.select("td")[1].text().trim()
@@ -79,7 +81,7 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
                 newDeaths = datum.select("td")[4].text().trim()
                 totalRecovered = datum.select("td")[5].text().trim()
 
-                var total = Information(country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths,totalRecovered)
+                val total = Information(country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths,totalRecovered)
                 infoList.add(total)
 
                 cnt++

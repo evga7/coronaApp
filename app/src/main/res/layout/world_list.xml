@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coronaTable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
-
-        <TableLayout
-            android:id="@+id/coronaTable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            android:stretchColumns="*"
-            >
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/country"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/totalCases"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="16sp" />
+    android:layout_margin="8dp"
+    android:padding="2dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
 
-            <TextView
-                android:id="@+id/totalDeaths"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="17sp" />
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="7dp"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/totalCases"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
 
 
-            <TextView
-                android:id="@+id/totalRecovered"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="16sp" />
+        <TextView
+            android:id="@+id/totalDeaths"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
 
-        </TableRow>
-        </TableLayout>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/totalRecovered"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="7dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
+
+    </TableRow>
+
+</TableLayout>
+
+
+
+
