@@ -1,10 +1,15 @@
 package com.example.coronaapp
 
 import android.graphics.Color
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TableRow
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.world_list.view.*
 
@@ -28,7 +33,7 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
 
     //items -> textview
     override fun onBindViewHolder(holder: WorldViewHolder, pos: Int) {
-        val recyclerviewColor = arrayListOf<String>("#3F51B5")
+        val recyclerviewColor = arrayListOf<String>("#B1BCBE")
 
         if (pos == 0){ // Title Textview 속성 값
             val textParam = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT).apply {
@@ -42,17 +47,30 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
             }
 
             holder.bind(items[pos])
-            //holder.itemView.setBackgroundColor(Color.parseColor(recyclerviewColor[0]))
-
             holder.country.layoutParams = textParam
             holder.totalCases.layoutParams = textParam
             holder.totalDeaths.layoutParams = textParam
             holder.totalRecovered.layoutParams = textParam
-
+            holder.itemView.setBackgroundColor(Color.parseColor(recyclerviewColor[0]))
 
         }
         else{
+            //holder.itemView.setBackgroundColor(Color.parseColor(recyclerviewColor[0]))
             holder.bind(items[pos])
+
+            // + 부분부터 색깔 변환
+            val totalCasesPlus = holder.totalCases.text.indexOf('+')
+            val totalDeathsPlus = holder.totalDeaths.text.indexOf('+')
+
+            val spannableCases = SpannableString(holder.totalCases.text)
+            val spannableDeaths = SpannableString(holder.totalDeaths.text)
+
+            spannableCases.setSpan(ForegroundColorSpan(Color.RED), totalCasesPlus, holder.totalCases.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannableDeaths.setSpan(ForegroundColorSpan(Color.RED), totalDeathsPlus, holder.totalDeaths.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+            holder.totalCases.setText(spannableCases, TextView.BufferType.SPANNABLE)
+            holder.totalDeaths.setText(spannableDeaths, TextView.BufferType.SPANNABLE)
+
         }
     }
 
