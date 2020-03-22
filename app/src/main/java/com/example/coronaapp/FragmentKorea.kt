@@ -11,6 +11,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.koreaAsync.koreaAsync1
@@ -79,13 +81,13 @@ class FragmentKorea : Fragment() {
             tempStr = coList2[i].title + "\n" + coList2[i].num + "\n" + coList2[i].before
             val sp = SpannableStringBuilder(tempStr)
             sp.setSpan(
-                ForegroundColorSpan(Color.RED),
+                ForegroundColorSpan(Color.BLUE),
                 coList2[i].title.length,
                 coList2[i].title.length + coList2[i].num.length + 1,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-            val dd=koreaFragView.resources.getIdentifier("cityButton1"+(i+1),"id","coronaapp")
-
+            val dd=koreaFragView.resources.getIdentifier("cityButton"+(i+1),"id",context?.packageName.toString())
+            koreaFragView.findViewById<Button>(dd).setText(sp)
         }
 
         barChar.startAnimation()
