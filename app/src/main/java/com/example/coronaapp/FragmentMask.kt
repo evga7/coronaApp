@@ -73,8 +73,6 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
         //userLatLng = LatLng(37.5479841,127.073755)
         // 중곡역
         //userLatLng = LatLng(37.565535,127.081892)
-        getPharmacyData(latitude.toString(), longitude.toString(), mContext)
-        array = pharmacy
 
         //사용자에게 위치 권한 설정을 물어봄.
         checkPermission()
@@ -115,7 +113,7 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
         // uiSettings.isCompassEnabled = true
         uiSettings.isLocationButtonEnabled = true
 
-        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 14.5)
+        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 15.0)
         naverMap.moveCamera(cameraUpdate)
 
         val infoWindow = InfoWindow()
@@ -229,6 +227,8 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+        getPharmacyData(latitude.toString(), longitude.toString(), mContext)
+        array = pharmacy
 
         Log.d("order", "onAttach")
     }
@@ -300,7 +300,7 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
                     //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.540661&lng127.0714121&m=500").openStream()
                     //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.5479841&lng127.073755&m=1000").openStream()
                     //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng127.081892&m=1000").openStream()
-                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng=127.073755&m=1000").openStream()
+                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng=127.073755&m=700").openStream()
                     val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
                     //temp = read.readLine()
                     var line:String?=read.readLine()
