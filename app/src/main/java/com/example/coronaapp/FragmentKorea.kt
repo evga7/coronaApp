@@ -1,24 +1,31 @@
 package com.example.coronaapp
 
-import android.os.AsyncTask
+import android.app.ActionBar
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.koreaAsync.koreaAsync1
+import com.example.coronaapp.koreaAsync.koreaAsync2
+import kotlinx.android.synthetic.main.fragment_korea.*
 import kotlinx.android.synthetic.main.fragment_korea.view.*
 import org.eazegraph.lib.charts.BarChart
 import org.eazegraph.lib.models.BarModel
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.select.Elements
 
 class FragmentKorea : Fragment() {
 
     val weburl = "http://ncov.mohw.go.kr"
     val TAG = "Main Activity"
     var coList: ArrayList<Item> = arrayListOf()
+    var coList2: ArrayList<Item> = arrayListOf()
     val infoMainText = String()
 
 
@@ -26,60 +33,14 @@ class FragmentKorea : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    class MyAsyncTask: AsyncTask<String, String, ArrayList<Item>>(){ //input, progress update type, result type
-        //private var result : String = ""
-        val weburl = "http://ncov.mohw.go.kr"
-        val TAG = "Main Activity"
-        override fun onPreExecute() {
-            super.onPreExecute()
-        }
 
-        override fun doInBackground(vararg params: String?): ArrayList<Item> {
-            val doc: Document = Jsoup.connect("$weburl").get()
-            val elts: Elements = doc.select("div.live_left")
-            val livenum = elts.select("ul.liveNum")
-            val chartD= elts.select("div.chart_d")
-            val mainInfoText =elts.select("span.livedate").text()
-            val infectedNum=livenum.select("li")
-            //Log.d("testtttttttt",infectedNum.text())
-            /*
-            elts.forEachIndexed{ index, elem ->
-                //val liveDate = elem.select("span.livedate")
-                //val infectedNum=livenum.select("span.num")
-                Log.d("테스트!!!!!!!!!!!!!!",infectedNum.toString())
-                //Log.d("테스트!!!!!!!!!!!!!!!",liveDate.toString())//추출한 자료를 가지고 데이터 객체를 만들어 ArrayList에 추가해 준다.
-                //var mNews = Item(title, a_href, "http:" + thumb_img)
-                //newsList.add(mNews)
-            }
-             */
-            val temp : ArrayList<Item> = arrayListOf()
-            infectedNum.forEachIndexed{index,elem->
-                val title = infectedNum[index].select("strong.tit").text()
-                val num = infectedNum[index].select("span.num").text()
-                val before = infectedNum[index].select("span.before").text()
-                var mNews = Item(title, num,before)
-                temp.add(mNews)
-            }
-            temp.add(Item(mainInfoText.toString(),"",""))
-            temp.add(Item(chartD.select("p.numinfo1").select("span.num_tit").text(),chartD.select("p.numinfo1").select("span.num_rnum").text().substringBefore("명"),chartD.select("p.numinfo1").select("span.num_rnum").text().substringAfter("명")))
-            temp.add(Item(chartD.select("p.numinfo2").select("span.num_tit").text(),chartD.select("p.numinfo2").select("span.num_rnum").text().substringBefore("명"),chartD.select("p.numinfo2").select("span.num_rnum").text().substringAfter("명")))
-            temp.add(Item(chartD.select("p.numinfo3").select("span.num_tit").text(),chartD.select("p.numinfo3").select("span.num_rnum").text().substringBefore("명"),chartD.select("p.numinfo3").select("span.num_rnum").text().substringAfter("명")))
-            return temp
-            //return doc.title()
-        }
-
-        override fun onPostExecute(result: ArrayList<Item>) {
-            //문서제목 출력
-
-            super.onPostExecute(result)
-        }
-    }
 
 
     companion object {
         fun newInstance(): FragmentKorea {
             val FragmentKorea = FragmentKorea()
-            FragmentKorea.coList=MyAsyncTask().execute("http://ncov.mohw.go.kr").get()
+            FragmentKorea.coList= koreaAsync1().execute("http://ncov.mohw.go.kr").get()
+            FragmentKorea.coList2= koreaAsync2().execute("http://ncov.mohw.go.kr").get()
             Log.d("fragLog",FragmentKorea.coList.toString())
             val args = Bundle()
             FragmentKorea.arguments = args
@@ -89,7 +50,6 @@ class FragmentKorea : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var koreaFragView= inflater.inflate(R.layout.fragment_korea, container, false)
-        coList
         koreaFragView.infoText.setText(coList[4].title)
         koreaFragView.infectedText1.setText(coList[0].title)
         koreaFragView.infectedText2.setText(coList[0].num.substring(4))
@@ -107,15 +67,33 @@ class FragmentKorea : Fragment() {
         barChar=koreaFragView.coronaChart
         barChar.clearChart()
         for (i in 5..7)
-        barChar.addBar(BarModel("",coList[i].before.substringAfter('(').substringBefore('%').toFloat(), 0xFF56B7F1.toInt()))
+            barChar.addBar(BarModel("",coList[i].before.substringAfter('(').substringBefore('%').toFloat(), 0xFF56B7F1.toInt()))
         koreaFragView.coChartText1.setText("  "+coList[5].title+"\n"+coList[5].num+"명")
         koreaFragView.coChartText2.setText(coList[6].title+"\n    "+coList[6].num+"명")
         koreaFragView.coChartText3.setText(coList[7].title+"\n"+coList[7].num+"명")
+
+        val textView = TextView(koreaFragView.context)
+        var tempStr= String()
+        textView.setTextColor(Color.GREEN)
+        for (i in 0..16) {
+            tempStr = coList2[i].title + "\n" + coList2[i].num + "\n" + coList2[i].before
+            val sp = SpannableStringBuilder(tempStr)
+            sp.setSpan(
+                ForegroundColorSpan(Color.RED),
+                coList2[i].title.length,
+                coList2[i].title.length + coList2[i].num.length + 1,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            val dd=koreaFragView.resources.getIdentifier("cityButton1"+(i+1),"id","coronaapp")
+
+        }
+
         barChar.startAnimation()
 
         return koreaFragView
     }
     data class Item(val title: String, val num:String, val before: String)
+
 }
 
 // 프레그먼트는 메모리 확보를 위해 파기 될 수 있는데 이때 보통

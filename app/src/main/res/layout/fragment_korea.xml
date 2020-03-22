@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#A1EDEDED">
+                >
 
                 <View
                     android:id="@+id/view"
@@ -72,22 +72,22 @@
 
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
 
                         <LinearLayout
                             android:layout_width="200sp"
-                            android:layout_height="130sp"
-                            android:layout_marginLeft="20sp"
-                            android:layout_marginRight="20sp"
+                            android:layout_height="110sp"
+                            android:layout_marginLeft="40sp"
+                            android:layout_marginRight="10sp"
                             android:layout_weight="1"
                             android:background="@drawable/round_corners"
                             android:orientation="vertical">
@@ -98,7 +98,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10sp"
-                                android:textSize="20dp"
+                                android:textSize="19sp"
                                 android:textStyle="bold" />
 
 
@@ -108,7 +108,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="15sp"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -116,21 +116,17 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:textSize="20dp" />
+                                android:textSize="16sp" />
 
                         </LinearLayout>
 
-                        <View
-                            android:id="@+id/view4"
-                            android:layout_width="20sp"
-                            android:layout_height="130sp"
-                            android:layout_weight="1" />
+
 
                         <LinearLayout
                             android:layout_width="200sp"
-                            android:layout_height="130sp"
-                            android:layout_marginLeft="20sp"
-                            android:layout_marginRight="20sp"
+                            android:layout_height="110sp"
+                            android:layout_marginLeft="10sp"
+                            android:layout_marginRight="40sp"
                             android:layout_weight="1"
                             android:background="@drawable/round_corners"
                             android:orientation="vertical">
@@ -141,7 +137,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10sp"
-                                android:textSize="20dp"
+                                android:textSize="19sp"
                                 android:textStyle="bold" />
 
 
@@ -152,7 +148,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="15sp"
                                 android:textColor="#2196F3"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -161,7 +157,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:textColor="#2196F3"
-                                android:textSize="20dp" />
+                                android:textSize="16sp" />
 
 
                         </LinearLayout>
@@ -172,7 +168,7 @@
                     <View
                         android:id="@+id/view6"
                         android:layout_width="match_parent"
-                        android:layout_height="30sp" />
+                        android:layout_height="10sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -182,9 +178,9 @@
 
                         <LinearLayout
                             android:layout_width="200sp"
-                            android:layout_height="130sp"
-                            android:layout_marginLeft="20sp"
-                            android:layout_marginRight="20sp"
+                            android:layout_height="110sp"
+                            android:layout_marginLeft="40sp"
+                            android:layout_marginRight="10sp"
                             android:layout_weight="1"
                             android:background="@drawable/round_corners"
                             android:orientation="vertical">
@@ -195,7 +191,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10sp"
-                                android:textSize="20dp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
 
@@ -206,7 +202,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="15sp"
                                 android:textColor="#9700FB09"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -215,21 +211,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:textColor="#9700FF09"
-                                android:textSize="20dp" />
+                                android:textSize="16sp" />
 
                         </LinearLayout>
 
-                        <View
-                            android:id="@+id/view5"
-                            android:layout_width="20sp"
-                            android:layout_height="130sp"
-                            android:layout_weight="1" />
 
                         <LinearLayout
                             android:layout_width="200sp"
-                            android:layout_height="130sp"
-                            android:layout_marginLeft="20sp"
-                            android:layout_marginRight="20sp"
+                            android:layout_height="110sp"
+                            android:layout_marginLeft="10sp"
+                            android:layout_marginRight="40sp"
                             android:layout_weight="1"
                             android:background="@drawable/round_corners"
                             android:orientation="vertical">
@@ -240,7 +231,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="10sp"
-                                android:textSize="20dp"
+                                android:textSize="19sp"
                                 android:textStyle="bold" />
 
 
@@ -250,7 +241,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="15sp"
-                                android:textSize="20dp"
+                                android:textSize="16sp"
                                 android:textColor="#FF0000"
                                 android:textStyle="bold" />
 
@@ -260,7 +251,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:textColor="#FF0000"
-                                android:textSize="20dp" />
+                                android:textSize="16sp" />
 
 
                         </LinearLayout>
@@ -273,6 +264,283 @@
                         android:layout_height="0dp"
                         android:layout_marginBottom="30sp"
                         android:layout_weight="1" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/koreamap" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <Button
+                                android:id="@+id/cityButton1"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="116dp"
+                                android:layout_marginLeft="116dp"
+                                android:layout_marginTop="102dp"
+                                android:layout_marginEnd="233dp"
+                                android:layout_marginRight="233dp"
+                                android:background="@drawable/round_corners"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton2"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="234dp"
+                                android:layout_marginLeft="234dp"
+                                android:layout_marginTop="391dp"
+                                android:layout_marginEnd="115dp"
+                                android:layout_marginRight="115dp"
+                                android:background="#00FF0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton3"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="253dp"
+                                android:layout_marginLeft="253dp"
+                                android:layout_marginTop="256dp"
+                                android:layout_marginEnd="96dp"
+                                android:layout_marginRight="96dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton4"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="30dp"
+                                android:layout_marginLeft="30dp"
+                                android:layout_marginTop="104dp"
+                                android:layout_marginEnd="319dp"
+                                android:layout_marginRight="319dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton5"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="97dp"
+                                android:layout_marginLeft="97dp"
+                                android:layout_marginTop="367dp"
+                                android:layout_marginEnd="252dp"
+                                android:layout_marginRight="252dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton6"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="151dp"
+                                android:layout_marginLeft="151dp"
+                                android:layout_marginTop="224dp"
+                                android:layout_marginEnd="198dp"
+                                android:layout_marginRight="198dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="1.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton7"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="290dp"
+                                android:layout_marginLeft="290dp"
+                                android:layout_marginTop="325dp"
+                                android:layout_marginEnd="59dp"
+                                android:layout_marginRight="59dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton8"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="116dp"
+                                android:layout_marginLeft="116dp"
+                                android:layout_marginTop="170dp"
+                                android:layout_marginEnd="233dp"
+                                android:layout_marginRight="233dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton9"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="97dp"
+                                android:layout_marginLeft="97dp"
+                                android:layout_marginTop="42dp"
+                                android:layout_marginEnd="252dp"
+                                android:layout_marginRight="252dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton10"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="203dp"
+                                android:layout_marginLeft="203dp"
+                                android:layout_marginTop="90dp"
+                                android:layout_marginEnd="146dp"
+                                android:layout_marginRight="146dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton11"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="184dp"
+                                android:layout_marginLeft="184dp"
+                                android:layout_marginTop="152dp"
+                                android:layout_marginEnd="165dp"
+                                android:layout_marginRight="165dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton12"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="58dp"
+                                android:layout_marginLeft="58dp"
+                                android:layout_marginTop="216dp"
+                                android:layout_marginEnd="291dp"
+                                android:layout_marginRight="291dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton13"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="97dp"
+                                android:layout_marginLeft="97dp"
+                                android:layout_marginTop="291dp"
+                                android:layout_marginEnd="252dp"
+                                android:layout_marginRight="252dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton14"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="58dp"
+                                android:layout_marginLeft="58dp"
+                                android:layout_marginTop="421dp"
+                                android:layout_marginEnd="291dp"
+                                android:layout_marginRight="291dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton15"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="253dp"
+                                android:layout_marginLeft="253dp"
+                                android:layout_marginTop="179dp"
+                                android:layout_marginEnd="96dp"
+                                android:layout_marginRight="96dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton16"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="174dp"
+                                android:layout_marginLeft="174dp"
+                                android:layout_marginTop="343dp"
+                                android:layout_marginEnd="175dp"
+                                android:layout_marginRight="175dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/cityButton17"
+                                android:layout_width="60sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="58dp"
+                                android:layout_marginLeft="58dp"
+                                android:layout_marginTop="506dp"
+                                android:layout_marginEnd="291dp"
+                                android:layout_marginRight="291dp"
+                                android:background="#00ff0000"
+                                android:text="공백"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </FrameLayout>
+
 
                 </LinearLayout>
 
