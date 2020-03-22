@@ -1,5 +1,8 @@
 package com.example.coronaapp
 
+import android.content.Context
+import android.content.Intent
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +10,12 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.naver.maps.geometry.LatLng
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.lang.Exception
+import java.net.URL
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,17 +39,8 @@ class MainActivity : AppCompatActivity() {
             R.id.mask->{
                 // 사용자 위치 얻기 (미구현)
                 var userLatLng: LatLng = LatLng(37.565535,127.081892)
-
-                // 사용자 위치로 인근 마스크 판매점 얻기
-                var getPharmacy = GetPharmacy()
-                getPharmacy.execute()
-
-                // 맵 보이기
-                val fragment = FragmentMask(getPharmacy.getPharmacyList(), userLatLng)
-
+                val fragment = FragmentMask(userLatLng)
                 addFragment(fragment)
-
-                Log.d("order", "ItemSelectedListener")
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -77,9 +77,4 @@ class MainActivity : AppCompatActivity() {
         Log.d("order", "addFragment 끝")
     }
 }
-
-
-
-
-
 
