@@ -17,17 +17,108 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/piechart"
+            <TableLayout
+                android:background="@drawable/round_border"
+                android:id="@+id/totalTable"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                >
-            </com.github.mikephil.charting.charts.PieChart>
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_margin="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="국가"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="확진자"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="사망자"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="회복자"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/a"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/b"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/c"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/d"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+
+            </TableLayout>
+
 
 
 
         <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/worldrecyclerview"
+            android:id="@+id/worldrecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
@@ -44,271 +135,3 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-    <!--    <TableLayout-->
-    <!--        android:id="@+id/coronaTable"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_margin="8dp"-->
-    <!--        android:background="#000000"-->
-    <!--        android:padding="8dp"-->
-    <!--        android:stretchColumns="*">-->
-
-    <!--        <TableRow-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:background="#ffffff"-->
-    <!--            android:padding="8dp"-->
-
-    <!--            >-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="국가"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="확진자"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="새로운 확진자"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="새로운 사망자"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="총 사망자"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="회복"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--        </TableRow>-->
-
-
-    <!--        <TableRow-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:background="#ffffff"-->
-    <!--            android:padding="8dp"-->
-
-    <!--            >-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--        </TableRow>-->
-
-
-    <!--    </TableLayout>--><!--    <TableLayout-->
-    <!--        android:id="@+id/coronaTable"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_margin="8dp"-->
-    <!--        android:background="#000000"-->
-    <!--        android:padding="8dp"-->
-    <!--        android:stretchColumns="*">-->
-
-    <!--        <TableRow-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:background="#ffffff"-->
-    <!--            android:padding="8dp"-->
-
-    <!--            >-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="국가"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="확진자"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="새로운 확진자"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="새로운 사망자"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="총 사망자"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:text="회복"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--        </TableRow>-->
-
-
-    <!--        <TableRow-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:background="#ffffff"-->
-    <!--            android:padding="8dp"-->
-
-    <!--            >-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:layout_margin="1dp"-->
-    <!--                android:gravity="center"-->
-    <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-    <!--                android:textSize="15sp" />-->
-
-    <!--        </TableRow>-->
-
-
-    <!--    </TableLayout>-->

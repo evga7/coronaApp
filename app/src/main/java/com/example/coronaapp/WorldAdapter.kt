@@ -27,7 +27,7 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
         ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100")
     )
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = worldItems.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WorldViewHolder(parent)
 
@@ -46,30 +46,34 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
                 gravity = Gravity.CENTER_HORIZONTAL
             }
 
-            holder.bind(items[pos])
+            holder.bind(worldItems[pos])
             holder.country.layoutParams = textParam
             holder.totalCases.layoutParams = textParam
             holder.totalDeaths.layoutParams = textParam
             holder.totalRecovered.layoutParams = textParam
             holder.itemView.setBackgroundColor(Color.parseColor(recyclerviewColor[0]))
-
+            Log.d("모야","멍멍")
         }
         else{
             //holder.itemView.setBackgroundColor(Color.parseColor(recyclerviewColor[0]))
-            holder.bind(items[pos])
+            holder.bind(worldItems[pos])
 
             // + 부분부터 색깔 변환
-            val totalCasesPlus = holder.totalCases.text.indexOf('+')
-            val totalDeathsPlus = holder.totalDeaths.text.indexOf('+')
+            if ('+' in holder.totalCases.text){
+                val totalCasesPlus = holder.totalCases.text.indexOf('+')
+                val spannableCases = SpannableString(holder.totalCases.text)
+                spannableCases.setSpan(ForegroundColorSpan(Color.RED), totalCasesPlus, holder.totalCases.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                holder.totalCases.setText(spannableCases, TextView.BufferType.SPANNABLE)
+            }
 
-            val spannableCases = SpannableString(holder.totalCases.text)
-            val spannableDeaths = SpannableString(holder.totalDeaths.text)
+            if ('+' in holder.totalDeaths.text){
+                val totalDeathsPlus = holder.totalDeaths.text.indexOf('+')
+                val spannableDeaths = SpannableString(holder.totalDeaths.text)
+                spannableDeaths.setSpan(ForegroundColorSpan(Color.RED), totalDeathsPlus, holder.totalDeaths.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                holder.totalDeaths.setText(spannableDeaths, TextView.BufferType.SPANNABLE)
+            }
 
-            spannableCases.setSpan(ForegroundColorSpan(Color.RED), totalCasesPlus, holder.totalCases.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannableDeaths.setSpan(ForegroundColorSpan(Color.RED), totalDeathsPlus, holder.totalDeaths.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-            holder.totalCases.setText(spannableCases, TextView.BufferType.SPANNABLE)
-            holder.totalDeaths.setText(spannableDeaths, TextView.BufferType.SPANNABLE)
 
         }
     }
