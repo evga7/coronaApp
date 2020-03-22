@@ -2,7 +2,6 @@ package com.example.coronaapp
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.AsyncTask
@@ -12,7 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
 import androidx.fragment.app.Fragment
 import com.naver.maps.geometry.LatLng
@@ -31,7 +29,7 @@ import java.net.URL
 import java.util.ArrayList
 
 
-class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
+class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
 
     // 확인할, 확인이 필요한 권한의 목록 생성
     var permission_list = arrayOf(
@@ -40,7 +38,7 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
     )
 
     // private var gpsTracker: GpsTracker? = null
-    val pharmacy = ArrayList<Pharmacy>()
+    //val pharmacy = ArrayList<Pharmacy>()
 
     // 네이버 맵뷰
     private lateinit var mapView: MapView
@@ -56,11 +54,15 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
     private lateinit var uiSettings: UiSettings
 
     // 보고 따라한거.
-    var array : ArrayList<Pharmacy>? = null
+    var array : ArrayList<Pharmacy>? = pharmacy
 
     // 사용자의 위도와 경도
     private var latitude: Double? = uLatLng.latitude
     private var longitude: Double? = uLatLng.longitude
+
+    public fun getMapView(): MapView {
+        return mapView
+    }
 
     // 초기화 리소스들이 들어가는 곳
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,7 +82,7 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
         locationSource =
             FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
 
-        // Log.d("order", "onCreate")
+        Log.d("order", "onCreate")
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
@@ -206,30 +208,32 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
     // Layout 을 inflate 하는 곳, View 객체를 얻어서 초기화
     // XML 로 만들어 놓은 View 를 inflater 를 활용하여 생성할 수 있음.
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         Log.d("order", "onCreateView")
         return inflater.inflate(R.layout.fragment_mask, container, false)
     }
 
-    // fragment 생성 이후 호출되는 함수.
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        mapView = map_view
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-
-        Log.d("order", "onActivityCreated")
-
     }
+
+    // fragment 생성 이후 호출되는 함수.
+//    override fun onActivityCreated(savedInstanceState: Bundle?) {
+//        super.onActivityCreated(savedInstanceState)
+//        mapView = map_view
+//        mapView.onCreate(savedInstanceState)
+//        mapView.getMapAsync(this)
+//        Log.d("order", "onActivityCreated")
+//
+//    }
 
     // Fragment 를 Activity 에 attach 할 때 호출
     // 여기서는 context 를 구하기 위해서 구현함.
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
-        getPharmacyData(latitude.toString(), longitude.toString(), mContext)
-        array = pharmacy
-
+        mapView = map_view
         Log.d("order", "onAttach")
     }
 
@@ -244,6 +248,7 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+        mapView.getMapAsync(this)
         Log.d("order", "onResume")
     }
 
@@ -271,6 +276,7 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
     override fun onDestroy() {
         super.onDestroy()
         mapView.onDestroy()
+        array?.clear()
         Log.d("order", "onDestroy")
     }
 
@@ -281,94 +287,5 @@ class FragmentMask(uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
-    }
-
-    fun getPharmacyData(latitude:String, longitude:String, mcontext: Context) {
-
-        class GetPharmacy: AsyncTask<Void, Void, Void>() {
-
-            // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
-            override fun doInBackground(vararg params: Void?): Void? {
-
-                Log.d("order", "doInBackground 시")
-
-                // 어린이대공원역사거리 37.5479841,127.073755
-                // 중곡역 37.565535,127.081892
-                // https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=34&lng=125&m=5000
-                var temp: String=""
-                try {
-                    //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.540661&lng127.0714121&m=500").openStream()
-                    //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.5479841&lng127.073755&m=1000").openStream()
-                    //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng127.081892&m=1000").openStream()
-                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng=127.073755&m=700").openStream()
-                    val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
-                    //temp = read.readLine()
-                    var line:String?=read.readLine()
-                    while(line!=null){
-                        temp+=(line);
-                        line = read.readLine()
-                    }
-                }
-                catch (e : Exception){
-                    Log.e("error", e.toString())
-                }
-
-                val json = JSONObject(temp)
-                try{
-                    var str = json.get("message").toString()
-                    pharmacy.add(Pharmacy("none", 0.0, 0.0, "none", "none", "none", "none"))
-                    return null
-                }
-                catch (e: java.lang.Exception) {
-                    Log.e("Error", e.toString())
-                }
-
-                val count = json.get("count").toString().toInt()
-                if (count != 0) {
-
-                    val upperArray = json.getJSONArray("stores")
-
-                    for(i in 0..(count - 1)) {
-                        val upperObjet = upperArray.getJSONObject(i)
-                        Log.d("CHECK", upperObjet.toString())
-                        pharmacy.add(Pharmacy(
-                            upperObjet.getString("addr"),
-                            upperObjet.getString("lat").toDouble(),
-                            upperObjet.getString("lng").toDouble(),
-                            upperObjet.getString("name"),
-                            upperObjet.getString("remain_stat"),
-                            upperObjet.getString("stock_at"),
-                            upperObjet.getString("type")
-                        ))
-                    }
-
-                } else {
-                    pharmacy.add(Pharmacy("none", 0.0, 0.0, "none", "none", "none", "none"))
-                }
-
-                Log.e("pharmacy", pharmacy.toString())
-
-                Log.d("order", "doInBackground 끝!!")
-                return null
-            }
-
-            override fun onPostExecute(result: Void?) {
-                super.onPostExecute(result)
-//                if(flag) {
-//                    val nextIntent = Intent(mcontext, FragmentMask::class.java)
-//                    nextIntent.putExtra("List", pharmacy)
-//                    nextIntent.putExtra("latitude", latitude.toDouble())
-//                    nextIntent.putExtra("longitude", longitude.toDouble())
-//                    startActivity(nextIntent)
-//                    finish()
-//                }
-
-            }
-
-        }
-
-        var getPharmacy = GetPharmacy()
-        getPharmacy.execute()
-
     }
 }
