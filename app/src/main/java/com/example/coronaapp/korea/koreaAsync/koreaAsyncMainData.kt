@@ -17,10 +17,10 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
     override fun doInBackground(vararg params: String?): ArrayList<FragmentKorea.Item> {
         val doc: Document = Jsoup.connect("$weburl").get()
         val elts: Elements = doc.select("div.live_left")
-        val livenum = elts.select("ul.liveNum")
+        val livenum =doc.select("div.liveNumOuter")
         val chartD= elts.select("div.chart_d")
-        val mainInfoText =elts.select("span.livedate").text()
-        val infectedNum=livenum.select("li")
+        val mainInfoText=livenum.select("span.livedate").text()
+        val infectedNum=livenum.select("div.livenum").select("li")
         //Log.d("testtttttttt",infectedNum.text())
         /*
         elts.forEachIndexed{ index, elem ->
