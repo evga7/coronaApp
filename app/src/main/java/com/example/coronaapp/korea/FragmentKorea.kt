@@ -1,10 +1,9 @@
-package com.example.coronaapp
+package com.example.coronaapp.korea
 
-import android.app.ActionBar
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.util.Log
@@ -12,12 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.koreaAsync.koreaAsync1
-import com.example.coronaapp.koreaAsync.koreaAsync2
-import kotlinx.android.synthetic.main.fragment_korea.*
+import com.example.coronaapp.R
+import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityData
+import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
+import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityMap
+import kotlinx.android.synthetic.main.dialog.view.*
 import kotlinx.android.synthetic.main.fragment_korea.view.*
 import org.eazegraph.lib.charts.BarChart
 import org.eazegraph.lib.models.BarModel
@@ -28,6 +28,7 @@ class FragmentKorea : Fragment() {
     val TAG = "Main Activity"
     var coList: ArrayList<Item> = arrayListOf()
     var coList2: ArrayList<Item> = arrayListOf()
+    var coList3: ArrayList<CityItem> = arrayListOf()
     val infoMainText = String()
 
 
@@ -41,8 +42,9 @@ class FragmentKorea : Fragment() {
     companion object {
         fun newInstance(): FragmentKorea {
             val FragmentKorea = FragmentKorea()
-            FragmentKorea.coList= koreaAsync1().execute("http://ncov.mohw.go.kr").get()
-            FragmentKorea.coList2= koreaAsync2().execute("http://ncov.mohw.go.kr").get()
+            FragmentKorea.coList= koreaAsyncMainData().execute("http://ncov.mohw.go.kr").get()
+            FragmentKorea.coList2= koreaAsyncCityMap().execute("http://ncov.mohw.go.kr").get()
+            FragmentKorea.coList3= koreaAsyncCityData().execute("http://ncov.mohw.go.kr").get()
             Log.d("fragLog",FragmentKorea.coList.toString())
             val args = Bundle()
             FragmentKorea.arguments = args
@@ -90,11 +92,42 @@ class FragmentKorea : Fragment() {
             koreaFragView.findViewById<Button>(dd).setText(sp)
         }
 
+
+        for (i in 0..16) {
+            val buttonId = koreaFragView.resources.getIdentifier(
+                "cityButton" + (i + 1),
+                "id",
+                context?.packageName.toString()
+            )
+            koreaFragView.findViewById<Button>(buttonId).setOnClickListener{
+                val dialogView = layoutInflater.inflate(R.layout.dialog, null)
+                dialogView.dialogText.setText(coList3[i].city)
+                dialogView.dialogInfectText.setText(coList3[i].tit)
+                dialogView.dialogInfectNum.setText(coList3[i].num)
+
+                dialogView.dialogBeforeText.setText(coList3[i].beforeTit)
+                dialogView.dialogBeforeNum.setText(coList3[i].before)
+
+                dialogView.dialogDeadText.setText(coList3[i].tit2)
+                dialogView.dialogDeadNum.setText(coList3[i].dead)
+
+                dialogView.dialogUnIsolatedText.setText(coList3[i].tit3)
+                dialogView.dialogUnIsolatedNum.setText(coList3[i].unIsolated)
+
+                dialogView.dialogIncidenceText.setText(coList3[i].tit4)
+                dialogView.dialogIncidenceNum.setText(coList3[i].incidenceRate)
+                val builder = AlertDialog.Builder(this.context).setView(dialogView)
+                builder.show()
+
+            }
+        }
+
         barChar.startAnimation()
 
         return koreaFragView
     }
     data class Item(val title: String, val num:String, val before: String)
+    data class CityItem(val city: String, val tit:String,val beforeTit:String,val tit2:String,val tit3:String,val tit4:String,val num:String, val before: String,val dead : String, val unIsolated: String,val incidenceRate:String )
 
 }
 

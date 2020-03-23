@@ -1,12 +1,12 @@
-package com.example.coronaapp.koreaAsync
+package com.example.coronaapp.korea.koreaAsync
 
 import android.os.AsyncTask
-import com.example.coronaapp.FragmentKorea
+import com.example.coronaapp.korea.FragmentKorea
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
-class koreaAsync2: AsyncTask<String, String, ArrayList<FragmentKorea.Item>>(){ //input, progress update type, result type
+class koreaAsyncCityMap: AsyncTask<String, String, ArrayList<FragmentKorea.Item>>(){ //input, progress update type, result type
     //private var result : String = ""
     val weburl = "http://ncov.mohw.go.kr"
     val TAG = "Main Activity"
