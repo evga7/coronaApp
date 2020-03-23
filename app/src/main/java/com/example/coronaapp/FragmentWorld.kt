@@ -10,15 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
-import kotlinx.android.synthetic.main.fragment_world.*
 import kotlinx.android.synthetic.main.fragment_world.view.*
 import org.jsoup.Jsoup
 import java.io.IOException
-import java.time.LocalDate
 
 class FragmentWorld : Fragment() {
     val url = "https://www.worldometers.info/coronavirus/"
@@ -26,14 +20,12 @@ class FragmentWorld : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.d("onCreate","onCreate")
         try {
             coronaList = WorldCrawling().execute(url).get()
         }catch (e : IOException) {
             e.printStackTrace();
         }
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,6 +39,7 @@ class FragmentWorld : Fragment() {
         rootView.d.text = coronaList[coronaList.size-1].totalRecovered
         coronaList.remove(coronaList[coronaList.size-1])
 
+
         // RecyclerView
         val worldRecyclerView = rootView.findViewById(R.id.worldrecyclerview) as RecyclerView
         worldRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -54,6 +47,7 @@ class FragmentWorld : Fragment() {
         worldRecyclerView.addItemDecoration(
             DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         )
+
 
         return rootView
     }
@@ -65,6 +59,7 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
 
     override fun onPreExecute() {
         super.onPreExecute()
+
     }
 
     override fun doInBackground(vararg params: String?): ArrayList<Information> {
@@ -85,7 +80,7 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
             // country cnt
             var countCnt :Int = 1
 
-            infoList.add(Information("국가","확진자","사망자","회복"))
+            //infoList.add(Information("국가","확진자","사망자","회복"))
 
             for (datum in data){
                 country = datum.select("td")[0].text().trim()
