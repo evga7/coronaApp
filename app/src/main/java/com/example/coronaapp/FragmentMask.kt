@@ -60,13 +60,11 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment()
     private var latitude: Double? = uLatLng.latitude
     private var longitude: Double? = uLatLng.longitude
 
-    public fun getMapView(): MapView {
-        return mapView
-    }
-
     // 초기화 리소스들이 들어가는 곳
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //mapView = map_view
 
         // 사용자의 위치를 가져옴 (미구현)
         //건대사거리
@@ -115,7 +113,7 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment()
         // uiSettings.isCompassEnabled = true
         uiSettings.isLocationButtonEnabled = true
 
-        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 15.0)
+        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 14.0)
         naverMap.moveCamera(cameraUpdate)
 
         val infoWindow = InfoWindow()
@@ -214,6 +212,7 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mapView = map_view
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
     }
@@ -225,7 +224,6 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment()
 //        mapView.onCreate(savedInstanceState)
 //        mapView.getMapAsync(this)
 //        Log.d("order", "onActivityCreated")
-//
 //    }
 
     // Fragment 를 Activity 에 attach 할 때 호출
@@ -233,7 +231,6 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment()
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
-        mapView = map_view
         Log.d("order", "onAttach")
     }
 
@@ -248,7 +245,7 @@ class FragmentMask(pharmacy : ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment()
     override fun onResume() {
         super.onResume()
         mapView.onResume()
-        mapView.getMapAsync(this)
+        //mapView.getMapAsync(this)
         Log.d("order", "onResume")
     }
 

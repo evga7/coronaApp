@@ -48,8 +48,6 @@ class MainActivity : AppCompatActivity() {
                 getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString(), this@MainActivity)
                 val fragment = FragmentMask(pharmacy, userLatLng)
                 addFragment(fragment)
-                mapView = fragment.getMapView()
-                mapView.getMapAsync(fragment)
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -103,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                     //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.540661&lng127.0714121&m=500").openStream()
                     //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.5479841&lng127.073755&m=1000").openStream()
                     //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng127.081892&m=1000").openStream()
-                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng=127.073755&m=700").openStream()
+                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng=127.073755&m=1000").openStream()
                     val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
                     //temp = read.readLine()
                     var line:String?=read.readLine()
