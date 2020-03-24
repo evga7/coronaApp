@@ -29,6 +29,7 @@ class FragmentWorld : Fragment() {
                 e.printStackTrace()
             }
         }
+
     }
 
 
@@ -37,11 +38,18 @@ class FragmentWorld : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_world, container, false)
 
         // tablelayout total data add
-        rootView.a.text = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.country
-        rootView.b.text = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalCases
-        rootView.c.text = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalDeaths
-        rootView.d.text = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalRecovered
-        //Singleton.coronaList?.remove(Singleton.coronaList?.get(Singleton.coronaList?.size!!-1)!!)
+        if (Singleton.coronaFlag == false){
+            Singleton.coronaFlag = true
+            Singleton.countrySum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.country
+            Singleton.totalCasesSum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalCases
+            Singleton.totalDeathsSum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalDeaths
+            Singleton.totalRecoveredSum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalRecovered
+            Singleton.coronaList?.remove(Singleton.coronaList?.get(Singleton.coronaList?.size!!-1)!!)
+        }
+        rootView.a.text = Singleton.countrySum
+        rootView.b.text = Singleton.totalCasesSum
+        rootView.c.text = Singleton.totalDeathsSum
+        rootView.d.text = Singleton.totalRecoveredSum
 
 
         // RecyclerView
