@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -21,28 +20,16 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 import kotlinx.android.synthetic.main.fragment_mask.*
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.lang.Exception
-import java.net.URL
 import java.util.ArrayList
 
 
-class FragmentMask(pharmacy: ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment(), OnMapReadyCallback {
+class FragmentMask : Fragment(), OnMapReadyCallback {
 
     // 확인할, 확인이 필요한 권한의 목록 생성
     var permission_list = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
-
-    // private var gpsTracker: GpsTracker? = null
-    //val pharmacy = ArrayList<Pharmacy>()
-
-    val markers: MutableList<Marker> = mutableListOf<Marker>()
-
-    private lateinit var marker: Marker
 
     // 네이버 맵뷰
     private lateinit var mapView: MapView
@@ -59,18 +46,30 @@ class FragmentMask(pharmacy: ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment(),
     private lateinit var locationOverlay: LocationOverlay
     private lateinit var uiSettings: UiSettings
 
-    // 보고 따라한거.
-    var array : ArrayList<Pharmacy>? = pharmacy
+    // 마스크 판매처(약국) 정보를 담을 리스트
+    var array : ArrayList<Pharmacy>? = null
 
     // 사용자의 위도와 경도
-    private var latitude: Double? = uLatLng.latitude
-    private var longitude: Double? = uLatLng.longitude
+    private var latitude: Double? = null
+    private var longitude: Double? = null
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString("stringKey", "This is a String value")
-        outState.putBoolean("booleanKey", true)
-        Log.d("order", "onSaveInstanceState")
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>,
+                                            grantResults: IntArray) {
+        if (locationSource.onRequestPermissionsResult(requestCode, permissions,
+                grantResults)) {
+            return
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Log.d("order", "onRequestPermissionsResult")
+    }
+
+    // Fragment 를 Activity 에 attach 할 때 호출
+    // 여기서는 context 를 구하기 위해서 구현함.
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+        Log.d("order", "onAttach")
     }
 
     // 초기화 리소스들이 들어가는 곳
@@ -96,15 +95,66 @@ class FragmentMask(pharmacy: ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment(),
         Log.d("order", "onCreate")
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>,
-                                            grantResults: IntArray) {
-        if (locationSource.onRequestPermissionsResult(requestCode, permissions,
-                grantResults)) {
-            return
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d("order", "onRequestPermissionsResult")
+    // Layout 을 inflate 하는 곳, View 객체를 얻어서 초기화
+    // XML 로 만들어 놓은 View 를 inflater 를 활용하여 생성할 수 있음.
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.d("order", "onCreateView")
+        return inflater.inflate(R.layout.fragment_mask, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mapView = map_view
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
+    }
+
+    // Fragment 화면에 표시될 때 호출
+    override fun onStart() {
+        super.onStart()
+        mapView.onStart()
+        Log.d("order", "onStart")
+    }
+
+    // Fragment 화면에 로딩이 끝났을 때 호출
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+        //mapView.getMapAsync(this)
+        Log.d("order", "onResume")
+    }
+
+    // 화면이 중지되면 호출되는 함수.
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+        Log.d("order", "onPause")
+    }
+
+    // Fragment 화면 삭제
+    override fun onStop() {
+        super.onStop()
+        mapView.onStop()
+        Log.d("order", "onStop")
+    }
+
+    // Fragment 완전히 종료할 때 호출
+    // Replace 함수나 backward 로 Fragment 를 삭제하는 경우 실행되는 함수.
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+        array?.clear()
+        Log.d("order", "onDestroy")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapView.onSaveInstanceState(outState)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
     }
 
     // NaverMap 객체가 준비되면 onMapReady 콜백 메서드가 호출됨. 비동기.
@@ -113,9 +163,6 @@ class FragmentMask(pharmacy: ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment(),
         navermap = naverMap
 
         Log.d("order", "onMapReady 시작!!")
-        // naverMap.locationTrackingMode = LocationTrackingMode.Follow
-
-        // getPharmacyData(latitude.toString(), longitude.toString(), mContext)
 
         // 위치 오버레이 객체를 지정하고 지도에 띄움. (위치오버레이 == 유저)
         locationOverlay = naverMap.locationOverlay
@@ -140,11 +187,7 @@ class FragmentMask(pharmacy: ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment(),
             }
         }
 
-        // markers = mutableListOf<Marker>()
-
-        if (array.isNullOrEmpty())
-            Log.d("array", "array 가 비었습니다.")
-
+        val markers = mutableListOf<Marker>()
         array!!.forEach {
             markers += Marker().apply {
 
@@ -196,15 +239,15 @@ class FragmentMask(pharmacy: ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment(),
             }
         }
 
-        if (array.isNullOrEmpty())
-            Log.d("array", "array 가 비었습니다.")
-
         markers.forEach{ markers ->
             markers.map = navermap
         }
 
         Log.d("order", "onMapReady")
+    }
 
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 
     // 사용자에게 권한을 확인할 함수. onCreate 에서 호출, 마시멜로우 이상부터 확인해야함.
@@ -227,90 +270,14 @@ class FragmentMask(pharmacy: ArrayList<Pharmacy>, uLatLng: LatLng) : Fragment(),
         Log.d("order", "checkPermission")
     }
 
-    // Layout 을 inflate 하는 곳, View 객체를 얻어서 초기화
-    // XML 로 만들어 놓은 View 를 inflater 를 활용하여 생성할 수 있음.
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d("order", "onCreateView")
+    fun setterLatLng(userLatLng: LatLng) {
 
-        marker = Marker()
-        marker.position=LatLng(37.5479841,127.073755)
-        return inflater.inflate(R.layout.fragment_mask, container, false)
+        latitude = userLatLng.latitude
+        longitude = userLatLng.longitude
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mapView = map_view
-        mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync(this)
-    }
+    fun setterPharmacyArray(pharmacy : ArrayList<Pharmacy>) {
 
-    // fragment 생성 이후 호출되는 함수.
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        mapView = map_view
-//        mapView.onCreate(savedInstanceState)
-//        mapView.getMapAsync(this)
-//        Log.d("order", "onActivityCreated")
-//    }
-
-    // Fragment 를 Activity 에 attach 할 때 호출
-    // 여기서는 context 를 구하기 위해서 구현함.
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mContext = context
-        Log.d("order", "onAttach")
-    }
-
-    // Fragment 화면에 표시될 때 호출
-   override fun onStart() {
-        super.onStart()
-        mapView.onStart()
-        Log.d("order", "onStart")
-    }
-
-    // Fragment 화면에 로딩이 끝났을 때 호출
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-        //mapView.getMapAsync(this)
-        Log.d("order", "onResume")
-    }
-
-    // 화면이 중지되면 호출되는 함수.
-    override fun onPause() {
-        super.onPause()
-        mapView.onPause()
-        Log.d("order", "onPause")
-    }
-
-//    override fun onSaveInstanceState(outState: Bundle) {
-//        super.onSaveInstanceState(outState)
-//        mapView.onSaveInstanceState(outState)
-//    }
-
-    // Fragment 화면 삭제
-    override fun onStop() {
-        super.onStop()
-        mapView.onStop()
-        Log.d("order", "onStop")
-    }
-
-    // Fragment 완전히 종료할 때 호출
-    // Replace 함수나 backward 로 Fragment 를 삭제하는 경우 실행되는 함수.
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView.onDestroy()
-        array?.clear()
-        markers.clear()
-        Log.d("order", "onDestroy")
-    }
-
-//    override fun onLowMemory() {
-//        super.onLowMemory()
-//        mapView.onLowMemory()
-//    }
-
-    companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
+        array = pharmacy
     }
 }

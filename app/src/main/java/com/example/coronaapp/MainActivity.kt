@@ -9,7 +9,6 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.MapView
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -21,12 +20,10 @@ class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
 
-    val pharmacy = ArrayList<Pharmacy>()
     private lateinit var userLatLng: LatLng
-
     // private var gpsTracker: GpsTracker? = null
-
-    private lateinit var mapView: MapView
+    val pharmacy = ArrayList<Pharmacy>()
+    val fragmentMask = FragmentMask()
 
     private val ItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
@@ -44,13 +41,17 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.mask->{
+
                 // 사용자 위치 얻기 (미구현)
                 userLatLng = LatLng(37.565535,127.081892)
                 // userLatLng = LatLng(37.540661, 127.0714121)
                 //userLatLng = LatLng(37.5479841,127.073755)
+
                 getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString(), this@MainActivity)
-//                val fragment = FragmentMask(pharmacy, userLatLng)
-//                addFragment(fragment)
+
+                // val fragment = FragmentMask(pharmacy, userLatLng)
+                // addFragment(fragment)
+
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -75,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 
         val fragment = FragmentKorea.Companion.newInstance()
         addFragment(fragment)
-
     }
 
     private fun addFragment(fragment: Fragment) {
@@ -106,10 +106,9 @@ class MainActivity : AppCompatActivity() {
                     //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng127.081892&m=1000").openStream()
                     val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng=127.073755&m=1000").openStream()
                     val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
-                    //temp = read.readLine()
                     var line:String?=read.readLine()
                     while(line!=null){
-                        temp+=(line);
+                        temp+=(line)
                         line = read.readLine()
                     }
                 }
@@ -156,10 +155,14 @@ class MainActivity : AppCompatActivity() {
                 return null
             }
 
+            // doInBackground 작업이 끝나면 실행되는 메서드.
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
-                val fragment = FragmentMask(pharmacy, userLatLng)
-                addFragment(fragment)
+
+                fragmentMask.setterLatLng(userLatLng)
+                fragmentMask.setterPharmacyArray(pharmacy)
+                addFragment(fragmentMask)
+
             }
 
         }
