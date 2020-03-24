@@ -38,7 +38,7 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
         val recyclerviewColor = arrayListOf<String>("#B1BCBE")
 
         // 한번만 바인딩
-       holder.setIsRecyclable(false)
+        holder.setIsRecyclable(false)
         holder.bind(worldItems[pos])
 
         // + 부분부터 색깔 변환
@@ -56,51 +56,11 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
             holder.totalDeaths.setText(spannableDeaths, TextView.BufferType.SPANNABLE)
         }
 
-//        if (pos == 0){ // Title Textview 속성 값
-//            val textParam = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT).apply {
-//                topMargin = 0
-//                bottomMargin = 0
-//                leftMargin = 0
-//                rightMargin = 0
-//                width = 0
-//                weight = 1.0f
-//                gravity = Gravity.CENTER_HORIZONTAL
-//            }
-//
-//            holder.bind(worldItems[pos])
-//            holder.country.layoutParams = textParam
-//            holder.totalCases.layoutParams = textParam
-//            holder.totalDeaths.layoutParams = textParam
-//            holder.totalRecovered.layoutParams = textParam
-//            holder.itemView.setBackgroundColor(Color.parseColor(recyclerviewColor[0]))
-//            Log.d("모야","멍멍")
-//        }
-//        else{
-//            //holder.itemView.setBackgroundColor(Color.parseColor(recyclerviewColor[0]))
-//            holder.bind(worldItems[pos])
-//
-//            // + 부분부터 색깔 변환
-//            if ('+' in holder.totalCases.text){
-//                val totalCasesPlus = holder.totalCases.text.indexOf('+')
-//                val spannableCases = SpannableString(holder.totalCases.text)
-//                spannableCases.setSpan(ForegroundColorSpan(Color.RED), totalCasesPlus, holder.totalCases.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-//                holder.totalCases.setText(spannableCases, TextView.BufferType.SPANNABLE)
-//            }
-//
-//            if ('+' in holder.totalDeaths.text){
-//                val totalDeathsPlus = holder.totalDeaths.text.indexOf('+')
-//                val spannableDeaths = SpannableString(holder.totalDeaths.text)
-//                spannableDeaths.setSpan(ForegroundColorSpan(Color.RED), totalDeathsPlus, holder.totalDeaths.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-//                holder.totalDeaths.setText(spannableDeaths, TextView.BufferType.SPANNABLE)
-//            }
-//
-//        }
     }
 
 
     inner class WorldViewHolder(parent: ViewGroup?) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent?.context).inflate(R.layout.world_list, parent, false)) {
-
 
         val country = itemView.country
         val totalCases= itemView.totalCases

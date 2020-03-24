@@ -16,34 +16,38 @@ import java.io.IOException
 
 class FragmentWorld : Fragment() {
     val url = "https://www.worldometers.info/coronavirus/"
-    var coronaList = ArrayList<Information>()
+    //var coronaList = ArrayList<Information>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("onCreate","onCreate")
-        try {
-            coronaList = WorldCrawling().execute(url).get()
-        }catch (e : IOException) {
-            e.printStackTrace();
+
+        if(Singleton.coronaList == null){
+            try {
+                Log.d("ÌÅ¨Î°§ÎßÅ","onCreate")
+                Singleton.coronaList = WorldCrawling().execute(url).get()
+            }catch (e : IOException) {
+                e.printStackTrace()
+            }
         }
     }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val rootView = inflater.inflate(R.layout.fragment_world, container, false)
 
         // tablelayout total data add
-        rootView.a.text = coronaList[coronaList.size-1].country
-        rootView.b.text = coronaList[coronaList.size-1].totalCases
-        rootView.c.text = coronaList[coronaList.size-1].totalDeaths
-        rootView.d.text = coronaList[coronaList.size-1].totalRecovered
-        coronaList.remove(coronaList[coronaList.size-1])
+        rootView.a.text = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.country
+        rootView.b.text = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalCases
+        rootView.c.text = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalDeaths
+        rootView.d.text = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalRecovered
+        //Singleton.coronaList?.remove(Singleton.coronaList?.get(Singleton.coronaList?.size!!-1)!!)
 
 
         // RecyclerView
         val worldRecyclerView = rootView.findViewById(R.id.worldrecyclerview) as RecyclerView
         worldRecyclerView.layoutManager = LinearLayoutManager(activity)
-        worldRecyclerView.adapter = WorldAdapter(coronaList)
+        worldRecyclerView.adapter = WorldAdapter(Singleton.coronaList!!)
         worldRecyclerView.addItemDecoration(
             DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         )
@@ -59,7 +63,6 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // Ï
 
     override fun onPreExecute() {
         super.onPreExecute()
-
     }
 
     override fun doInBackground(vararg params: String?): ArrayList<Information> {
@@ -131,5 +134,4 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // Ï
     }
 
 }
-
 
