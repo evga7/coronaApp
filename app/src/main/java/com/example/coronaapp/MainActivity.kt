@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
 
+    val pharmacy = ArrayList<Pharmacy>()
+    private lateinit var userLatLng: LatLng
+
     // private var gpsTracker: GpsTracker? = null
 
     private lateinit var mapView: MapView
@@ -42,10 +45,12 @@ class MainActivity : AppCompatActivity() {
 
             R.id.mask->{
                 // 사용자 위치 얻기 (미구현)
-                var userLatLng: LatLng = LatLng(37.565535,127.081892)
-                // getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString(), this@MainActivity)
-                val fragment = FragmentMask(userLatLng)
-                addFragment(fragment)
+                userLatLng = LatLng(37.565535,127.081892)
+                // userLatLng = LatLng(37.540661, 127.0714121)
+                //userLatLng = LatLng(37.5479841,127.073755)
+                getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString(), this@MainActivity)
+//                val fragment = FragmentMask(pharmacy, userLatLng)
+//                addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -80,6 +85,88 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
             .commit()
         Log.d("order", "addFragment 끝")
+    }
+
+    fun getPharmacyData(latitude:String, longitude:String, mcontext: Context) {
+
+        class GetPharmacy: AsyncTask<Void, Void, Void>() {
+
+            // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
+            override fun doInBackground(vararg params: Void?): Void? {
+
+                Log.d("order", "doInBackground 시")
+
+                // 어린이대공원역사거리 37.5479841,127.073755
+                // 중곡역 37.565535,127.081892
+                // https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=34&lng=125&m=5000
+                var temp: String=""
+                try {
+                    //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.540661&lng127.0714121&m=800").openStream()
+                    // val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.5479841&lng127.073755&m=1000").openStream()
+                    //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng127.081892&m=1000").openStream()
+                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng=127.073755&m=1000").openStream()
+                    val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
+                    //temp = read.readLine()
+                    var line:String?=read.readLine()
+                    while(line!=null){
+                        temp+=(line);
+                        line = read.readLine()
+                    }
+                }
+                catch (e : Exception){
+                    Log.e("error", e.toString())
+                }
+
+                val json = JSONObject(temp)
+                try{
+                    var str = json.get("message").toString()
+                    pharmacy.add(Pharmacy("none", 0.0, 0.0, "none", "none", "none", "none"))
+                    return null
+                }
+                catch (e: java.lang.Exception) {
+                    Log.e("Error", e.toString())
+                }
+
+                val count = json.get("count").toString().toInt()
+                if (count != 0) {
+
+                    val upperArray = json.getJSONArray("stores")
+
+                    for(i in 0..(count - 1)) {
+                        val upperObjet = upperArray.getJSONObject(i)
+                        Log.d("CHECK", upperObjet.toString())
+                        pharmacy.add(Pharmacy(
+                            upperObjet.getString("addr"),
+                            upperObjet.getString("lat").toDouble(),
+                            upperObjet.getString("lng").toDouble(),
+                            upperObjet.getString("name"),
+                            upperObjet.getString("remain_stat"),
+                            upperObjet.getString("stock_at"),
+                            upperObjet.getString("type")
+                        ))
+                    }
+
+                } else {
+                    pharmacy.add(Pharmacy("none", 0.0, 0.0, "none", "none", "none", "none"))
+                }
+
+                Log.e("pharmacy", pharmacy.toString())
+
+                Log.d("order", "doInBackground 끝!!")
+                return null
+            }
+
+            override fun onPostExecute(result: Void?) {
+                super.onPostExecute(result)
+                val fragment = FragmentMask(pharmacy, userLatLng)
+                addFragment(fragment)
+            }
+
+        }
+
+        var getPharmacy = GetPharmacy()
+        getPharmacy.execute()
+
     }
 }
 
