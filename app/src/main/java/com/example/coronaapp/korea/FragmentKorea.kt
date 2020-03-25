@@ -17,13 +17,11 @@ import com.example.coronaapp.R
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityData
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityMap
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.dialog.view.*
 import kotlinx.android.synthetic.main.fragment_korea.view.*
 
@@ -95,12 +93,11 @@ class FragmentKorea : Fragment() {
         piechart.description.setEnabled(false)
         pieData.setSliceSpace(1f)
 
-        piechart.setExtraOffsets(0f,0f,0f,8f)
         val l = piechart.legend
-        l.setOrientation(Legend.LegendOrientation.VERTICAL)
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM)
+        l.setWordWrapEnabled(true)
         piechart.setData(pieda)
-
+        l.setTextSize(13f)
+        piechart.animateY(2000,Easing.EaseOutQuad)
 
 
         koreaFragView.currentInfoText1.setText(coList[8].title)
@@ -129,8 +126,7 @@ class FragmentKorea : Fragment() {
         }
 
 
-        var did1 = coList3[9].cityPencentage.substringBefore('%').toFloat()
-        var did2 = coList3[9].cityPencentage.substringBefore('%')
+
 
         for (i in 0..16) {
             val buttonId = koreaFragView.resources.getIdentifier(
@@ -156,32 +152,33 @@ class FragmentKorea : Fragment() {
                 dialogView.dialogIncidenceNum.setText(coList3[i].incidenceRate)
 
 
-                var piechart : PieChart
-                piechart=dialogView.dialogPiechart
-                piechart.setEntryLabelTextSize(0f)
+                var pieChart : PieChart
+                pieChart=dialogView.dialogPiechart
+                pieChart.setEntryLabelTextSize(0f)
                 var yValue: ArrayList<PieEntry> = arrayListOf()
                 yValue.add(PieEntry(coList3[i].cityPencentage.substringBefore('%').toFloat(),""))
                 yValue.add(PieEntry(100-coList3[i].cityPencentage.substringBefore('%').toFloat(),""))
                 var subText1 =coList3[i].cityPencentage.substringBefore(' ')
                 var subText2 =coList3[i].cityPencentage.substringAfter(' ').substringBefore(' ')
                 var subText3 =coList3[i].cityPencentage.substringAfter(' ').substringAfter(' ')
-                piechart.setCenterText(subText2+'\n'+subText3+'\n'+subText1)
+                pieChart.setCenterText(subText2+'\n'+subText3+'\n'+subText1)
                 val pieData = PieDataSet(yValue,null)
-                piechart.setUsePercentValues(true)
+                pieChart.setUsePercentValues(true)
                 var colors : ArrayList<Int> = arrayListOf<Int>()
-                colors.add(Color.parseColor("#D98888"))
+                colors.add(Color.parseColor("#4C62DF"))
                 colors.add(Color.parseColor("#B0A4A4"))
+                pieChart.setHighlightPerTapEnabled(true)
                 pieData.setColors(colors)
 
                 val pieda=PieData(pieData)
-
+                pieChart.animateY(2000,Easing.EaseOutQuad)
                 pieda.setValueTextColor(Color.BLACK)
                 pieda.setValueTextSize(0f)
 
-                piechart.description.setEnabled(false)
+                pieChart.description.setEnabled(false)
 
-                val l = piechart.legend.setEnabled(false)
-                piechart.setData(pieda)
+                val legend = pieChart.legend.setEnabled(false)
+                pieChart.setData(pieda)
 
 
                 val builder = AlertDialog.Builder(this.context).setView(dialogView)
