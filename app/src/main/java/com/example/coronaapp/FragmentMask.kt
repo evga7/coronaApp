@@ -17,10 +17,11 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.LocationOverlay
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 import kotlinx.android.synthetic.main.fragment_mask.*
-import java.util.ArrayList
+import java.util.*
 
 
 class FragmentMask : Fragment(), OnMapReadyCallback {
@@ -34,6 +35,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     // 네이버 맵뷰
     private lateinit var mapView: MapView
 
+    // 네이버맵 객체
     private lateinit var navermap: NaverMap
 
     // onAttach 를 통해서 Context 를 얻어옴.
@@ -76,16 +78,6 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //mapView = map_view
-
-        // 사용자의 위치를 가져옴 (미구현)
-        //건대사거리
-        //userLatLng = LatLng(37.540661, 127.0714121)
-        // 우리학교 근처
-        //userLatLng = LatLng(37.5479841,127.073755)
-        // 중곡역
-        //userLatLng = LatLng(37.565535,127.081892)
-
         //사용자에게 위치 권한 설정을 물어봄.
         checkPermission()
 
@@ -120,6 +112,23 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+
+        val calenndar: Calendar = Calendar.getInstance()
+        val days = listOf<String>("일", "월","화", "수", "목", "금", "토")
+        val day: String = days[calenndar.get(Calendar.DAY_OF_WEEK) - 1]
+        var info: String? = null
+
+        when(day) {
+            "월" -> info = "출생년도 끝 [ 1, 6 ] 구매 가능"
+            "화" -> info = "출생년도 끝 [ 2, 7 ] 구매 가능"
+            "수" -> info = "출생년도 끝 [ 3, 8 ] 구매 가능"
+            "목" -> info = "출생년도 끝 [ 4, 9 ] 구매 가능"
+            "금" -> info = "출생년도 끝 [ 0, 5 ] 구매 가능"
+            else -> info = "평일에 구매하지 못하신 분들이 구매하는 날"
+        }
+
+        textInfo.setText(info)
+
         //mapView.getMapAsync(this)
         Log.d("order", "onResume")
     }
@@ -174,12 +183,15 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         //네이버맵으로부터 UiSettings 를 가져옴
         uiSettings = naverMap.uiSettings
+
         // uiSettings.isCompassEnabled = true
         uiSettings.isLocationButtonEnabled = true
 
+        // 사용자로부터 받은 위치를 지도 실행시 보이는 최초 위치로 둠.
         val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 14.0)
         naverMap.moveCamera(cameraUpdate)
 
+        // 마커 위에 띄울 정보창.
         val infoWindow = InfoWindow()
         infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
             override fun getText(infoWindow: InfoWindow): CharSequence {
@@ -187,8 +199,24 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             }
         }
 
+        //마커를 클릭 시 infoWindow 로 정보를 보이기 위한 OnClickListener
+        val listener = Overlay.OnClickListener { overlay ->
+            val marker = overlay as Marker
+
+            if(marker.infoWindow == null) {
+                // 현재 마커에 정보 창이 열려있지 않을 경우 엶
+                infoWindow.open(marker)
+            }
+            else {
+                infoWindow.close()
+            }
+
+            true
+        }
+
         val markers = mutableListOf<Marker>()
         array!!.forEach {
+
             markers += Marker().apply {
 
                 position = LatLng(it.latitude, it.longitude)
@@ -231,16 +259,14 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                     tag = it.name + "($tmp)" + "\n입고시간 : " + it.stock_at
                 }
 
-                setOnClickListener {
-                    infoWindow.open(this)
-                    true
-                }
-
+                this.onClickListener = listener
             }
         }
 
-        markers.forEach{ markers ->
-            markers.map = navermap
+        markers.forEach{ marker ->
+
+            marker.map = navermap
+
         }
 
         Log.d("order", "onMapReady")
@@ -259,7 +285,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         for(permission : String in permission_list) {
 
-            var chk = checkCallingOrSelfPermission(mContext, permission)
+            val chk = checkCallingOrSelfPermission(mContext, permission)
 
             if(chk == PackageManager.PERMISSION_DENIED) {
                 requestPermissions(permission_list,0)
@@ -270,13 +296,15 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         Log.d("order", "checkPermission")
     }
 
-    fun setterLatLng(userLatLng: LatLng) {
+    // 사용자의 위도와 경도
+    fun setLatLng(userLatLng: LatLng) {
 
         latitude = userLatLng.latitude
         longitude = userLatLng.longitude
     }
 
-    fun setterPharmacyArray(pharmacy : ArrayList<Pharmacy>) {
+    // 인근 마스크 판매처의 정보를 담은 리스트를 set
+    fun setPharmacyArray(pharmacy : ArrayList<Pharmacy>) {
 
         array = pharmacy
     }

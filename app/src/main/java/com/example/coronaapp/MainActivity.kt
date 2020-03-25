@@ -1,6 +1,5 @@
 package com.example.coronaapp
 
-import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -43,14 +42,12 @@ class MainActivity : AppCompatActivity() {
             R.id.mask->{
 
                 // 사용자 위치 얻기 (미구현)
-                userLatLng = LatLng(37.565535,127.081892)
+                // userLatLng = LatLng(37.565535,127.081892)
                 // userLatLng = LatLng(37.540661, 127.0714121)
-                //userLatLng = LatLng(37.5479841,127.073755)
+                // userLatLng = LatLng(37.5661525,127.0832786)
+                userLatLng = LatLng(37.5479841,127.073755)
 
-                getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString(), this@MainActivity)
-
-                // val fragment = FragmentMask(pharmacy, userLatLng)
-                // addFragment(fragment)
+                getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString())
 
                 return@OnNavigationItemSelectedListener true
             }
@@ -87,24 +84,16 @@ class MainActivity : AppCompatActivity() {
         Log.d("order", "addFragment 끝")
     }
 
-    fun getPharmacyData(latitude:String, longitude:String, mcontext: Context) {
+    fun getPharmacyData(latitude:String, longitude:String) {
 
         class GetPharmacy: AsyncTask<Void, Void, Void>() {
 
             // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
             override fun doInBackground(vararg params: Void?): Void? {
 
-                Log.d("order", "doInBackground 시")
-
-                // 어린이대공원역사거리 37.5479841,127.073755
-                // 중곡역 37.565535,127.081892
-                // https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=34&lng=125&m=5000
                 var temp: String=""
                 try {
-                    //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.540661&lng127.0714121&m=800").openStream()
-                    // val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.5479841&lng127.073755&m=1000").openStream()
-                    //val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng127.081892&m=1000").openStream()
-                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=37.565535&lng=127.073755&m=1000").openStream()
+                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+latitude+"&lng="+longitude+"&m=1500").openStream()
                     val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
                     var line:String?=read.readLine()
                     while(line!=null){
@@ -159,15 +148,15 @@ class MainActivity : AppCompatActivity() {
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
 
-                fragmentMask.setterLatLng(userLatLng)
-                fragmentMask.setterPharmacyArray(pharmacy)
+                fragmentMask.setLatLng(userLatLng)
+                fragmentMask.setPharmacyArray(pharmacy)
                 addFragment(fragmentMask)
 
             }
 
         }
 
-        var getPharmacy = GetPharmacy()
+        val getPharmacy = GetPharmacy()
         getPharmacy.execute()
 
     }
