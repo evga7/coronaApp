@@ -113,6 +113,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         super.onResume()
         mapView.onResume()
 
+        // 구매 가능한 출생년도 TextView 에 보이기
         val calenndar: Calendar = Calendar.getInstance()
         val days = listOf<String>("일", "월","화", "수", "목", "금", "토")
         val day: String = days[calenndar.get(Calendar.DAY_OF_WEEK) - 1]
@@ -193,10 +194,15 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         // 마커 위에 띄울 정보창.
         val infoWindow = InfoWindow()
+
         infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
             override fun getText(infoWindow: InfoWindow): CharSequence {
                 return infoWindow.marker?.tag as CharSequence? ?: ""
             }
+        }
+
+        naverMap.setOnMapClickListener { pointF, latLng -> 
+            infoWindow.close()
         }
 
         //마커를 클릭 시 infoWindow 로 정보를 보이기 위한 OnClickListener
@@ -296,7 +302,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         Log.d("order", "checkPermission")
     }
 
-    // 사용자의 위도와 경도
+    // 사용자의 위도와 경도 set
     fun setLatLng(userLatLng: LatLng) {
 
         latitude = userLatLng.latitude
