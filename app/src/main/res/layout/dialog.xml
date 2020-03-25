@@ -11,6 +11,8 @@
 
 
 
+
+
     <TextView
         android:id="@+id/dialogText"
         android:layout_width="match_parent"
@@ -21,11 +23,17 @@
         android:textColor="#ffffff"
         android:textSize="16dp"
         android:textStyle="bold" />
+
     <View
         android:id="@+id/view3"
         android:layout_width="wrap_content"
-        android:layout_height="30sp"
+        android:layout_height="10sp"
         android:layout_weight="1" />
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/dialogPiechart"
+        android:layout_width="match_parent"
+        android:layout_height="170sp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +48,7 @@
             android:layout_gravity="center_vertical"
             android:textStyle="bold"
             android:textColor="#7C7979"
-            android:layout_marginLeft="70sp"
+            android:layout_marginLeft="50sp"
             android:textSize="16sp" />
         <TextView
             android:id="@+id/dialogInfectNum"
@@ -63,7 +71,7 @@
             android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginLeft="70sp"
+            android:layout_marginLeft="50sp"
             android:textColor="#7C7979"
             android:textSize="16sp" />
         <TextView
@@ -84,7 +92,7 @@
             android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginLeft="70sp"
+            android:layout_marginLeft="50sp"
             android:textColor="#7C7979"
             android:textSize="16sp" />
         <TextView
@@ -107,7 +115,7 @@
             android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginLeft="70sp"
+            android:layout_marginLeft="50sp"
             android:textColor="#7C7979"
             android:textSize="16sp" />
         <TextView
@@ -129,7 +137,7 @@
             android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginLeft="70sp"
+            android:layout_marginLeft="50sp"
             android:textColor="#7C7979"
             android:textSize="16sp" />
         <TextView

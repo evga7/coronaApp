@@ -17,10 +17,16 @@ import com.example.coronaapp.R
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityData
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityMap
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Description
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.dialog.view.*
 import kotlinx.android.synthetic.main.fragment_korea.view.*
-import org.eazegraph.lib.charts.BarChart
-import org.eazegraph.lib.models.BarModel
+
 
 class FragmentKorea : Fragment() {
 
@@ -67,23 +73,53 @@ class FragmentKorea : Fragment() {
         koreaFragView.deadText1.setText(coList[3].title)
         koreaFragView.deadText2.setText(coList[3].num)
         koreaFragView.deadText3.setText(coList[3].before)
-        val barChar : BarChart
-        barChar=koreaFragView.coronaChart
-        barChar.clearChart()
+        var piechart : PieChart
+        piechart=koreaFragView.Piechart
+        piechart.setUsePercentValues(true)
+        var yValue: ArrayList<PieEntry> = arrayListOf()
         for (i in 5..7)
-            barChar.addBar(BarModel("",coList[i].before.substringAfter('(').substringBefore('%').toFloat(), 0xFF56B7F1.toInt()))
-        koreaFragView.coChartText1.setText("  "+coList[5].title+"\n"+coList[5].num+"명")
-        koreaFragView.coChartText2.setText(coList[6].title+"\n    "+coList[6].num+"명")
-        koreaFragView.coChartText3.setText(coList[7].title+"\n"+coList[7].num+"명")
+        yValue.add(PieEntry(coList[i].before.substringAfter('(').substringBefore('%').toFloat(),coList[i].title+" "+coList[i].num+" 명 "+coList[i].before))
+        val pieData = PieDataSet(yValue,null)
+        var colors : ArrayList<Int> = arrayListOf<Int>()
+        colors.add(Color.parseColor("#D6CE8E"))
+        colors.add(Color.parseColor("#CB7474"))
+        colors.add(Color.parseColor("#BCDD95"))
+        pieData.setColors(colors)
+
+        val pieda=PieData(pieData)
+
+        piechart.setEntryLabelTextSize(0f)
+        pieda.setValueTextColor(Color.BLACK)
+        pieda.setValueTextSize(0f)
+
+        piechart.description.setEnabled(false)
+        pieData.setSliceSpace(1f)
+
+        piechart.setExtraOffsets(0f,0f,0f,8f)
+        val l = piechart.legend
+        l.setOrientation(Legend.LegendOrientation.VERTICAL)
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM)
+        piechart.setData(pieda)
+
+
+
+        koreaFragView.currentInfoText1.setText(coList[8].title)
+        koreaFragView.currentInfoText2.setText(coList[8].num)
+
+        koreaFragView.currentInfoText3.setText(coList[9].title)
+        koreaFragView.currentInfoText4.setText(coList[9].num)
+
+        koreaFragView.currentInfoText5.setText(coList[10].title)
+        koreaFragView.currentInfoText6.setText(coList[10].num)
 
         val textView = TextView(koreaFragView.context)
-        var tempStr= String()
+        var tempStr : String
         textView.setTextColor(Color.GREEN)
         for (i in 0..16) {
             tempStr = coList2[i].title + "\n" + coList2[i].num + "\n" + coList2[i].before
             val sp = SpannableStringBuilder(tempStr)
             sp.setSpan(
-                ForegroundColorSpan(Color.BLUE),
+                ForegroundColorSpan(Color.parseColor("#BAF1BC")),
                 coList2[i].title.length,
                 coList2[i].title.length + coList2[i].num.length + 1,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -92,6 +128,9 @@ class FragmentKorea : Fragment() {
             koreaFragView.findViewById<Button>(dd).setText(sp)
         }
 
+
+        var did1 = coList3[9].cityPencentage.substringBefore('%').toFloat()
+        var did2 = coList3[9].cityPencentage.substringBefore('%')
 
         for (i in 0..16) {
             val buttonId = koreaFragView.resources.getIdentifier(
@@ -104,7 +143,6 @@ class FragmentKorea : Fragment() {
                 dialogView.dialogText.setText(coList3[i].city)
                 dialogView.dialogInfectText.setText(coList3[i].tit)
                 dialogView.dialogInfectNum.setText(coList3[i].num)
-
                 dialogView.dialogBeforeText.setText(coList3[i].beforeTit)
                 dialogView.dialogBeforeNum.setText(coList3[i].before)
 
@@ -116,18 +154,48 @@ class FragmentKorea : Fragment() {
 
                 dialogView.dialogIncidenceText.setText(coList3[i].tit4)
                 dialogView.dialogIncidenceNum.setText(coList3[i].incidenceRate)
+
+
+                var piechart : PieChart
+                piechart=dialogView.dialogPiechart
+                piechart.setEntryLabelTextSize(0f)
+                var yValue: ArrayList<PieEntry> = arrayListOf()
+                yValue.add(PieEntry(coList3[i].cityPencentage.substringBefore('%').toFloat(),""))
+                yValue.add(PieEntry(100-coList3[i].cityPencentage.substringBefore('%').toFloat(),""))
+                var subText1 =coList3[i].cityPencentage.substringBefore(' ')
+                var subText2 =coList3[i].cityPencentage.substringAfter(' ').substringBefore(' ')
+                var subText3 =coList3[i].cityPencentage.substringAfter(' ').substringAfter(' ')
+                piechart.setCenterText(subText2+'\n'+subText3+'\n'+subText1)
+                val pieData = PieDataSet(yValue,null)
+                piechart.setUsePercentValues(true)
+                var colors : ArrayList<Int> = arrayListOf<Int>()
+                colors.add(Color.parseColor("#D98888"))
+                colors.add(Color.parseColor("#B0A4A4"))
+                pieData.setColors(colors)
+
+                val pieda=PieData(pieData)
+
+                pieda.setValueTextColor(Color.BLACK)
+                pieda.setValueTextSize(0f)
+
+                piechart.description.setEnabled(false)
+
+                val l = piechart.legend.setEnabled(false)
+                piechart.setData(pieda)
+
+
                 val builder = AlertDialog.Builder(this.context).setView(dialogView)
                 builder.show()
 
             }
         }
 
-        barChar.startAnimation()
+
 
         return koreaFragView
     }
     data class Item(val title: String, val num:String, val before: String)
-    data class CityItem(val city: String, val tit:String,val beforeTit:String,val tit2:String,val tit3:String,val tit4:String,val num:String, val before: String,val dead : String, val unIsolated: String,val incidenceRate:String )
+    data class CityItem(val city: String, val tit:String,val beforeTit:String,val tit2:String,val tit3:String,val tit4:String,val num:String, val before: String,val dead : String, val unIsolated: String,val incidenceRate:String,val cityPencentage:String )
 
 }
 

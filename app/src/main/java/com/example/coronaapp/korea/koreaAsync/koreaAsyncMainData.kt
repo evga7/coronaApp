@@ -19,6 +19,8 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
         val elts: Elements = doc.select("div.live_left")
         val livenum =doc.select("div.liveNumOuter")
         val chartD= elts.select("div.chart_d")
+        val sumInfoTit=elts.select("ul.suminfo").select("span.tit")
+        val sumInfoNum=elts.select("ul.suminfo").select("span.num")
         val mainInfoText=livenum.select("span.livedate").text()
         val infectedNum=livenum.select("div.livenum").select("li")
         //Log.d("testtttttttt",infectedNum.text())
@@ -69,6 +71,10 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
                 chartD.select("p.numinfo3").select("span.num_rnum").text().substringAfter("명")
             )
         )
+        for(i in 0..sumInfoNum.size-1)
+        {
+            temp.add(FragmentKorea.Item(sumInfoTit[i].text(),sumInfoNum[i].text(),""))
+        }
         return temp
         //return doc.title()
     }

@@ -25,7 +25,8 @@ class koreaAsyncCityData: AsyncTask<String, String, ArrayList<FragmentKorea.City
             val num = cityInfo.select("span.num")
             val before_tit = cityInfo.select("span.sub_tit.red")
             val before_num = cityInfo.select("span.sub_num.red")
-            temp.add(FragmentKorea.CityItem(elts.select("h4.cityname").text(),tit[0].text(),before_tit.text(),tit[1].text(),tit[2].text(),tit[3].text(),num[0].text(),before_num.text(),num[1].text(),num[2].text(),num[3].text()))
+            val percentage = elts.select("p.citytit")
+            temp.add(FragmentKorea.CityItem(elts.select("h4.cityname").text(),tit[0].text(),before_tit.text(),tit[1].text(),tit[2].text(),tit[3].text(),num[0].text(),before_num.text(),num[1].text(),num[2].text(),num[3].text(),percentage.text()))
         }
 
 
