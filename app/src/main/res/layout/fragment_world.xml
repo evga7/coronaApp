@@ -1,16 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/worldtext"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:background="@drawable/round_border"
+                android:id="@+id/totalTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_margin="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TableRow
+                    android:id="@+id/titlerow"
+                    android:background="@drawable/round_boder_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="국가"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="확진자"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="사망자"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="회복자"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/a"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/b"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/c"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/d"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+
+            </TableLayout>
+
+
+            <TableLayout
+                android:background="@drawable/round_table_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+            <TableRow
+
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="국가"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="확진자"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="사망자"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="회복자"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="16sp" />
+
+            </TableRow>
+            </TableLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/worldrecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/round_table_bottom"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

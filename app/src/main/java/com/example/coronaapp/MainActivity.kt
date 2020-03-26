@@ -3,13 +3,14 @@ package com.example.coronaapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.korea.FragmentKorea
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
+    private var lastClickedTime: Long = 0L
 
     private val ItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
@@ -48,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         content = findViewById(R.id.frameLayout)
+
+        Singleton()
 
         val navigation = findViewById<BottomNavigationView>(R.id.navigationView)
         navigation.setOnNavigationItemSelectedListener(ItemSelectedListener)

@@ -25,10 +25,6 @@ android {
 
 }
 
-repositories {
-    maven { url 'https://jitpack.io' }
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -39,7 +35,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'org.jsoup:jsoup:1.13.1'
+    implementation 'org.jsoup:jsoup:1.12.1'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'com.github.PhilJay:MpAndroidChart:v3.1.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
