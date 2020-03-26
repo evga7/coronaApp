@@ -23,6 +23,7 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
         val sumInfoNum=elts.select("ul.suminfo").select("span.num")
         val mainInfoText=livenum.select("span.livedate").text()
         val infectedNum=livenum.select("div.livenum").select("li")
+        val todayInfectAndCure =livenum.select("ul.liveNum_today.mgt8")
         //Log.d("testtttttttt",infectedNum.text())
         /*
         elts.forEachIndexed{ index, elem ->
@@ -75,6 +76,8 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
         {
             temp.add(FragmentKorea.Item(sumInfoTit[i].text(),sumInfoNum[i].text(),""))
         }
+        temp.add(FragmentKorea.Item(todayInfectAndCure.select("span.tit1").text(),todayInfectAndCure.select("span.data1").text(),""))
+        temp.add(FragmentKorea.Item(todayInfectAndCure.select("span.tit2").text(),todayInfectAndCure.select("span.data2").text(),""))
         return temp
         //return doc.title()
     }

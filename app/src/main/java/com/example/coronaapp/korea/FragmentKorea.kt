@@ -70,7 +70,13 @@ class FragmentKorea : Fragment() {
         koreaFragView.careText3.setText(coList[2].before)
         koreaFragView.deadText1.setText(coList[3].title)
         koreaFragView.deadText2.setText(coList[3].num)
+
         koreaFragView.deadText3.setText(coList[3].before)
+        koreaFragView.todayInfedctText.setText(coList[11].title)
+        koreaFragView.todayInfedctNumText.setText(coList[11].num)
+
+        koreaFragView.todayCureText.setText(coList[12].title)
+        koreaFragView.todayCureNumText.setText(coList[12].num)
         var piechart : PieChart
         piechart=koreaFragView.Piechart
         piechart.setUsePercentValues(true)

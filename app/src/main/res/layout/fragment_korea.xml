@@ -94,6 +94,67 @@
 
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40sp"
+                        android:orientation="horizontal"
+                        >
+
+
+                        <LinearLayout
+                            android:layout_width="200sp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="40sp"
+                            android:layout_marginRight="10sp"
+                            android:gravity="center"
+                           >
+
+
+                            <TextView
+                                android:id="@+id/todayInfedctText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TextView"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:id="@+id/todayInfedctNumText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TextView"
+                                android:layout_marginLeft="10sp"
+                                android:layout_gravity="center"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="200sp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginRight="40sp"
+                            android:layout_marginLeft="10sp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            >
+                            <TextView
+                                android:id="@+id/todayCureText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TextView"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:id="@+id/todayCureNumText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TextView"
+                                android:layout_marginLeft="10sp"
+                                android:layout_gravity="center"/>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
