@@ -1,5 +1,7 @@
 package com.example.coronaapp
 
+import com.example.coronaapp.world.Information
+
 class Singleton {
     companion object {
         var coronaList: ArrayList<Information>? = null

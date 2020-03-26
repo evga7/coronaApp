@@ -1,4 +1,4 @@
-package com.example.coronaapp
+package com.example.coronaapp.world
 
 import android.graphics.Color
 import android.text.Spannable
@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.coronaapp.R
 import kotlinx.android.synthetic.main.fragment_world.view.*
 import kotlinx.android.synthetic.main.world_list.view.*
 
@@ -37,9 +38,32 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: WorldViewHolder, pos: Int) {
         val recyclerviewColor = arrayListOf<String>("#B1BCBE")
 
-        // 한번만 바인딩
+        //한번만 바인
         holder.setIsRecyclable(false)
         holder.bind(worldItems[pos])
+
+//        if (holder.totalCases.text.length == 2){
+//            val Params = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT,1f).apply {
+//                topMargin = 0
+//                bottomMargin = 0
+//                leftMargin = 0
+//                rightMargin = 0
+//            }
+//            holder.totalCases.setPadding(0,20,0,0)
+//            holder.totalCases.layoutParams = Params
+//        }
+//        if (holder.totalDeaths.text.length == 2){
+//            val Params = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT,1f).apply {
+//                width = 0
+//                weight = 1f
+//                gravity = Gravity.CENTER
+//                topMargin = 7
+//                bottomMargin = 7
+//            }
+//
+//            holder.totalDeaths.layoutParams = Params
+//        }
+
 
         // + 부분부터 색깔 변환
         if ('+' in holder.totalCases.text){

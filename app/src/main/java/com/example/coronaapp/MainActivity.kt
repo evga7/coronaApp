@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.world.FragmentWorld
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -77,8 +78,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
         .commit()
     }
-
-
 }
 
 

@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 class FragmentKorea : Fragment() {
     // first
     // 프레그먼트 재생성 시 세팅 해놓은 번들을 통해 다시 넘어오게 할 수 있음.
-
-
     companion object {
         fun newInstance(): FragmentKorea {
             val FragmentKorea = FragmentKorea()
@@ -24,7 +22,6 @@ class FragmentKorea : Fragment() {
 
         return inflater.inflate(R.layout.fragment_korea, container, false)
     }
-
 
 }
 
