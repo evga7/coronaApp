@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.Mask.FragmentMask
+import com.example.coronaapp.Mask.GpsTracker
+import com.example.coronaapp.Mask.Pharmacy
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.naver.maps.geometry.LatLng
 import org.json.JSONObject
@@ -20,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private var content: FrameLayout? = null
 
     private lateinit var userLatLng: LatLng
-    // private var gpsTracker: GpsTracker? = null
+    private var gpsTracker: GpsTracker? = null
     val pharmacy = ArrayList<Pharmacy>()
     val fragmentMask = FragmentMask()
 
@@ -41,12 +44,11 @@ class MainActivity : AppCompatActivity() {
 
             R.id.mask->{
 
-                // 사용자 위치 얻기 (미구현)
-                // userLatLng = LatLng(37.565535,127.081892)
-                // userLatLng = LatLng(37.540661, 127.0714121)
-                // userLatLng = LatLng(37.5661525,127.0832786)
-                userLatLng = LatLng(37.5479841,127.073755)
+                // 사용자 위치 얻기
+                gpsTracker = GpsTracker(this@MainActivity)
+                userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
 
+                // 사용자 인근 마스크 판매점 얻고 맵에 그림.
                 getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString())
 
                 return@OnNavigationItemSelectedListener true
@@ -108,7 +110,17 @@ class MainActivity : AppCompatActivity() {
                 val json = JSONObject(temp)
                 try{
                     var str = json.get("message").toString()
-                    pharmacy.add(Pharmacy("none", 0.0, 0.0, "none", "none", "none", "none"))
+                    pharmacy.add(
+                        Pharmacy(
+                            "none",
+                            0.0,
+                            0.0,
+                            "none",
+                            "none",
+                            "none",
+                            "none"
+                        )
+                    )
                     return null
                 }
                 catch (e: java.lang.Exception) {
@@ -123,19 +135,31 @@ class MainActivity : AppCompatActivity() {
                     for(i in 0..(count - 1)) {
                         val upperObjet = upperArray.getJSONObject(i)
                         Log.d("CHECK", upperObjet.toString())
-                        pharmacy.add(Pharmacy(
-                            upperObjet.getString("addr"),
-                            upperObjet.getString("lat").toDouble(),
-                            upperObjet.getString("lng").toDouble(),
-                            upperObjet.getString("name"),
-                            upperObjet.getString("remain_stat"),
-                            upperObjet.getString("stock_at"),
-                            upperObjet.getString("type")
-                        ))
+                        pharmacy.add(
+                            Pharmacy(
+                                upperObjet.getString("addr"),
+                                upperObjet.getString("lat").toDouble(),
+                                upperObjet.getString("lng").toDouble(),
+                                upperObjet.getString("name"),
+                                upperObjet.getString("remain_stat"),
+                                upperObjet.getString("stock_at"),
+                                upperObjet.getString("type")
+                            )
+                        )
                     }
 
                 } else {
-                    pharmacy.add(Pharmacy("none", 0.0, 0.0, "none", "none", "none", "none"))
+                    pharmacy.add(
+                        Pharmacy(
+                            "none",
+                            0.0,
+                            0.0,
+                            "none",
+                            "none",
+                            "none",
+                            "none"
+                        )
+                    )
                 }
 
                 Log.e("pharmacy", pharmacy.toString())

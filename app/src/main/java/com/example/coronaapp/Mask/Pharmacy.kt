@@ -1,4 +1,4 @@
-package com.example.coronaapp
+package com.example.coronaapp.Mask
 
 import android.os.Parcel
 import android.os.Parcelable

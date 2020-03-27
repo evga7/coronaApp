@@ -1,4 +1,4 @@
-package com.example.coronaapp
+package com.example.coronaapp.Mask
 
 import android.Manifest
 import android.content.Context
@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.R
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
@@ -82,7 +83,9 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         checkPermission()
 
         locationSource =
-            FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+            FusedLocationSource(this,
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
 
         Log.d("order", "onCreate")
     }
@@ -201,6 +204,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             }
         }
 
+        // 네이버맵 클릭 시 열린 infoWindow 를 닫게 함.
         naverMap.setOnMapClickListener { pointF, latLng -> 
             infoWindow.close()
         }
