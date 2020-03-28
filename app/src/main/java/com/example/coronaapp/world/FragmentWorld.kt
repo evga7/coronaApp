@@ -19,7 +19,6 @@ class FragmentWorld : Fragment() {
     val url = "https://www.worldometers.info/coronavirus/"
     lateinit var mcontext :Context
     //var coronaList = ArrayList<Information>()
-    val progressCircle = CustomProgressCircle()
 
 
     override fun onAttach(context: Context) {
@@ -29,14 +28,17 @@ class FragmentWorld : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(Singleton.coronaList == null){
-            try {
-                Log.d("크롤링","onCreate")
-                Singleton.coronaList = WorldCrawling(mcontext).execute(url).get()
-            }catch (e : IOException) {
-                e.printStackTrace()
-            }
-        }
+
+//        if(Singleton.coronaList == null){
+//            val crawlingData = WorldCrawling(mcontext).execute(url)
+//            try {
+//                //Singleton.coronaList= crawlingData.get()
+//                Log.d("크롤링","onCreate")
+//                //Singleton.coronaList = WorldCrawling(mcontext).execute(url).get()
+//            }catch (e : IOException) {
+//                e.printStackTrace()
+//            }
+//        }
 
     }
 

@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.world.CustomProgressCircle
 import com.example.coronaapp.world.FragmentWorld
 import com.example.coronaapp.world.WorldCrawling
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -35,8 +36,20 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.world->{
+
                 val fragment = FragmentWorld()
-                addFragment(fragment)
+                if(Singleton.coronaList == null){
+                    try {
+                        Log.d("크롤링","onCreate")
+                        WorldCrawling(this,this,fragment).execute("https://www.worldometers.info/coronavirus/")
+                    }catch (e : IOException) {
+                        e.printStackTrace()
+                    }
+                }
+                else{
+                    addFragment(fragment)
+                }
+                //addFragment(fragment)
                 Log.d("worldclick","worldclcc")
                 return@OnNavigationItemSelectedListener true
             }

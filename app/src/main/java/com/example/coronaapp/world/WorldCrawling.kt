@@ -4,22 +4,23 @@ import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import android.widget.Toast
-import com.example.coronaapp.MainActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
+import com.example.coronaapp.Singleton
 import org.jsoup.Jsoup
 import java.io.IOException
 
-class WorldCrawling(context: Context) : AsyncTask<String, String, ArrayList<Information>>() { // 세번째 doinbackground 반환타입, onPostExecute 매개변수
+class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : AsyncTask<String, String, ArrayList<Information>>() { // 세번째 doinbackground 반환타입, onPostExecute 매개변수
     var infoList: ArrayList<Information> = arrayListOf()
     val progressCircle = CustomProgressCircle()
     val dialogContext : Context = context
-
+    val currentActivity:AppCompatActivity = act
+    val fragment:Fragment = frg
 
     override fun onPreExecute() {
         super.onPreExecute()
         progressCircle.show(dialogContext)
-        Toast.makeText(dialogContext, "시작", Toast.LENGTH_LONG).show()
-
     }
 
     override fun doInBackground(vararg params: String?): ArrayList<Information> {
@@ -78,8 +79,8 @@ class WorldCrawling(context: Context) : AsyncTask<String, String, ArrayList<Info
             }
 
             // total data add
-            val totalCasesSum:String
-            val totalDeathsSum:String
+            var totalCasesSum:String
+            var totalDeathsSum:String
             val totalRecoveredSum:String
 
             val caseArr = infoList[infoList.size - 1].totalCases.split("\n")
@@ -94,12 +95,19 @@ class WorldCrawling(context: Context) : AsyncTask<String, String, ArrayList<Info
 
             totalRecoveredSum = infoList[infoList.size - 1].totalRecovered
 
+            // ',' add
+            totalCasesSum = totalCasesSum.substring(0,totalCasesSum.length - 3) + ',' + totalCasesSum.substring(totalCasesSum.length - 3,totalCasesSum.length)
+            totalDeathsSum = totalDeathsSum.substring(0,totalDeathsSum.length - 3) + ',' + totalDeathsSum.substring(totalDeathsSum.length - 3,totalDeathsSum.length)
+
+
             infoList.add(Information(countCnt.toString(),totalCasesSum,totalDeathsSum,totalRecoveredSum))
 
         }catch (e : IOException) {
             Log.d("안됨","안딤")
             e.printStackTrace()
         }
+
+        Singleton.coronaList = infoList
         return infoList
     }
 
@@ -110,7 +118,11 @@ class WorldCrawling(context: Context) : AsyncTask<String, String, ArrayList<Info
     override fun onPostExecute(result: ArrayList<Information>) {
         super.onPostExecute(result)
         progressCircle.dialog.dismiss()
-        Toast.makeText(dialogContext, "끝남", Toast.LENGTH_LONG).show()
+        currentActivity.supportFragmentManager.beginTransaction()
+            //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+            .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
+            .commit()
+
     }
 
     fun countryTrans(c:String):String =
