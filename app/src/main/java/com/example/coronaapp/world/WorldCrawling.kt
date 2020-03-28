@@ -1,16 +1,24 @@
 package com.example.coronaapp.world
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
+import com.example.coronaapp.MainActivity
+import dmax.dialog.SpotsDialog
 import org.jsoup.Jsoup
 import java.io.IOException
 
-class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // 세번째 doinbackground 반환타입, onPostExecute 매개변수
+class WorldCrawling(context: Context): AsyncTask<String, String, ArrayList<Information>>() { // 세번째 doinbackground 반환타입, onPostExecute 매개변수
     var infoList: ArrayList<Information> = arrayListOf()
+    val dialog : AlertDialog = SpotsDialog.Builder().setContext(context).build()
 
     override fun onPreExecute() {
+        dialog.show()
         super.onPreExecute()
     }
+
+
 
     override fun doInBackground(vararg params: String?): ArrayList<Information> {
 
@@ -80,6 +88,7 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
     }
 
     override fun onPostExecute(result: ArrayList<Information>) {
+        dialog.dismiss()
         super.onPostExecute(result)
     }
 

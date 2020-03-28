@@ -1,10 +1,12 @@
 package com.example.coronaapp
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.korea.FragmentKorea
+import com.example.coronaapp.world.FragmentWorld
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var lastClickedTime: Long = 0L
 
     private val ItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+
 
         when(item.itemId){
             R.id.korea->{

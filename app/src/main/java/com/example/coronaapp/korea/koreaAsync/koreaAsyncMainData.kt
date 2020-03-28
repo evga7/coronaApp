@@ -1,5 +1,6 @@
 package com.example.coronaapp.korea.koreaAsync
 
+import android.app.ProgressDialog
 import android.os.AsyncTask
 import com.example.coronaapp.korea.FragmentKorea
 import org.jsoup.Jsoup
@@ -11,7 +12,9 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
     val weburl = "http://ncov.mohw.go.kr"
     val TAG = "Main Activity"
     override fun onPreExecute() {
+
         super.onPreExecute()
+
     }
 
     override fun doInBackground(vararg params: String?): ArrayList<FragmentKorea.Item> {

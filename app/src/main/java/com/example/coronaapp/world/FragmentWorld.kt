@@ -1,19 +1,20 @@
 package com.example.coronaapp.world
 
-import android.os.AsyncTask
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.coronaapp.MainActivity
 import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
 import kotlinx.android.synthetic.main.fragment_world.view.*
-import org.jsoup.Jsoup
 import java.io.IOException
 
 class FragmentWorld : Fragment() {
@@ -25,8 +26,9 @@ class FragmentWorld : Fragment() {
 
         if(Singleton.coronaList == null){
             try {
+                val fra = FragmentWorld()
                 Log.d("크롤링","onCreate")
-                Singleton.coronaList = WorldCrawling().execute(url).get()
+                Singleton.coronaList = fra.context?.let { WorldCrawling(it).execute(url).get() }
             }catch (e : IOException) {
                 e.printStackTrace()
             }

@@ -17,7 +17,7 @@ class koreaAsyncCityData: AsyncTask<String, String, ArrayList<FragmentKorea.City
     override fun doInBackground(vararg params: String?): ArrayList<FragmentKorea.CityItem> {
         val doc: Document = Jsoup.connect("$weburl").get()
         val temp : ArrayList<FragmentKorea.CityItem> = arrayListOf()
-        for (i in 1..17)
+        for (i in 1..18)
         {
             val elts: Elements = doc.select("div#map_city"+i)
             val cityInfo = elts.select("ul.cityinfo")

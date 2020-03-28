@@ -1,6 +1,7 @@
 package com.example.coronaapp.korea
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -118,11 +119,11 @@ class FragmentKorea : Fragment() {
         val textView = TextView(koreaFragView.context)
         var tempStr : String
         textView.setTextColor(Color.GREEN)
-        for (i in 0..16) {
+        for (i in 0..17) {
             tempStr = coList2[i].title + "\n" + coList2[i].num + "\n" + coList2[i].before
             val sp = SpannableStringBuilder(tempStr)
             sp.setSpan(
-                ForegroundColorSpan(Color.parseColor("#BAF1BC")),
+                ForegroundColorSpan(Color.RED),
                 coList2[i].title.length,
                 coList2[i].title.length + coList2[i].num.length + 1,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -134,7 +135,7 @@ class FragmentKorea : Fragment() {
 
 
 
-        for (i in 0..16) {
+        for (i in 0..17) {
             val buttonId = koreaFragView.resources.getIdentifier(
                 "cityButton" + (i + 1),
                 "id",
