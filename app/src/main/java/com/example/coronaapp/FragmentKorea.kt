@@ -1,5 +1,6 @@
 package com.example.coronaapp
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 class FragmentKorea : Fragment() {
+
     // first
     // 프레그먼트 재생성 시 세팅 해놓은 번들을 통해 다시 넘어오게 할 수 있음.
     companion object {
@@ -17,6 +19,7 @@ class FragmentKorea : Fragment() {
             return FragmentKorea
         }
     }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

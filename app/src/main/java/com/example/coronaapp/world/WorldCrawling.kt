@@ -1,15 +1,25 @@
 package com.example.coronaapp.world
 
+import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
+import android.widget.Toast
+import com.example.coronaapp.MainActivity
+import com.example.coronaapp.R
 import org.jsoup.Jsoup
 import java.io.IOException
 
-class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // 세번째 doinbackground 반환타입, onPostExecute 매개변수
+class WorldCrawling(context: Context) : AsyncTask<String, String, ArrayList<Information>>() { // 세번째 doinbackground 반환타입, onPostExecute 매개변수
     var infoList: ArrayList<Information> = arrayListOf()
+    val progressCircle = CustomProgressCircle()
+    val dialogContext : Context = context
+
 
     override fun onPreExecute() {
         super.onPreExecute()
+        progressCircle.show(dialogContext)
+        Toast.makeText(dialogContext, "시작", Toast.LENGTH_LONG).show()
+
     }
 
     override fun doInBackground(vararg params: String?): ArrayList<Information> {
@@ -40,7 +50,25 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
                 newDeaths = datum.select("td")[4].text().trim()
                 totalRecovered = datum.select("td")[5].text().trim()
 
+                // 영어 -> 한글
                 country = countryTrans(country)
+
+                if(totalCases.length == 0){
+                     totalCases += '0'
+                }
+                if (totalDeaths.length == 0){
+                    totalDeaths += '0'
+                }
+                if (totalRecovered.length == 0){
+                    totalRecovered += '0'
+                }
+                if (newCases.length == 0){
+                    newCases += "+0"
+                }
+                if (newDeaths.length == 0){
+                    newDeaths += "+0"
+                }
+
 
                 val total = Information(country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths,totalRecovered)
 
@@ -81,6 +109,8 @@ class WorldCrawling : AsyncTask<String, String, ArrayList<Information>>() { // �
 
     override fun onPostExecute(result: ArrayList<Information>) {
         super.onPostExecute(result)
+        progressCircle.dialog.dismiss()
+        Toast.makeText(dialogContext, "끝남", Toast.LENGTH_LONG).show()
     }
 
     fun countryTrans(c:String):String =

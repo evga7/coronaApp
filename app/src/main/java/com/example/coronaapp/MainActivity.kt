@@ -1,12 +1,15 @@
 package com.example.coronaapp
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.world.FragmentWorld
+import com.example.coronaapp.world.WorldCrawling
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -70,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         addFragment(fragment)
 
     }
-
 
     private fun addFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()

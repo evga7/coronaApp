@@ -1,6 +1,6 @@
 package com.example.coronaapp.world
 
-import android.os.AsyncTask
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,20 +13,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
 import kotlinx.android.synthetic.main.fragment_world.view.*
-import org.jsoup.Jsoup
 import java.io.IOException
 
 class FragmentWorld : Fragment() {
     val url = "https://www.worldometers.info/coronavirus/"
+    lateinit var mcontext :Context
     //var coronaList = ArrayList<Information>()
+    val progressCircle = CustomProgressCircle()
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mcontext = context
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if(Singleton.coronaList == null){
             try {
                 Log.d("크롤링","onCreate")
-                Singleton.coronaList = WorldCrawling().execute(url).get()
+                Singleton.coronaList = WorldCrawling(mcontext).execute(url).get()
             }catch (e : IOException) {
                 e.printStackTrace()
             }
