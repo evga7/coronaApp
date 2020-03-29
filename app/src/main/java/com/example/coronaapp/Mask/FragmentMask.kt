@@ -1,17 +1,14 @@
 package com.example.coronaapp.Mask
 
-import android.Manifest
 import android.app.AlertDialog
 import android.content.Context
-import android.content.pm.PackageManager
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
 import com.naver.maps.geometry.LatLng
@@ -122,10 +119,10 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             "수" -> info = "수요일 : 출생년도 끝 [ 3, 8 ] 구매 가능"
             "목" -> info = "목요일 : 출생년도 끝 [ 4, 9 ] 구매 가능"
             "금" -> info = "금요일 : 출생년도 끝 [ 0, 5 ] 구매 가능"
-            else -> info = "평일에 구매하지 못하신 분들이 구매하는 날"
+            else -> info = "평일에 구매 못하신 분들 구매 가능"
         }
 
-        textInfo.setText(info)
+        // textInfo.setText(info)
 
         //mapView.getMapAsync(this)
         Log.d("order", "onResume")
@@ -176,6 +173,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         locationOverlay.isVisible = true
         locationOverlay.position = LatLng(latitude!!, longitude!!)
 
+        // Toast.makeText(mContext, "${latitude}   +   ${longitude}", Toast.LENGTH_LONG).show()
+
         //네이버맵에 locationSource 를 지정
         naverMap.locationSource = locationSource
 
@@ -186,7 +185,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         uiSettings.isLocationButtonEnabled = true
 
         // 사용자로부터 받은 위치를 지도 실행시 보이는 최초 위치로 둠.
-        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 14.0)
+        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 14.5)
         naverMap.moveCamera(cameraUpdate)
 
         // 마커 위에 띄울 정보창.
@@ -226,26 +225,26 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 position = LatLng(it.latitude, it.longitude)
                 icon = MarkerIcons.BLACK
 
-                var stat : String? = null
+                // var stat : String? = null
 
                 if (it.remain_stat == "plenty") {
                     iconTintColor = Color.GREEN
-                    stat = "\n수량 : 100개 이상"
+                    // stat = "\n수량 : 100개 이상"
                 }
 
                 else if(it.remain_stat == "some") {
                     iconTintColor = Color.YELLOW
-                    stat = "\n수량 : 30개 이상 100개 미만"
+                    // stat = "\n수량 : 30개 이상 100개 미만"
                 }
 
                 else if(it.remain_stat == "few") {
                     iconTintColor = Color.RED
-                    stat = "\n수량 : 2개 이상 30개 미만"
+                    // stat = "\n수량 : 2개 이상 30개 미만"
                 }
 
                 else {
                     iconTintColor = Color.GRAY
-                    stat = "\n수량 : 판매중지"
+                    // stat = "\n수량 : 판매중지"
                 }
 
                 width = 50
@@ -267,7 +266,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                     tag = it.name + " ($tmp) " + "\n정보없음"
                 }
                 else {
-                    tag = it.name + "($tmp)" + "\n입고시간 : " + it.stock_at + stat
+                    tag = it.name + "($tmp)" + "\n입고시간 : " + it.stock_at //+ stat
                 }
 
                 this.onClickListener = listener

@@ -3,6 +3,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,31 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_gravity="top"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/edge"
-            android:gravity="center_horizontal"
-            android:padding="6dp"
-            android:text=""
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-    </RelativeLayout>
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edge"/>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="120dp"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="10dp"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="12dp"
+        app:srcCompat="@drawable/stock4" />
 
 </FrameLayout>
 

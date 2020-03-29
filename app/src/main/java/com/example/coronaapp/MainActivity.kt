@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
                 gpsTracker = GpsTracker(this@MainActivity)
                 userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
 
+                // 최초 좌표 확인.
+                checkKoreaLatLng()
+
                 // 사용자 인근 마스크 판매점 얻고 맵에 그림.
                 getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString())
 
@@ -100,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("order", "addFragment 끝")
     }
 
-    fun getPharmacyData(latitude:String, longitude:String) {
+    private fun getPharmacyData(latitude:String, longitude:String) {
 
         class GetPharmacy: AsyncTask<Void, Void, Void>() {
 
@@ -210,6 +213,17 @@ class MainActivity : AppCompatActivity() {
                 break
             }
         }
+    }
+
+    // 대한민국의 위도 및 경도를 벗어났을 경우 초기화
+    private fun checkKoreaLatLng() {
+
+        // 대한민국의 위도 및 경도 범위
+        if (userLatLng.latitude >= 33.0 && userLatLng.latitude <= 43.0)
+            if (userLatLng.longitude >= 124.0 && userLatLng.longitude <= 132.0)
+                return
+
+        userLatLng = LatLng(37.497848, 127.0267397)
     }
 }
 
