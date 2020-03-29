@@ -17,14 +17,7 @@ import java.io.IOException
 
 class FragmentWorld : Fragment() {
     val url = "https://www.worldometers.info/coronavirus/"
-    lateinit var mcontext :Context
     //var coronaList = ArrayList<Information>()
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mcontext = context
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +49,7 @@ class FragmentWorld : Fragment() {
             Singleton.totalRecoveredSum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalRecovered
             Singleton.coronaList?.remove(Singleton.coronaList?.get(Singleton.coronaList?.size!!-1)!!)
         }
+
         rootView.a.text = Singleton.countrySum
         rootView.b.text = Singleton.totalCasesSum
         rootView.c.text = Singleton.totalDeathsSum

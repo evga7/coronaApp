@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 else{
                     addFragment(fragment)
                 }
+
                 //addFragment(fragment)
                 Log.d("worldclick","worldclcc")
                 return@OnNavigationItemSelectedListener true

@@ -3,13 +3,14 @@ package com.example.coronaapp.world
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
 import org.jsoup.Jsoup
 import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 
 class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : AsyncTask<String, String, ArrayList<Information>>() { // 세번째 doinbackground 반환타입, onPostExecute 매개변수
     var infoList: ArrayList<Information> = arrayListOf()
@@ -28,7 +29,8 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
         try{
             val doc = Jsoup.connect(params[0]).get()
             //val data = doc.select("#main_table_countries > tbody > tr")
-            val data = doc.select("#main_table_countries_yesterday > tbody > tr")
+            //val data = doc.select("#main_table_countries_yesterday > tbody > tr")
+            val data = doc.select("#main_table_countries_today > tbody > tr")
 
             var country :String
             var totalCases : String
@@ -39,8 +41,6 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
 
             // country cnt
             var countCnt :Int = 1
-
-            //infoList.add(Information("국가","확진자","사망자","회복"))
 
             for (datum in data){
 
@@ -53,6 +53,7 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
 
                 // 영어 -> 한글
                 country = countryTrans(country)
+                //Log.d("나라",country)
 
                 if(totalCases.length == 0){
                      totalCases += '0'
@@ -71,7 +72,7 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
                 }
 
 
-                val total = Information(country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths,totalRecovered)
+                val total = Information(country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths, totalRecovered)
 
                 infoList.add(total)
 
@@ -79,50 +80,69 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
             }
 
             // total data add
-            var totalCasesSum:String
-            var totalDeathsSum:String
+            val totalCasesSum:String
+            val totalDeathsSum:String
             val totalRecoveredSum:String
 
+//            val totalData  = { splitData1: String, splitData2: String->
+//                val case1 = splitData1.split(',')
+//
+//                if (splitData2.length > 4){
+//                    val case2 = splitData2.split(',')
+//                    ((case1[0] + case1[1]).toInt() + (case2[0] + case2[1]).toInt()).toString()
+//                }else{
+//                    ((case1[0] + case1[1]).toInt() + (splitData2.substring(1, splitData2.length - 1)).toInt()).toString()
+//                }
+//            }
+
             val caseArr = infoList[infoList.size - 1].totalCases.split("\n")
-            val case1 = caseArr[0].split(',')
-            val case2 = caseArr[1].split(',')
-            totalCasesSum = ((case1[0] + case1[1]).toInt() + (case2[0] + case2[1]).toInt()).toString()
-
             val deathArr = infoList[infoList.size - 1].totalDeaths.split("\n")
-            val death1 = deathArr[0].split(',')
-            val death2 = deathArr[1].split(',')
-            totalDeathsSum = ((death1[0] + death1[1]).toInt() + (death2[0] + death2[1]).toInt()).toString()
 
+            totalCasesSum = caseArr[0]
+            totalDeathsSum = deathArr[0]
+
+//            val case1 = caseArr[0].split(',')
+//            val case2 = caseArr[1].split(',')
+//
+//            totalCasesSum = ((case1[0] + case1[1]).toInt() + (case2[0] + case2[1]).toInt()).toString()
+//
+//            val deathArr = infoList[infoList.size - 1].totalDeaths.split("\n")
+//            val death1 = deathArr[0].split(',')
+//            val death2 = deathArr[1].split(',')
+//            totalDeathsSum = ((death1[0] + death1[1]).toInt() + (death2[0] + death2[1]).toInt()).toString()
+//
             totalRecoveredSum = infoList[infoList.size - 1].totalRecovered
 
-            // ',' add
-            totalCasesSum = totalCasesSum.substring(0,totalCasesSum.length - 3) + ',' + totalCasesSum.substring(totalCasesSum.length - 3,totalCasesSum.length)
-            totalDeathsSum = totalDeathsSum.substring(0,totalDeathsSum.length - 3) + ',' + totalDeathsSum.substring(totalDeathsSum.length - 3,totalDeathsSum.length)
+//            // ',' add
+//            totalCasesSum = totalCasesSum.substring(0,totalCasesSum.length - 3) + ',' + totalCasesSum.substring(totalCasesSum.length - 3,totalCasesSum.length)
+//            totalDeathsSum = totalDeathsSum.substring(0,totalDeathsSum.length - 3) + ',' + totalDeathsSum.substring(totalDeathsSum.length - 3,totalDeathsSum.length)
 
-
+            //infoList.sortBy { it.totalCases }
             infoList.add(Information(countCnt.toString(),totalCasesSum,totalDeathsSum,totalRecoveredSum))
+
 
         }catch (e : IOException) {
             Log.d("안됨","안딤")
             e.printStackTrace()
         }
 
-        Singleton.coronaList = infoList
         return infoList
     }
 
-    override fun onProgressUpdate(vararg values: String?) { // UI 업데이
+    override fun onProgressUpdate(vararg values: String?) {
         super.onProgressUpdate(*values)
     }
 
     override fun onPostExecute(result: ArrayList<Information>) {
         super.onPostExecute(result)
+        Singleton.coronaList = result
+
         progressCircle.dialog.dismiss()
+
         currentActivity.supportFragmentManager.beginTransaction()
             //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
             .commit()
-
     }
 
     fun countryTrans(c:String):String =
@@ -136,7 +156,7 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
             c == "France" ->"프랑스"
             c == "Switzerland" -> "스위스"
             c == "UK" -> "영국"
-            c == "S.Korea" -> "한국"
+            c == "S. Korea" -> "대한민국"
             c == "Netherlands" -> "네덜란드"
             c == "Austria" -> "오스트리아"
             c == "Belgium" -> "벨기에"
@@ -241,11 +261,10 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
             c == "DRC" -> "콩고민주공화국"
             c == "Liechtenstein"-> "리히텐슈타인"
             c == "Nigeria" -> "나이지리아"
-            c == "Channel Islands" -> "채널 제"
+            c == "Channel Islands" -> "채널 제도"
             c == "Kyrgyzstan" -> "키르기스탄"
             c == "Paraguay" -> "파라과이"
             c == "Rwanda" -> "르완다"
-            c == "Bangladesh" -> "방글라데시"
             c == "Bolivia" -> "볼리비아"
             c == "Mayotte" -> "마요트"
             c == "Macao" -> "마카오"

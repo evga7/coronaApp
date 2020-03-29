@@ -1,6 +1,5 @@
 package com.example.coronaapp
 
-import android.content.Context
 import com.example.coronaapp.world.Information
 
 class Singleton {

@@ -33,7 +33,6 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WorldViewHolder(parent)
 
-
     //items -> textview
     override fun onBindViewHolder(holder: WorldViewHolder, pos: Int) {
         val recyclerviewColor = arrayListOf<String>("#B1BCBE")
