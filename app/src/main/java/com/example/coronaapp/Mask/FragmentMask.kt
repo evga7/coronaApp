@@ -1,6 +1,7 @@
 package com.example.coronaapp.Mask
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -26,12 +27,6 @@ import java.util.*
 
 
 class FragmentMask : Fragment(), OnMapReadyCallback {
-
-    // 확인할, 확인이 필요한 권한의 목록 생성
-    var permission_list = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.ACCESS_COARSE_LOCATION
-    )
 
     // 네이버 맵뷰
     private lateinit var mapView: MapView
@@ -79,8 +74,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //사용자에게 위치 권한 설정을 물어봄.
-        checkPermission()
+        showDialog()
 
         locationSource =
             FusedLocationSource(this,
@@ -123,11 +117,11 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         var info: String? = null
 
         when(day) {
-            "월" -> info = "출생년도 끝 [ 1, 6 ] 구매 가능"
-            "화" -> info = "출생년도 끝 [ 2, 7 ] 구매 가능"
-            "수" -> info = "출생년도 끝 [ 3, 8 ] 구매 가능"
-            "목" -> info = "출생년도 끝 [ 4, 9 ] 구매 가능"
-            "금" -> info = "출생년도 끝 [ 0, 5 ] 구매 가능"
+            "월" -> info = "월요일 : 출생년도 끝 [ 1, 6 ] 구매 가능"
+            "화" -> info = "화요일 : 출생년도 끝 [ 2, 7 ] 구매 가능"
+            "수" -> info = "수요일 : 출생년도 끝 [ 3, 8 ] 구매 가능"
+            "목" -> info = "목요일 : 출생년도 끝 [ 4, 9 ] 구매 가능"
+            "금" -> info = "금요일 : 출생년도 끝 [ 0, 5 ] 구매 가능"
             else -> info = "평일에 구매하지 못하신 분들이 구매하는 날"
         }
 
@@ -232,19 +226,26 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 position = LatLng(it.latitude, it.longitude)
                 icon = MarkerIcons.BLACK
 
-                if (it.remain_stat == "plenty")
+                var stat : String? = null
+
+                if (it.remain_stat == "plenty") {
                     iconTintColor = Color.GREEN
+                    stat = "\n수량 : 100개 이상"
+                }
 
                 else if(it.remain_stat == "some") {
                     iconTintColor = Color.YELLOW
+                    stat = "\n수량 : 30개 이상 100개 미만"
                 }
 
                 else if(it.remain_stat == "few") {
                     iconTintColor = Color.RED
+                    stat = "\n수량 : 2개 이상 30개 미만"
                 }
 
                 else {
                     iconTintColor = Color.GRAY
+                    stat = "\n수량 : 판매중지"
                 }
 
                 width = 50
@@ -266,7 +267,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                     tag = it.name + " ($tmp) " + "\n정보없음"
                 }
                 else {
-                    tag = it.name + "($tmp)" + "\n입고시간 : " + it.stock_at
+                    tag = it.name + "($tmp)" + "\n입고시간 : " + it.stock_at + stat
                 }
 
                 this.onClickListener = listener
@@ -286,36 +287,35 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 
-    // 사용자에게 권한을 확인할 함수. onCreate 에서 호출, 마시멜로우 이상부터 확인해야함.
-    private fun checkPermission() {
-        // 실행한 기기의 안드로이드 버전이 마시멜로우 보다 낮으면 검사를 하지 않음.
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return
-        }
+    fun showDialog() {
+        // 여기가 문제.
+        val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.notice_dialog, null)
 
-        for(permission : String in permission_list) {
-
-            val chk = checkCallingOrSelfPermission(mContext, permission)
-
-            if(chk == PackageManager.PERMISSION_DENIED) {
-                requestPermissions(permission_list,0)
-                break
+        val alertDialog = AlertDialog.Builder(mContext)
+            .setTitle("공지 사항")
+            .setMessage("\n\n5 - 10분의 오차가 있을 수 있으므로 마스크 수량 정보는 참고만을 부탁드리겠습니다." +
+                    "\n\n\n화면상단 요일별 구매 가능 출생년도 끝자리를 꼭 확인해주세요.")
+            .setPositiveButton("확 인") { dialog, which ->
             }
-        }
+            //.setNeutralButton("취소", null)
+            .create()
 
-        Log.d("order", "checkPermission")
+        // 여백 눌러도 창 안없어지게
+        alertDialog.setCancelable(false)
+        alertDialog.setView(view)
+        alertDialog.show()
     }
 
     // 사용자의 위도와 경도 set
     fun setLatLng(userLatLng: LatLng) {
-
         latitude = userLatLng.latitude
         longitude = userLatLng.longitude
     }
 
     // 인근 마스크 판매처의 정보를 담은 리스트를 set
     fun setPharmacyArray(pharmacy : ArrayList<Pharmacy>) {
-
         array = pharmacy
     }
+
 }

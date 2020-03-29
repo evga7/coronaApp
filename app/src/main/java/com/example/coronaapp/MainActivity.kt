@@ -1,10 +1,14 @@
 package com.example.coronaapp
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.AsyncTask
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
+import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.Mask.FragmentMask
 import com.example.coronaapp.Mask.GpsTracker
@@ -22,6 +26,11 @@ class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
 
+    // 확인할, 확인이 필요한 권한의 목록 생성
+    var permission_list = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
     private lateinit var userLatLng: LatLng
     private var gpsTracker: GpsTracker? = null
     val pharmacy = ArrayList<Pharmacy>()
@@ -43,6 +52,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.mask->{
+
+                Log.d("order", "addFragment 시작")
+
+                //사용자에게 위치 권한 설정을 물어봄.
+                checkPermission()
 
                 // 사용자 위치 얻기
                 gpsTracker = GpsTracker(this@MainActivity)
@@ -78,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addFragment(fragment: Fragment) {
-        Log.d("order", "addFragment 시작")
+
         supportFragmentManager.beginTransaction()
             //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
@@ -163,7 +177,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 Log.e("pharmacy", pharmacy.toString())
-
                 Log.d("order", "doInBackground 끝!!")
                 return null
             }
@@ -171,18 +184,32 @@ class MainActivity : AppCompatActivity() {
             // doInBackground 작업이 끝나면 실행되는 메서드.
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
-
                 fragmentMask.setLatLng(userLatLng)
                 fragmentMask.setPharmacyArray(pharmacy)
                 addFragment(fragmentMask)
-
             }
-
         }
 
         val getPharmacy = GetPharmacy()
         getPharmacy.execute()
+    }
 
+    // 사용자에게 권한을 확인할 함수. onCreate 에서 호출, 마시멜로우 이상부터 확인해야함.
+    private fun checkPermission() {
+        // 실행한 기기의 안드로이드 버전이 마시멜로우 보다 낮으면 검사를 하지 않음.
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return
+        }
+
+        for(permission : String in permission_list) {
+
+            val chk = PermissionChecker.checkCallingOrSelfPermission(this@MainActivity, permission)
+
+            if(chk == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(permission_list,0)
+                break
+            }
+        }
     }
 }
 
