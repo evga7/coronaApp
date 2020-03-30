@@ -1,11 +1,15 @@
 package com.example.coronaapp
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.widget.FrameLayout
 import androidx.core.content.PermissionChecker
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private var gpsTracker: GpsTracker? = null
     val pharmacy = ArrayList<Pharmacy>()
     val fragmentMask = FragmentMask()
+    private lateinit var locationManager: LocationManager
 
     private val ItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
@@ -54,9 +59,6 @@ class MainActivity : AppCompatActivity() {
             R.id.mask->{
 
                 Log.d("order", "addFragment 시작")
-
-                //사용자에게 위치 권한 설정을 물어봄.
-                checkPermission()
 
                 // 사용자 위치 얻기
                 gpsTracker = GpsTracker(this@MainActivity)
@@ -85,6 +87,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //사용자에게 위치 권한 설정을 물어봄.
+        checkPermission()
+
         content = findViewById(R.id.frameLayout)
 
         val navigation = findViewById<BottomNavigationView>(R.id.navigationView)
@@ -92,6 +97,15 @@ class MainActivity : AppCompatActivity() {
 
         val fragment = FragmentKorea.Companion.newInstance()
         addFragment(fragment)
+
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            intent.addCategory(Intent.CATEGORY_DEFAULT)
+            startActivity(intent)
+        }
     }
 
     private fun addFragment(fragment: Fragment) {

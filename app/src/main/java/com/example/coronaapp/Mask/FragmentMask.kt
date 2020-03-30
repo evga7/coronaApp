@@ -29,7 +29,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     private lateinit var mapView: MapView
 
     // 네이버맵 객체
-    private lateinit var navermap: NaverMap
+    private var navermap: NaverMap? = null
+    var listenerer: (()->Unit)? = null
 
     // onAttach 를 통해서 Context 를 얻어옴.
     private lateinit var mContext: Context
@@ -127,8 +128,18 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         stockInfo.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 stockInfo.visibility = View.INVISIBLE
+                stockButton.visibility = View.VISIBLE
             }
         })
+
+        stockButton.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                stockButton.visibility = View.INVISIBLE
+                stockInfo.visibility = View.VISIBLE
+            }
+        })
+
+
 
         //mapView.getMapAsync(this)
         Log.d("order", "onResume")
@@ -171,6 +182,17 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     override fun onMapReady(naverMap: NaverMap) {
 
         navermap = naverMap
+        listenerer = {
+            navermap!!.locationSource=locationSource
+            navermap!!.uiSettings.isLocationButtonEnabled = true
+            navermap!!.locationOverlay.isVisible = true
+            navermap!!.locationTrackingMode = LocationTrackingMode.Follow
+
+            navermap?.setOnMapClickListener{ pointF, coord ->
+                Toast.makeText(mContext, "${coord.latitude}, ${coord.longitude}", Toast.LENGTH_LONG).show()
+            }
+        }
+        listenerer?.invoke()
 
         Log.d("order", "onMapReady 시작!!")
 
@@ -203,10 +225,10 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             }
         }
 
-        // 네이버맵 클릭 시 열린 infoWindow 를 닫게 함.
-        naverMap.setOnMapClickListener { pointF, latLng -> 
-            infoWindow.close()
-        }
+//        // 네이버맵 클릭 시 열린 infoWindow 를 닫게 함.
+//        naverMap.setOnMapClickListener { pointF, latLng ->
+//            infoWindow.close()
+//        }
 
         //마커를 클릭 시 infoWindow 로 정보를 보이기 위한 OnClickListener
         val listener = Overlay.OnClickListener { overlay ->
