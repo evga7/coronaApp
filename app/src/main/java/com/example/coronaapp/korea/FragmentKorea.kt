@@ -82,8 +82,9 @@ class FragmentKorea : Fragment() {
         piechart=koreaFragView.Piechart
         piechart.setUsePercentValues(true)
         var yValue: ArrayList<PieEntry> = arrayListOf()
+
         for (i in 5..7)
-        yValue.add(PieEntry(coList[i].before.substringAfter('(').substringBefore('%').toFloat(),coList[i].title+" "+coList[i].num+" 명 "+coList[i].before))
+        yValue.add(PieEntry(coList[i].before.substringBefore('%').toFloat(),coList[i].title+" "+coList[i].num+" 명 "+coList[i].before))
         val pieData = PieDataSet(yValue,null)
         var colors : ArrayList<Int> = arrayListOf<Int>()
         colors.add(Color.parseColor("#D6CE8E"))
@@ -144,18 +145,18 @@ class FragmentKorea : Fragment() {
             koreaFragView.findViewById<Button>(buttonId).setOnClickListener{
                 val dialogView = layoutInflater.inflate(R.layout.dialog, null)
                 dialogView.dialogText.setText(coList3[i].city)
-                dialogView.dialogInfectText.setText(coList3[i].tit)
+
                 dialogView.dialogInfectNum.setText(coList3[i].num)
-                dialogView.dialogBeforeText.setText(coList3[i].beforeTit)
+
                 dialogView.dialogBeforeNum.setText(coList3[i].before)
 
-                dialogView.dialogDeadText.setText(coList3[i].tit2)
+
                 dialogView.dialogDeadNum.setText(coList3[i].dead)
 
-                dialogView.dialogUnIsolatedText.setText(coList3[i].tit3)
+
                 dialogView.dialogUnIsolatedNum.setText(coList3[i].unIsolated)
 
-                dialogView.dialogIncidenceText.setText(coList3[i].tit4)
+
                 dialogView.dialogIncidenceNum.setText(coList3[i].incidenceRate)
 
 
@@ -199,7 +200,7 @@ class FragmentKorea : Fragment() {
         return koreaFragView
     }
     data class Item(val title: String, val num:String, val before: String)
-    data class CityItem(val city: String, val tit:String,val beforeTit:String,val tit2:String,val tit3:String,val tit4:String,val num:String, val before: String,val dead : String, val unIsolated: String,val incidenceRate:String,val cityPencentage:String )
+    data class CityItem(val city: String, val num:String, val before: String,val dead : String, val unIsolated: String,val incidenceRate:String,val cityPencentage:String )
 
 }
 

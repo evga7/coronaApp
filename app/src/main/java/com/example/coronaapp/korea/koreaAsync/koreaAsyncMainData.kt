@@ -21,7 +21,7 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
         val doc: Document = Jsoup.connect("$weburl").get()
         val elts: Elements = doc.select("div.live_left")
         val livenum =doc.select("div.liveNumOuter")
-        val chartD= elts.select("div.chart_d")
+        val chartD= elts.select("div.c_chart.c_chart_is")
         val sumInfoTit=elts.select("ul.suminfo").select("span.tit")
         val sumInfoNum=elts.select("ul.suminfo").select("span.num")
         val mainInfoText=livenum.select("span.livedate").text()
@@ -57,24 +57,21 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
         temp.add(
             FragmentKorea.Item(
                 chartD.select("p.numinfo1").select("span.num_tit").text(),
-                chartD.select("p.numinfo1").select("span.num_rnum").text().substringBefore("명"),
-                chartD.select("p.numinfo1").select("span.num_rnum").text().substringAfter("명")
+                chartD.select("p.numinfo1").select("span.num_rnum").text(),
+                chartD.select("p.numinfo1").select("span.num_percentage").text())
             )
-        )
         temp.add(
             FragmentKorea.Item(
                 chartD.select("p.numinfo2").select("span.num_tit").text(),
-                chartD.select("p.numinfo2").select("span.num_rnum").text().substringBefore("명"),
-                chartD.select("p.numinfo2").select("span.num_rnum").text().substringAfter("명")
-            )
+                chartD.select("p.numinfo2").select("span.num_rnum").text(),
+                chartD.select("p.numinfo2").select("span.num_percentage").text())
         )
         temp.add(
-            FragmentKorea.Item(
-                chartD.select("p.numinfo3").select("span.num_tit").text(),
-                chartD.select("p.numinfo3").select("span.num_rnum").text().substringBefore("명"),
-                chartD.select("p.numinfo3").select("span.num_rnum").text().substringAfter("명")
-            )
-        )
+                FragmentKorea.Item(
+                    chartD.select("p.numinfo3").select("span.num_tit").text(),
+                    chartD.select("p.numinfo3").select("span.num_rnum").text(),
+                    chartD.select("p.numinfo3").select("span.num_percentage").text())
+                )
         for(i in 0..sumInfoNum.size-1)
         {
             temp.add(FragmentKorea.Item(sumInfoTit[i].text(),sumInfoNum[i].text(),""))
