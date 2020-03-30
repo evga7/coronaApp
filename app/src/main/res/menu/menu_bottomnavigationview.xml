@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/korea"
-        android:icon="@android:drawable/presence_online"
+        android:icon="@drawable/icon3"
         android:title="KOREA" />
     <item
         android:id="@+id/world"
