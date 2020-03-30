@@ -122,7 +122,13 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             else -> info = "평일에 구매 못하신 분들 구매 가능"
         }
 
-        // textInfo.setText(info)
+        textInfo.setText(info)
+
+        stockInfo.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                stockInfo.visibility = View.INVISIBLE
+            }
+        })
 
         //mapView.getMapAsync(this)
         Log.d("order", "onResume")
