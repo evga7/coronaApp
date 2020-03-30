@@ -20,6 +20,14 @@
         >
 
         <TextView
+            android:id="@+id/number"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
+
+        <TextView
             android:id="@+id/country"
             android:layout_width="0dp"
             android:layout_weight="1"

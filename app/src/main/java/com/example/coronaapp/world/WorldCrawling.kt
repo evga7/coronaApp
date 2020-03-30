@@ -72,7 +72,7 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
                 }
 
 
-                val total = Information(country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths, totalRecovered)
+                val total = Information(null,country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths, totalRecovered)
 
                 infoList.add(total)
 
@@ -84,42 +84,38 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
             val totalDeathsSum:String
             val totalRecoveredSum:String
 
-//            val totalData  = { splitData1: String, splitData2: String->
-//                val case1 = splitData1.split(',')
-//
-//                if (splitData2.length > 4){
-//                    val case2 = splitData2.split(',')
-//                    ((case1[0] + case1[1]).toInt() + (case2[0] + case2[1]).toInt()).toString()
-//                }else{
-//                    ((case1[0] + case1[1]).toInt() + (splitData2.substring(1, splitData2.length - 1)).toInt()).toString()
-//                }
-//            }
 
             val caseArr = infoList[infoList.size - 1].totalCases.split("\n")
             val deathArr = infoList[infoList.size - 1].totalDeaths.split("\n")
 
             totalCasesSum = caseArr[0]
             totalDeathsSum = deathArr[0]
-
-//            val case1 = caseArr[0].split(',')
-//            val case2 = caseArr[1].split(',')
-//
-//            totalCasesSum = ((case1[0] + case1[1]).toInt() + (case2[0] + case2[1]).toInt()).toString()
-//
-//            val deathArr = infoList[infoList.size - 1].totalDeaths.split("\n")
-//            val death1 = deathArr[0].split(',')
-//            val death2 = deathArr[1].split(',')
-//            totalDeathsSum = ((death1[0] + death1[1]).toInt() + (death2[0] + death2[1]).toInt()).toString()
-//
             totalRecoveredSum = infoList[infoList.size - 1].totalRecovered
 
-//            // ',' add
-//            totalCasesSum = totalCasesSum.substring(0,totalCasesSum.length - 3) + ',' + totalCasesSum.substring(totalCasesSum.length - 3,totalCasesSum.length)
-//            totalDeathsSum = totalDeathsSum.substring(0,totalDeathsSum.length - 3) + ',' + totalDeathsSum.substring(totalDeathsSum.length - 3,totalDeathsSum.length)
+            //total remove
+            infoList.remove(infoList[infoList.size - 1])
 
-            //infoList.sortBy { it.totalCases }
-            infoList.add(Information(countCnt.toString(),totalCasesSum,totalDeathsSum,totalRecoveredSum))
+            val splitData  = { c: String->
+                val case = c.split('\n')
 
+                if (case[0].length > 4){
+                    val a = case[0].split(',')
+                    a[0] + a[1]
+                }else{
+                    case[0]
+                }
+            }
+
+            // totalCase reverse sort
+            infoList.sortByDescending { splitData(it.totalCases).toInt() }
+
+            // numberling
+           for (i in 0 until infoList.size){
+                infoList[i].num = i+1
+            }
+
+
+            infoList.add(Information(0,countCnt.toString(),totalCasesSum,totalDeathsSum,totalRecoveredSum))
 
         }catch (e : IOException) {
             Log.d("안됨","안딤")

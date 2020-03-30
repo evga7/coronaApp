@@ -17,17 +17,17 @@ import kotlinx.android.synthetic.main.world_list.view.*
 
 class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter<WorldAdapter.WorldViewHolder>() {
 
-    var items: MutableList<Information> = mutableListOf(
-        Information("국가","확진자","사망자","회복"),
-        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
-        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
-        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
-        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
-        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
-        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
-        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
-        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100")
-    )
+//    var items: MutableList<Information> = mutableListOf(
+//        Information("국가","확진자","사망자","회복"),
+//        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
+//        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
+//        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
+//        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
+//        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
+//        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
+//        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
+//        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100")
+//    )
 
     override fun getItemCount(): Int = worldItems.size
 
@@ -85,12 +85,14 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
     inner class WorldViewHolder(parent: ViewGroup?) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent?.context).inflate(R.layout.world_list, parent, false)) {
 
+        val number = itemView.number
         val country = itemView.country
         val totalCases= itemView.totalCases
         val totalDeaths= itemView.totalDeaths
         val totalRecovered = itemView.totalRecovered
 
         fun bind(listInfo:Information){
+            number?.text = listInfo.num.toString()
             country?.text = listInfo.country
             totalCases?.text = listInfo.totalCases
             totalDeaths?.text = listInfo.totalDeaths
