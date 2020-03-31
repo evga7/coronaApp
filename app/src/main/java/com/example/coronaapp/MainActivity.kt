@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김. ==> 다이얼로그로 바꿔야할 것 같음 +  
+        // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김. ==> 다이얼로그로 바꿔야할 것 같음
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
