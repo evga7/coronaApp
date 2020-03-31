@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.Mask.FragmentMask
@@ -35,10 +36,8 @@ class MainActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
-    private lateinit var userLatLng: LatLng
+
     private var gpsTracker: GpsTracker? = null
-    val pharmacy = ArrayList<Pharmacy>()
-    val fragmentMask = FragmentMask()
     private lateinit var locationManager: LocationManager
 
     private val ItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -58,17 +57,26 @@ class MainActivity : AppCompatActivity() {
 
             R.id.mask->{
 
-                Log.d("order", "addFragment 시작")
-
                 // 사용자 위치 얻기
                 gpsTracker = GpsTracker(this@MainActivity)
-                userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
+                Singleton.userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
 
-                // 최초 좌표 확인.
-                checkKoreaLatLng()
-
-                // 사용자 인근 마스크 판매점 얻고 맵에 그림.
-                getPharmacyData(userLatLng.latitude.toString(), userLatLng.longitude.toString())
+                // 최초 좌표 확인 ==> GPS On/Off 상태를 반환해주는 메서드 필요!!
+                if(Singleton.checkKoreaLatLng(Singleton.userLatLng)) {
+                    // 사용자 인근 마스크 판매점 얻고 맵에 그림.
+                    Log.d("최초좌표확인", "사용자가 GPS를 켰습니다.")
+                    Toast.makeText(this, "사용자가 GPS를 켰습니다.", Toast.LENGTH_LONG).show()
+                    Singleton.getPharmacyData(Singleton.userLatLng.latitude.toString(), Singleton.userLatLng.longitude.toString(), this)
+                }
+                else {
+                    // 강남역 좌표, GPS 가 켜져 있지 않을 경우
+                    Log.d("최초좌표확인", "사용자가 GPS를 껐습니다.")
+                    Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
+                    Toast.makeText(this, "사용자가 GPS를 껐습니다.", Toast.LENGTH_LONG).show()
+                    Singleton.fragmentMask.setLatLng(Singleton.userLatLng)
+                    Singleton.fragmentMask.setPharmacyArray(null)
+                    addFragment(Singleton.fragmentMask)
+                }
 
                 return@OnNavigationItemSelectedListener true
             }
@@ -87,25 +95,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //사용자에게 위치 권한 설정을 물어봄.
-        checkPermission()
-
-        content = findViewById(R.id.frameLayout)
-
-        val navigation = findViewById<BottomNavigationView>(R.id.navigationView)
-        navigation.setOnNavigationItemSelectedListener(ItemSelectedListener)
-
-        val fragment = FragmentKorea.Companion.newInstance()
-        addFragment(fragment)
-
+        // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김. ==> 다이얼로그로 바꿔야할 것 같음 +  
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             intent.addCategory(Intent.CATEGORY_DEFAULT)
             startActivity(intent)
         }
+
+        content = findViewById(R.id.frameLayout)
+
+        val navigation = findViewById<BottomNavigationView>(R.id.navigationView)
+        navigation.setOnNavigationItemSelectedListener(ItemSelectedListener)
+
+        val fragment = FragmentKorea.newInstance()
+        addFragment(fragment)
+
+        //사용자에게 위치 권한 설정을 물어봄.
+        checkPermission()
     }
 
     private fun addFragment(fragment: Fragment) {
@@ -115,100 +123,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
             .commit()
         Log.d("order", "addFragment 끝")
-    }
-
-    private fun getPharmacyData(latitude:String, longitude:String) {
-
-        class GetPharmacy: AsyncTask<Void, Void, Void>() {
-
-            // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
-            override fun doInBackground(vararg params: Void?): Void? {
-
-                var temp: String=""
-                try {
-                    val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+latitude+"&lng="+longitude+"&m=1500").openStream()
-                    val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
-                    var line:String?=read.readLine()
-                    while(line!=null){
-                        temp+=(line)
-                        line = read.readLine()
-                    }
-                }
-                catch (e : Exception){
-                    Log.e("error", e.toString())
-                }
-
-                val json = JSONObject(temp)
-                try{
-                    var str = json.get("message").toString()
-                    pharmacy.add(
-                        Pharmacy(
-                            "none",
-                            0.0,
-                            0.0,
-                            "none",
-                            "none",
-                            "none",
-                            "none"
-                        )
-                    )
-                    return null
-                }
-                catch (e: java.lang.Exception) {
-                    Log.e("Error", e.toString())
-                }
-
-                val count = json.get("count").toString().toInt()
-                if (count != 0) {
-
-                    val upperArray = json.getJSONArray("stores")
-
-                    for(i in 0..(count - 1)) {
-                        val upperObjet = upperArray.getJSONObject(i)
-                        Log.d("CHECK", upperObjet.toString())
-                        pharmacy.add(
-                            Pharmacy(
-                                upperObjet.getString("addr"),
-                                upperObjet.getString("lat").toDouble(),
-                                upperObjet.getString("lng").toDouble(),
-                                upperObjet.getString("name"),
-                                upperObjet.getString("remain_stat"),
-                                upperObjet.getString("stock_at"),
-                                upperObjet.getString("type")
-                            )
-                        )
-                    }
-
-                } else {
-                    pharmacy.add(
-                        Pharmacy(
-                            "none",
-                            0.0,
-                            0.0,
-                            "none",
-                            "none",
-                            "none",
-                            "none"
-                        )
-                    )
-                }
-
-                Log.e("pharmacy", pharmacy.toString())
-                Log.d("order", "doInBackground 끝!!")
-                return null
-            }
-
-            // doInBackground 작업이 끝나면 실행되는 메서드.
-            override fun onPostExecute(result: Void?) {
-                super.onPostExecute(result)
-                fragmentMask.setLatLng(userLatLng)
-                fragmentMask.setPharmacyArray(pharmacy)
-                addFragment(fragmentMask)
-            }
-        }
-
-        val getPharmacy = GetPharmacy()
-        getPharmacy.execute()
     }
 
     // 사용자에게 권한을 확인할 함수. onCreate 에서 호출, 마시멜로우 이상부터 확인해야함.
@@ -229,15 +143,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 대한민국의 위도 및 경도를 벗어났을 경우 초기화
-    private fun checkKoreaLatLng() {
 
-        // 대한민국의 위도 및 경도 범위
-        if (userLatLng.latitude >= 33.0 && userLatLng.latitude <= 43.0)
-            if (userLatLng.longitude >= 124.0 && userLatLng.longitude <= 132.0)
-                return
 
-        userLatLng = LatLng(37.497848, 127.0267397)
-    }
 }
 

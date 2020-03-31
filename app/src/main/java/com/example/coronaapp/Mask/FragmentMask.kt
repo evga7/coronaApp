@@ -25,11 +25,12 @@ import java.util.*
 
 class FragmentMask : Fragment(), OnMapReadyCallback {
 
+    // 네이버맵 객체
+    var navermap: NaverMap? = null
+
     // 네이버 맵뷰
     private lateinit var mapView: MapView
 
-    // 네이버맵 객체
-    private var navermap: NaverMap? = null
     var listenerer: (()->Unit)? = null
 
     // onAttach 를 통해서 Context 를 얻어옴.
@@ -181,12 +182,13 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     // NaverMap 객체가 준비되면 onMapReady 콜백 메서드가 호출됨. 비동기.
     override fun onMapReady(naverMap: NaverMap) {
 
+        // if (Singleton.navermap == null) Singleton.navermap = naverMap
         navermap = naverMap
+
+        // 임시, 터치한 화면의 좌표를 토스트 창으로 둠.
         listenerer = {
-            navermap!!.locationSource=locationSource
-            navermap!!.uiSettings.isLocationButtonEnabled = true
-            navermap!!.locationOverlay.isVisible = true
-            navermap!!.locationTrackingMode = LocationTrackingMode.Follow
+            //네이버맵에 locationSource 를 지정
+            navermap!!.locationSource = locationSource
 
             navermap?.setOnMapClickListener{ pointF, coord ->
                 Toast.makeText(mContext, "${coord.latitude}, ${coord.longitude}", Toast.LENGTH_LONG).show()
@@ -196,42 +198,83 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         Log.d("order", "onMapReady 시작!!")
 
-        // 위치 오버레이 객체를 지정하고 지도에 띄움. (위치오버레이 == 유저)
+        // GPS 가 켜져 있지 않은 경우, 위치 오버레이 객체를 지정하고 지도에 띄움. (위치오버레이 == 유저)
         locationOverlay = naverMap.locationOverlay
-        locationOverlay.isVisible = true
-        locationOverlay.position = LatLng(latitude!!, longitude!!)
-
-        // Toast.makeText(mContext, "${latitude}   +   ${longitude}", Toast.LENGTH_LONG).show()
-
-        //네이버맵에 locationSource 를 지정
-        naverMap.locationSource = locationSource
+        if(latitude == 37.49796323 && longitude == 127.02779767) {
+            locationOverlay.isVisible = false
+            locationOverlay.position = LatLng(latitude!!, longitude!!)
+        }
+        else {
+            locationOverlay.isVisible = true
+            locationOverlay.position = LatLng(latitude!!, longitude!!)
+        }
 
         //네이버맵으로부터 UiSettings 를 가져옴
         uiSettings = naverMap.uiSettings
-
-        // uiSettings.isCompassEnabled = true
+        // 현위치 버튼을 보이게 함.
         uiSettings.isLocationButtonEnabled = true
 
         // 사용자로부터 받은 위치를 지도 실행시 보이는 최초 위치로 둠.
-        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 14.5)
+        Log.d("cameraUpdate", "${latitude},  ${longitude}")
+        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 15.0)
         naverMap.moveCamera(cameraUpdate)
 
-        // 마커 위에 띄울 정보창.
-        val infoWindow = InfoWindow()
+        // !!!!!!!!!!!!!!!마커 그리는 부분 ==> 함수로 따로 빼놓으면 좋을 것 같음.
+        createMarker()
 
+        Log.d("order", "onMapReady")
+    }
+
+    fun showDialog() {
+        // 여기가 문제.
+        val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.notice_dialog, null)
+
+        val alertDialog = AlertDialog.Builder(mContext)
+            .setTitle("공지 사항")
+            .setMessage("\n\n판매정보 출처는 \"건강보험심사평가원\" 입니다." +
+                    "\n\n5 - 10분의 오차가 있을 수 있으므로 마스크 수량 정보는 참고만을 부탁드리겠습니다." +
+                    "\n\n화면상단 요일별 구매 가능 출생년도 끝자리를 꼭 확인해주세요.")
+            .setPositiveButton("확 인") { dialog, which ->
+            }
+            //.setNeutralButton("취소", null)
+            .create()
+
+        // 여백 눌러도 창 안없어지게
+        alertDialog.setCancelable(false)
+        alertDialog.setView(view)
+        alertDialog.show()
+    }
+
+    // 사용자의 위도와 경도 set
+    fun setLatLng(userLatLng: LatLng) {
+        latitude = userLatLng.latitude
+        longitude = userLatLng.longitude
+        Log.d("setLatLng", "${latitude},  ${longitude}")
+    }
+
+    // 인근 마스크 판매처의 정보를 담은 리스트를 set
+    fun setPharmacyArray(pharmacy : ArrayList<Pharmacy>?) {
+        array = pharmacy
+    }
+
+    // onMapReady 에서 마커를 그리도록 하는 함수.
+    private fun createMarker() {
+
+        if(array == null) {
+            Log.d("createMarker", " array == null ")
+            return
+        }
+
+        // 마커 위에 띄울 약국정보창(말풍선 같이 생김).
+        val infoWindow = InfoWindow()
         infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
             override fun getText(infoWindow: InfoWindow): CharSequence {
                 return infoWindow.marker?.tag as CharSequence? ?: ""
             }
         }
-
-//        // 네이버맵 클릭 시 열린 infoWindow 를 닫게 함.
-//        naverMap.setOnMapClickListener { pointF, latLng ->
-//            infoWindow.close()
-//        }
-
-        //마커를 클릭 시 infoWindow 로 정보를 보이기 위한 OnClickListener
-        val listener = Overlay.OnClickListener { overlay ->
+        // 마커를 클릭 시 infoWindow 로 정보를 보이기 위한 OnClickListener
+        val markerListener = Overlay.OnClickListener { overlay ->
             val marker = overlay as Marker
 
             if(marker.infoWindow == null) {
@@ -244,10 +287,10 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
             true
         }
-
         val markers = mutableListOf<Marker>()
         array!!.forEach {
 
+            Log.d("array!!.forEach", " array!!.forEach ")
             markers += Marker().apply {
 
                 position = LatLng(it.latitude, it.longitude)
@@ -297,52 +340,23 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                     tag = it.name + "($tmp)" + "\n입고시간 : " + it.stock_at //+ stat
                 }
 
-                this.onClickListener = listener
+                this.onClickListener = markerListener
             }
         }
-
         markers.forEach{ marker ->
 
+            Log.d("markers.forEach", " 마커를 찍습니다!! ")
             marker.map = navermap
 
         }
-
-        Log.d("order", "onMapReady")
+//        // 네이버맵 클릭 시 열린 infoWindow 를 닫게 함.
+//        naverMap.setOnMapClickListener { pointF, latLng ->
+//            infoWindow.close()
+//        }
     }
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
-    }
-
-    fun showDialog() {
-        // 여기가 문제.
-        val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.notice_dialog, null)
-
-        val alertDialog = AlertDialog.Builder(mContext)
-            .setTitle("공지 사항")
-            .setMessage("\n\n5 - 10분의 오차가 있을 수 있으므로 마스크 수량 정보는 참고만을 부탁드리겠습니다." +
-                    "\n\n\n화면상단 요일별 구매 가능 출생년도 끝자리를 꼭 확인해주세요.")
-            .setPositiveButton("확 인") { dialog, which ->
-            }
-            //.setNeutralButton("취소", null)
-            .create()
-
-        // 여백 눌러도 창 안없어지게
-        alertDialog.setCancelable(false)
-        alertDialog.setView(view)
-        alertDialog.show()
-    }
-
-    // 사용자의 위도와 경도 set
-    fun setLatLng(userLatLng: LatLng) {
-        latitude = userLatLng.latitude
-        longitude = userLatLng.longitude
-    }
-
-    // 인근 마스크 판매처의 정보를 담은 리스트를 set
-    fun setPharmacyArray(pharmacy : ArrayList<Pharmacy>) {
-        array = pharmacy
     }
 
 }
