@@ -26,17 +26,6 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
         val mainInfoText=livenum.select("span.livedate").text()
         val infectedNum=livenum.select("div.livenum").select("li")
         val todayInfectAndCure =livenum.select("ul.liveNum_today.mgt8")
-        //Log.d("testtttttttt",infectedNum.text())
-        /*
-        elts.forEachIndexed{ index, elem ->
-            //val liveDate = elem.select("span.livedate")
-            //val infectedNum=livenum.select("span.num")
-            Log.d("테스트!!!!!!!!!!!!!!",infectedNum.toString())
-            //Log.d("테스트!!!!!!!!!!!!!!!",liveDate.toString())//추출한 자료를 가지고 데이터 객체를 만들어 ArrayList에 추가해 준다.
-            //var mNews = Item(title, a_href, "http:" + thumb_img)
-            //newsList.add(mNews)
-        }
-         */
         val temp : ArrayList<FragmentKorea.Item> = arrayListOf()
         infectedNum.forEachIndexed{index,elem->
             val title = infectedNum[index].select("strong.tit").text()
@@ -78,6 +67,36 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
         temp.add(FragmentKorea.Item(todayInfectAndCure.select("span.tit1").text(),todayInfectAndCure.select("span.data1").text(),""))
         temp.add(FragmentKorea.Item(todayInfectAndCure.select("span.tit2").text(),todayInfectAndCure.select("span.data2").text(),""))
         Singleton.coList=temp
+
+
+        val elts2: Elements = doc.select("div#main_maplayout")
+        val cityName=elts2.select("span.name")
+        val cityNum = elts2.select("span.num")
+        val citybefore = elts2.select("span.before")
+        val temp2 : ArrayList<FragmentKorea.Item> = arrayListOf()
+        for (i in 0..cityName.size-1)
+        {
+            var tempItem =
+                FragmentKorea.Item(cityName[i].text(), cityNum[i].text(),citybefore[i].text())
+            temp2.add(tempItem)
+        }
+        Singleton.coList2=temp2
+
+        val temp3 : ArrayList<FragmentKorea.CityItem> = arrayListOf()
+        for (i in 1..18)
+        {
+            val elts3: Elements = doc.select("div#map_city"+i)
+            val cityInfo = elts3.select("ul.cityinfo")
+            //val tit = cityInfo.select("span.tit")
+            val num = cityInfo.select("span.num")
+            //val before_tit = cityInfo.select("span.sub_tit.red")
+            val before_num = cityInfo.select("span.sub_num.red")
+            val percentage = elts3.select("p.citytit")
+            temp3.add(FragmentKorea.CityItem(elts3.select("h4.cityname").text(),num[0].text(),before_num.text(),num[1].text(),num[2].text(),num[3].text(),percentage.text()))
+        }
+
+        Singleton.coList3=temp3
+
         return temp
         //return doc.title()
     }

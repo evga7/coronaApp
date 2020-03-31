@@ -1,13 +1,11 @@
 package com.example.coronaapp.korea
 
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +14,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
-import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityData
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
-import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityMap
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -50,12 +46,16 @@ class FragmentKorea : Fragment() {
 
             val args = Bundle()
             FragmentKorea.arguments = args
+
             if (Singleton.coList==null)
                 koreaAsyncMainData().execute("http://ncov.mohw.go.kr").get()
+            /*
             if (Singleton.coList2==null)
                 koreaAsyncCityMap().execute("http://ncov.mohw.go.kr").get()
             if (Singleton.coList3==null)
                 koreaAsyncCityData().execute("http://ncov.mohw.go.kr").get()
+
+             */
             return FragmentKorea
         }
     }
