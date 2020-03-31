@@ -47,8 +47,8 @@ class FragmentKorea : Fragment() {
             val args = Bundle()
             FragmentKorea.arguments = args
 
-            if (Singleton.coList==null)
-                koreaAsyncMainData().execute("http://ncov.mohw.go.kr").get()
+//            if (Singleton.coList==null)
+//                koreaAsyncMainData().execute("http://ncov.mohw.go.kr").get()
             /*
             if (Singleton.coList2==null)
                 koreaAsyncCityMap().execute("http://ncov.mohw.go.kr").get()

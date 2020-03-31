@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.korea.FragmentKorea
+import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
 import com.example.coronaapp.world.CustomProgressCircle
 import com.example.coronaapp.world.FragmentWorld
 import com.example.coronaapp.world.WorldCrawling
@@ -85,7 +86,12 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(ItemSelectedListener)
 
         val fragment = FragmentKorea.Companion.newInstance()
-        addFragment(fragment)
+
+        if (Singleton.coList==null){
+            koreaAsyncMainData(this,this,fragment).execute("http://ncov.mohw.go.kr")
+        }
+
+        //addFragment(fragment)
 
     }
 

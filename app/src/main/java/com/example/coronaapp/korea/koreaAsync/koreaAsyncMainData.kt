@@ -1,19 +1,29 @@
 package com.example.coronaapp.korea.koreaAsync
 
+import android.content.Context
 import android.os.AsyncTask
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
 import com.example.coronaapp.korea.FragmentKorea
+import com.example.coronaapp.world.CustomProgressCircle
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
-class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item>>(){ //input, progress update type, result type
+class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment): AsyncTask<String, String, ArrayList<FragmentKorea.Item>>(){ //input, progress update type, result type
     //private var result : String = ""
     val weburl = "http://ncov.mohw.go.kr"
     val TAG = "Main Activity"
-    override fun onPreExecute() {
+    val progressCircle = CustomProgressCircle()
+    val dialogContext : Context = context
+    val currentActivity:AppCompatActivity = act
+    val fragment:Fragment = frg
 
+    override fun onPreExecute() {
         super.onPreExecute()
+        progressCircle.show(dialogContext)
     }
 
     override fun doInBackground(vararg params: String?): ArrayList<FragmentKorea.Item> {
@@ -104,6 +114,13 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
     override fun onPostExecute(result: ArrayList<FragmentKorea.Item>) {
         //문서제목 출력
         super.onPostExecute(result)
+        progressCircle.dialog.dismiss()
+
+        currentActivity.supportFragmentManager.beginTransaction()
+            //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+            .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
+            .commit()
+
     }
     data class Item(val title: String, val num:String, val before: String)
 }
