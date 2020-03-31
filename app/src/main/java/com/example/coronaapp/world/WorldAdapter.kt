@@ -17,18 +17,6 @@ import kotlinx.android.synthetic.main.world_list.view.*
 
 class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter<WorldAdapter.WorldViewHolder>() {
 
-//    var items: MutableList<Information> = mutableListOf(
-//        Information("국가","확진자","사망자","회복"),
-//        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
-//        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
-//        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
-//        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
-//        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
-//        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100"),
-//        Information("china","80,928"+"\n"+"+34","3,245"+"\n"+"+34","70,420")
-//        ,Information("요맨","111"+"\n"+"+34","300"+"\n"+"+34","100")
-//    )
-
     override fun getItemCount(): Int = worldItems.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = WorldViewHolder(parent)

@@ -17,7 +17,6 @@ import java.io.IOException
 
 class FragmentWorld : Fragment() {
     val url = "https://www.worldometers.info/coronavirus/"
-    //var coronaList = ArrayList<Information>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,15 +54,15 @@ class FragmentWorld : Fragment() {
         rootView.c.text = Singleton.totalDeathsSum
         rootView.d.text = Singleton.totalRecoveredSum
 
-
         // RecyclerView
         val worldRecyclerView = rootView.findViewById(R.id.worldrecyclerview) as RecyclerView
-        worldRecyclerView.layoutManager = LinearLayoutManager(activity)
-        worldRecyclerView.adapter = WorldAdapter(Singleton.coronaList!!)
-        worldRecyclerView.addItemDecoration(
-            DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
-        )
-
+        worldRecyclerView.run {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = WorldAdapter(Singleton.coronaList!!)
+            addItemDecoration(
+                DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+            )
+        }
 
         return rootView
     }

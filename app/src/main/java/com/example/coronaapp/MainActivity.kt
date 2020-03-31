@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
         content = findViewById(R.id.frameLayout)
 
-        Singleton()
+        //Singleton()
 
         val navigation = findViewById<BottomNavigationView>(R.id.navigationView)
         navigation.setOnNavigationItemSelectedListener(ItemSelectedListener)
