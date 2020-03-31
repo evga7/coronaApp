@@ -1,7 +1,7 @@
 package com.example.coronaapp.korea.koreaAsync
 
-import android.app.ProgressDialog
 import android.os.AsyncTask
+import com.example.coronaapp.Singleton
 import com.example.coronaapp.korea.FragmentKorea
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -78,14 +78,15 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
         }
         temp.add(FragmentKorea.Item(todayInfectAndCure.select("span.tit1").text(),todayInfectAndCure.select("span.data1").text(),""))
         temp.add(FragmentKorea.Item(todayInfectAndCure.select("span.tit2").text(),todayInfectAndCure.select("span.data2").text(),""))
+        Singleton.coList=temp
         return temp
         //return doc.title()
     }
 
     override fun onPostExecute(result: ArrayList<FragmentKorea.Item>) {
         //문서제목 출력
-
         super.onPostExecute(result)
+        Singleton.coList=result
     }
     data class Item(val title: String, val num:String, val before: String)
 }

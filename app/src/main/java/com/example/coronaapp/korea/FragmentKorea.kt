@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
+import com.example.coronaapp.Singleton
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityData
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncCityMap
@@ -31,14 +32,14 @@ class FragmentKorea : Fragment() {
 
     val weburl = "http://ncov.mohw.go.kr"
     val TAG = "Main Activity"
-    var coList: ArrayList<Item> = arrayListOf()
-    var coList2: ArrayList<Item> = arrayListOf()
-    var coList3: ArrayList<CityItem> = arrayListOf()
+
     val infoMainText = String()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+        koreaAsyncMainData().execute("http://ncov.mohw.go.kr")
     }
 
 
@@ -46,11 +47,9 @@ class FragmentKorea : Fragment() {
 
     companion object {
         fun newInstance(): FragmentKorea {
+
             val FragmentKorea = FragmentKorea()
-            FragmentKorea.coList= koreaAsyncMainData().execute("http://ncov.mohw.go.kr").get()
-            FragmentKorea.coList2= koreaAsyncCityMap().execute("http://ncov.mohw.go.kr").get()
-            FragmentKorea.coList3= koreaAsyncCityData().execute("http://ncov.mohw.go.kr").get()
-            Log.d("fragLog",FragmentKorea.coList.toString())
+            koreaAsyncMainData().execute("http://ncov.mohw.go.kr")
             val args = Bundle()
             FragmentKorea.arguments = args
             return FragmentKorea
@@ -59,32 +58,35 @@ class FragmentKorea : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var koreaFragView= inflater.inflate(R.layout.fragment_korea, container, false)
-        koreaFragView.infoText.setText(coList[4].title)
-        koreaFragView.infectedText1.setText(coList[0].title)
-        koreaFragView.infectedText2.setText(coList[0].num.substring(4))
-        koreaFragView.infectedText3.setText(coList[0].before.substring(5))
-        koreaFragView.cureText1.setText(coList[1].title)
-        koreaFragView.cureText2.setText(coList[1].num)
-        koreaFragView.cureText3.setText(coList[1].before)
-        koreaFragView.careText1.setText(coList[2].title)
-        koreaFragView.careText2.setText(coList[2].num)
-        koreaFragView.careText3.setText(coList[2].before)
-        koreaFragView.deadText1.setText(coList[3].title)
-        koreaFragView.deadText2.setText(coList[3].num)
+            koreaAsyncMainData().execute("http://ncov.mohw.go.kr")
+        if (Singleton.coList2==null)koreaAsyncCityMap().execute("http://ncov.mohw.go.kr")
+        if (Singleton.coList3==null) koreaAsyncCityData().execute("http://ncov.mohw.go.kr")
+        koreaFragView.infoText.setText(Singleton.coList!![4].title)
+        koreaFragView.infectedText1.setText(Singleton.coList!![0].title)
+        koreaFragView.infectedText2.setText(Singleton.coList!![0].num.substring(4))
+        koreaFragView.infectedText3.setText(Singleton.coList!![0].before.substring(5))
+        koreaFragView.cureText1.setText(Singleton.coList!![1].title)
+        koreaFragView.cureText2.setText(Singleton.coList!![1].num)
+        koreaFragView.cureText3.setText(Singleton.coList!![1].before)
+        koreaFragView.careText1.setText(Singleton.coList!![2].title)
+        koreaFragView.careText2.setText(Singleton.coList!![2].num)
+        koreaFragView.careText3.setText(Singleton.coList!![2].before)
+        koreaFragView.deadText1.setText(Singleton.coList!![3].title)
+        koreaFragView.deadText2.setText(Singleton.coList!![3].num)
 
-        koreaFragView.deadText3.setText(coList[3].before)
-        koreaFragView.todayInfedctText.setText(coList[11].title)
-        koreaFragView.todayInfedctNumText.setText(coList[11].num)
+        koreaFragView.deadText3.setText(Singleton.coList!![3].before)
+        koreaFragView.todayInfedctText.setText(Singleton.coList!![11].title)
+        koreaFragView.todayInfedctNumText.setText(Singleton.coList!![11].num)
 
-        koreaFragView.todayCureText.setText(coList[12].title)
-        koreaFragView.todayCureNumText.setText(coList[12].num)
+        koreaFragView.todayCureText.setText(Singleton.coList!![12].title)
+        koreaFragView.todayCureNumText.setText(Singleton.coList!![12].num)
         var piechart : PieChart
         piechart=koreaFragView.Piechart
         piechart.setUsePercentValues(true)
         var yValue: ArrayList<PieEntry> = arrayListOf()
 
         for (i in 5..7)
-        yValue.add(PieEntry(coList[i].before.substringBefore('%').toFloat(),coList[i].title+" "+coList[i].num+" 명 "+coList[i].before))
+        yValue.add(PieEntry(Singleton.coList!![i].before.substringBefore('%').toFloat(),Singleton.coList!![i].title+" "+Singleton.coList!![i].num+" 명 "+Singleton.coList!![i].before))
         val pieData = PieDataSet(yValue,null)
         var colors : ArrayList<Int> = arrayListOf<Int>()
         colors.add(Color.parseColor("#D6CE8E"))
@@ -104,29 +106,29 @@ class FragmentKorea : Fragment() {
         val l = piechart.legend
         l.setWordWrapEnabled(true)
         piechart.setData(pieda)
-        l.setTextSize(13f)
+        l.setTextSize(11f)
         piechart.animateY(2000,Easing.EaseOutQuad)
 
 
-        koreaFragView.currentInfoText1.setText(coList[8].title)
-        koreaFragView.currentInfoText2.setText(coList[8].num)
+        koreaFragView.currentInfoText1.setText(Singleton.coList!![8].title)
+        koreaFragView.currentInfoText2.setText(Singleton.coList!![8].num)
 
-        koreaFragView.currentInfoText3.setText(coList[9].title)
-        koreaFragView.currentInfoText4.setText(coList[9].num)
+        koreaFragView.currentInfoText3.setText(Singleton.coList!![9].title)
+        koreaFragView.currentInfoText4.setText(Singleton.coList!![9].num)
 
-        koreaFragView.currentInfoText5.setText(coList[10].title)
-        koreaFragView.currentInfoText6.setText(coList[10].num)
+        koreaFragView.currentInfoText5.setText(Singleton.coList!![10].title)
+        koreaFragView.currentInfoText6.setText(Singleton.coList!![10].num)
 
         val textView = TextView(koreaFragView.context)
         var tempStr : String
         textView.setTextColor(Color.GREEN)
         for (i in 0..17) {
-            tempStr = coList2[i].title + "\n" + coList2[i].num + "\n" + coList2[i].before
+            tempStr = Singleton.coList2!![i].title + "\n" + Singleton.coList2!![i].num + "\n" + Singleton.coList2!![i].before
             val sp = SpannableStringBuilder(tempStr)
             sp.setSpan(
                 ForegroundColorSpan(Color.RED),
-                coList2[i].title.length,
-                coList2[i].title.length + coList2[i].num.length + 1,
+                Singleton.coList2!![i].title.length,
+                Singleton.coList2!![i].title.length + Singleton.coList2!![i].num.length + 1,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             val dd=koreaFragView.resources.getIdentifier("cityButton"+(i+1),"id",context?.packageName.toString())
@@ -144,31 +146,31 @@ class FragmentKorea : Fragment() {
             )
             koreaFragView.findViewById<Button>(buttonId).setOnClickListener{
                 val dialogView = layoutInflater.inflate(R.layout.dialog, null)
-                dialogView.dialogText.setText(coList3[i].city)
+                dialogView.dialogText.setText(Singleton.coList3!![i].city)
 
-                dialogView.dialogInfectNum.setText(coList3[i].num)
+                dialogView.dialogInfectNum.setText(Singleton.coList3!![i].num)
 
-                dialogView.dialogBeforeNum.setText(coList3[i].before)
-
-
-                dialogView.dialogDeadNum.setText(coList3[i].dead)
+                dialogView.dialogBeforeNum.setText(Singleton.coList3!![i].before)
 
 
-                dialogView.dialogUnIsolatedNum.setText(coList3[i].unIsolated)
+                dialogView.dialogDeadNum.setText(Singleton.coList3!![i].dead)
 
 
-                dialogView.dialogIncidenceNum.setText(coList3[i].incidenceRate)
+                dialogView.dialogUnIsolatedNum.setText(Singleton.coList3!![i].unIsolated)
+
+
+                dialogView.dialogIncidenceNum.setText(Singleton.coList3!![i].incidenceRate)
 
 
                 var pieChart : PieChart
                 pieChart=dialogView.dialogPiechart
                 pieChart.setEntryLabelTextSize(0f)
                 var yValue: ArrayList<PieEntry> = arrayListOf()
-                yValue.add(PieEntry(coList3[i].cityPencentage.substringBefore('%').toFloat(),""))
-                yValue.add(PieEntry(100-coList3[i].cityPencentage.substringBefore('%').toFloat(),""))
-                var subText1 =coList3[i].cityPencentage.substringBefore(' ')
-                var subText2 =coList3[i].cityPencentage.substringAfter(' ').substringBefore(' ')
-                var subText3 =coList3[i].cityPencentage.substringAfter(' ').substringAfter(' ')
+                yValue.add(PieEntry(Singleton.coList3!![i].cityPencentage.substringBefore('%').toFloat(),""))
+                yValue.add(PieEntry(100-Singleton.coList3!![i].cityPencentage.substringBefore('%').toFloat(),""))
+                var subText1 =Singleton.coList3!![i].cityPencentage.substringBefore(' ')
+                var subText2 =Singleton.coList3!![i].cityPencentage.substringAfter(' ').substringBefore(' ')
+                var subText3 =Singleton.coList3!![i].cityPencentage.substringAfter(' ').substringAfter(' ')
                 pieChart.setCenterText(subText2+'\n'+subText3+'\n'+subText1)
                 val pieData = PieDataSet(yValue,null)
                 pieChart.setUsePercentValues(true)

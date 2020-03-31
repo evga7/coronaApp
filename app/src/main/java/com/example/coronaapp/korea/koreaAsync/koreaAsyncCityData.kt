@@ -1,6 +1,7 @@
 package com.example.coronaapp.korea.koreaAsync
 
 import android.os.AsyncTask
+import com.example.coronaapp.Singleton
 import com.example.coronaapp.korea.FragmentKorea
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -28,16 +29,14 @@ class koreaAsyncCityData: AsyncTask<String, String, ArrayList<FragmentKorea.City
             val percentage = elts.select("p.citytit")
             temp.add(FragmentKorea.CityItem(elts.select("h4.cityname").text(),num[0].text(),before_num.text(),num[1].text(),num[2].text(),num[3].text(),percentage.text()))
         }
-
-
-
-
         return temp
         //return doc.title()
     }
 
     override fun onPostExecute(result: ArrayList<FragmentKorea.CityItem>) {
         //문서제목 출력
+
         super.onPostExecute(result)
+        Singleton.coList3=result
     }
 }

@@ -1,6 +1,7 @@
 package com.example.coronaapp.korea.koreaAsync
 
 import android.os.AsyncTask
+import com.example.coronaapp.Singleton
 import com.example.coronaapp.korea.FragmentKorea
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
@@ -35,5 +36,6 @@ class koreaAsyncCityMap: AsyncTask<String, String, ArrayList<FragmentKorea.Item>
         //문서제목 출력
 
         super.onPostExecute(result)
+        Singleton.coList2=result
     }
 }
