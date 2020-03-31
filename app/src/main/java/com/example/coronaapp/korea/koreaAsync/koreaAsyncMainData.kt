@@ -14,7 +14,6 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
     override fun onPreExecute() {
 
         super.onPreExecute()
-
     }
 
     override fun doInBackground(vararg params: String?): ArrayList<FragmentKorea.Item> {
@@ -86,7 +85,6 @@ class koreaAsyncMainData: AsyncTask<String, String, ArrayList<FragmentKorea.Item
     override fun onPostExecute(result: ArrayList<FragmentKorea.Item>) {
         //문서제목 출력
         super.onPostExecute(result)
-        Singleton.coList=result
     }
     data class Item(val title: String, val num:String, val before: String)
 }

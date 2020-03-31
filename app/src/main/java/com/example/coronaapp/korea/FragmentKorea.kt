@@ -39,7 +39,6 @@ class FragmentKorea : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        koreaAsyncMainData().execute("http://ncov.mohw.go.kr")
     }
 
 
@@ -47,24 +46,26 @@ class FragmentKorea : Fragment() {
 
     companion object {
         fun newInstance(): FragmentKorea {
-
             val FragmentKorea = FragmentKorea()
-            koreaAsyncMainData().execute("http://ncov.mohw.go.kr")
+
             val args = Bundle()
             FragmentKorea.arguments = args
+            if (Singleton.coList==null)
+                koreaAsyncMainData().execute("http://ncov.mohw.go.kr").get()
+            if (Singleton.coList2==null)
+                koreaAsyncCityMap().execute("http://ncov.mohw.go.kr").get()
+            if (Singleton.coList3==null)
+                koreaAsyncCityData().execute("http://ncov.mohw.go.kr").get()
             return FragmentKorea
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var koreaFragView= inflater.inflate(R.layout.fragment_korea, container, false)
-            koreaAsyncMainData().execute("http://ncov.mohw.go.kr")
-        if (Singleton.coList2==null)koreaAsyncCityMap().execute("http://ncov.mohw.go.kr")
-        if (Singleton.coList3==null) koreaAsyncCityData().execute("http://ncov.mohw.go.kr")
         koreaFragView.infoText.setText(Singleton.coList!![4].title)
         koreaFragView.infectedText1.setText(Singleton.coList!![0].title)
-        koreaFragView.infectedText2.setText(Singleton.coList!![0].num.substring(4))
-        koreaFragView.infectedText3.setText(Singleton.coList!![0].before.substring(5))
+        koreaFragView.infectedText2.setText(Singleton.coList!![0].num?.substring(4))
+        koreaFragView.infectedText3.setText(Singleton.coList!![0].before?.substring(5))
         koreaFragView.cureText1.setText(Singleton.coList!![1].title)
         koreaFragView.cureText2.setText(Singleton.coList!![1].num)
         koreaFragView.cureText3.setText(Singleton.coList!![1].before)
@@ -85,8 +86,14 @@ class FragmentKorea : Fragment() {
         piechart.setUsePercentValues(true)
         var yValue: ArrayList<PieEntry> = arrayListOf()
 
-        for (i in 5..7)
-        yValue.add(PieEntry(Singleton.coList!![i].before.substringBefore('%').toFloat(),Singleton.coList!![i].title+" "+Singleton.coList!![i].num+" 명 "+Singleton.coList!![i].before))
+        for (i in 5..7) {
+            val st = Singleton.coList!![i].title + " " + Singleton.coList!![i].num + " 명 " + Singleton.coList!![i].before
+            Singleton.coList?.get(i)?.before?.substringBefore('%')?.toFloat()?.let {
+                PieEntry(
+                    it,st
+                )
+            }?.let { yValue.add(it) }
+        }
         val pieData = PieDataSet(yValue,null)
         var colors : ArrayList<Int> = arrayListOf<Int>()
         colors.add(Color.parseColor("#D6CE8E"))
@@ -167,10 +174,10 @@ class FragmentKorea : Fragment() {
                 pieChart.setEntryLabelTextSize(0f)
                 var yValue: ArrayList<PieEntry> = arrayListOf()
                 yValue.add(PieEntry(Singleton.coList3!![i].cityPencentage.substringBefore('%').toFloat(),""))
-                yValue.add(PieEntry(100-Singleton.coList3!![i].cityPencentage.substringBefore('%').toFloat(),""))
-                var subText1 =Singleton.coList3!![i].cityPencentage.substringBefore(' ')
-                var subText2 =Singleton.coList3!![i].cityPencentage.substringAfter(' ').substringBefore(' ')
-                var subText3 =Singleton.coList3!![i].cityPencentage.substringAfter(' ').substringAfter(' ')
+                yValue.add(PieEntry(100- Singleton.coList3!![i].cityPencentage.substringBefore('%').toFloat(),""))
+                var subText1 = Singleton.coList3!![i].cityPencentage.substringBefore(' ')
+                var subText2 = Singleton.coList3!![i].cityPencentage.substringAfter(' ').substringBefore(' ')
+                var subText3 = Singleton.coList3!![i].cityPencentage.substringAfter(' ').substringAfter(' ')
                 pieChart.setCenterText(subText2+'\n'+subText3+'\n'+subText1)
                 val pieData = PieDataSet(yValue,null)
                 pieChart.setUsePercentValues(true)

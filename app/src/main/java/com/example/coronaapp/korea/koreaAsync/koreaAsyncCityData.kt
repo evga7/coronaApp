@@ -1,5 +1,7 @@
 package com.example.coronaapp.korea.koreaAsync
 
+import android.app.ProgressDialog
+import android.content.Context
 import android.os.AsyncTask
 import com.example.coronaapp.Singleton
 import com.example.coronaapp.korea.FragmentKorea
@@ -11,7 +13,12 @@ class koreaAsyncCityData: AsyncTask<String, String, ArrayList<FragmentKorea.City
     //private var result : String = ""
     val weburl = "http://ncov.mohw.go.kr"
     val TAG = "Main Activity"
+
+
+
     override fun onPreExecute() {
+//        prog.setMessage("dd")
+
         super.onPreExecute()
     }
 
@@ -29,6 +36,9 @@ class koreaAsyncCityData: AsyncTask<String, String, ArrayList<FragmentKorea.City
             val percentage = elts.select("p.citytit")
             temp.add(FragmentKorea.CityItem(elts.select("h4.cityname").text(),num[0].text(),before_num.text(),num[1].text(),num[2].text(),num[3].text(),percentage.text()))
         }
+
+        Singleton.coList3=temp
+
         return temp
         //return doc.title()
     }
@@ -37,6 +47,5 @@ class koreaAsyncCityData: AsyncTask<String, String, ArrayList<FragmentKorea.City
         //문서제목 출력
 
         super.onPostExecute(result)
-        Singleton.coList3=result
     }
 }

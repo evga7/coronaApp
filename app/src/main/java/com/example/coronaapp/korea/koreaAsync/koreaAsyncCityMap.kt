@@ -28,6 +28,7 @@ class koreaAsyncCityMap: AsyncTask<String, String, ArrayList<FragmentKorea.Item>
                 FragmentKorea.Item(cityName[i].text(), cityNum[i].text(),citybefore[i].text())
             temp.add(tempItem)
         }
+        Singleton.coList2=temp
         return temp
         //return doc.title()
     }
@@ -36,6 +37,6 @@ class koreaAsyncCityMap: AsyncTask<String, String, ArrayList<FragmentKorea.Item>
         //문서제목 출력
 
         super.onPostExecute(result)
-        Singleton.coList2=result
+
     }
 }
