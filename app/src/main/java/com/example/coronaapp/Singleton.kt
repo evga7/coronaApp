@@ -23,6 +23,7 @@ class Singleton {
         val pharmacy = ArrayList<Pharmacy>()
         val fragmentMask = FragmentMask()
         lateinit var locationManager: LocationManager
+        lateinit var Activity: AppCompatActivity
 
         // 대한민국의 위도 및 경도를 벗어났을 경우 초기화하는 함수 - Mask
         fun checkKoreaLatLng(userLatLng: LatLng) : Boolean {
@@ -36,7 +37,7 @@ class Singleton {
         }
 
         //공공데이터 정보를 얻어옴.
-        fun getPharmacyData(latitude:String, longitude:String, Activity: AppCompatActivity) {
+        fun getPharmacyData(latitude:String, longitude:String) {
 
             class GetPharmacy: AsyncTask<Void, Void, Void>() {
 
@@ -126,7 +127,8 @@ class Singleton {
                     Activity.supportFragmentManager.beginTransaction()
                         //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
                         .replace(R.id.frameLayout, fragmentMask, fragmentMask.javaClass.simpleName)
-                        .commit()
+                        //.commit() // 네비게이션 누르고 바로 최근 앱 버튼을 눌렀을 때 에러가 발생할 수 있음.
+                        .commitAllowingStateLoss() // 위의 에러를 이 줄로써 해결함.
                 }
             }
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
+import com.example.coronaapp.Singleton
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
@@ -30,7 +31,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     // 네이버 맵뷰
     private lateinit var mapView: MapView
 
-    private var listenerer: (()->Unit)? = null
+    private var mapListener: (()->Unit)? = null
 
     // onAttach 를 통해서 Context 를 얻어옴.
     private lateinit var mContext: Context
@@ -185,31 +186,43 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         // if (Singleton.navermap == null) Singleton.navermap = naverMap
         navermap = naverMap
-
         // 임시, 터치한 화면의 좌표를 토스트 창으로 둠.
-        listenerer = {
+        mapListener = {
             //네이버맵에 locationSource 를 지정
             navermap!!.locationSource = locationSource
+            navermap!!.uiSettings.isLocationButtonEnabled = true
+            navermap!!.locationOverlay.isVisible = true
+            navermap!!.locationTrackingMode = LocationTrackingMode.Follow
 
             navermap?.setOnMapClickListener{ pointF, coord ->
                 Toast.makeText(mContext, "${coord.latitude}, ${coord.longitude}", Toast.LENGTH_LONG).show()
+                // Singleton.pharmacy.clear()
+                Log.d("setOnMapClickListener", "${coord.latitude},  ${coord.longitude}")
+                Singleton.userLatLng = LatLng(coord.latitude, coord.longitude)
+                latitude = coord.latitude
+                longitude = coord.longitude
+                Singleton.getPharmacyData(coord.latitude.toString(), coord.longitude.toString())
+                onMapReady(naverMap)
             }
         }
-        listenerer?.invoke()
+        mapListener?.invoke()
 
         Log.d("order", "onMapReady 시작!!")
 
         // GPS 가 켜져 있지 않은 경우, 위치 오버레이 객체를 지정하고 지도에 띄움. (위치오버레이 == 유저)
         locationOverlay = naverMap.locationOverlay
-        if(latitude == 37.49796323 && longitude == 127.02779767) {
-            locationOverlay.isVisible = false
-            locationOverlay.position = LatLng(latitude!!, longitude!!)
-        }
-        else {
-            locationOverlay.isVisible = true
-            locationOverlay.position = LatLng(latitude!!, longitude!!)
-        }
+        locationOverlay.isVisible = true
+        locationOverlay.position = LatLng(latitude!!, longitude!!)
+//        if(latitude == 37.49796323 && longitude == 127.02779767) {
+//            locationOverlay.isVisible = false
+//            locationOverlay.position = LatLng(latitude!!, longitude!!)
+//        }
+//        else {
+//            locationOverlay.isVisible = true
+//            locationOverlay.position = LatLng(latitude!!, longitude!!)
+//        }
 
+        naverMap.locationSource = locationSource
         //네이버맵으로부터 UiSettings 를 가져옴
         uiSettings = naverMap.uiSettings
         // 현위치 버튼을 보이게 함.
@@ -222,6 +235,10 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         // !!!!!!!!!!!!!!!마커 그리는 부분 ==> 함수로 따로 빼놓으면 좋을 것 같음.
         createMarker()
+//        // 네이버맵 클릭 시 열린 infoWindow 를 닫게 함.
+//        naverMap.setOnMapClickListener { pointF, latLng ->
+//            infoWindow.close()
+//        }
 
         Log.d("order", "onMapReady")
     }

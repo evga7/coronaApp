@@ -50,20 +50,33 @@ class MainActivity : AppCompatActivity() {
 
             R.id.mask->{
 
-                // 사용자 위치 얻기
-                gpsTracker = GpsTracker(this@MainActivity)
-                Singleton.userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
+//                // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김 ==> 마스크 쪽을 옮길 수도 있음.
+//                if(!Singleton.isGpsOn()) {
+//                    showLocationDialog()
+//                }
+//                // 최초 좌표 확인 ==> GPS On/Off 상태를 반환해주는 메서드 필요!!
+//                if(Singleton.checkKoreaLatLng(Singleton.userLatLng)) {
+//                    // 사용자 인근 마스크 판매점 얻고 맵에 그림.
+//                    Log.d("최초좌표확인", "사용자가 GPS를 켰습니다.")
+//                    Toast.makeText(this, "사용자가 GPS를 켰습니다.", Toast.LENGTH_LONG).show()
+//                    Singleton.getPharmacyData(Singleton.userLatLng.latitude.toString(), Singleton.userLatLng.longitude.toString(), this)
+//                }
 
-                // 최초 좌표 확인 ==> GPS On/Off 상태를 반환해주는 메서드 필요!!
-                if(Singleton.checkKoreaLatLng(Singleton.userLatLng)) {
+                if(Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
+
+                    // 사용자 위치 얻기
+                    gpsTracker = GpsTracker(this@MainActivity)
+                    Singleton.userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
+
                     // 사용자 인근 마스크 판매점 얻고 맵에 그림.
                     Log.d("최초좌표확인", "사용자가 GPS를 켰습니다.")
                     Toast.makeText(this, "사용자가 GPS를 켰습니다.", Toast.LENGTH_LONG).show()
-                    Singleton.getPharmacyData(Singleton.userLatLng.latitude.toString(), Singleton.userLatLng.longitude.toString(), this)
+                    Singleton.getPharmacyData(Singleton.userLatLng.latitude.toString(), Singleton.userLatLng.longitude.toString())
                 }
-                else {
-                    // 강남역 좌표, GPS 가 켜져 있지 않을 경우
-                    Log.d("최초좌표확인", "사용자가 GPS를 껐습니다.")
+
+                else { // GPS 가 켜져 있지 않은 경우
+                    // 강남역 좌표
+                    Log.d("최초좌표확인", "사용자가 GPS를 켜지 않았습니다.")
                     Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
                     Toast.makeText(this, "사용자가 GPS를 껐습니다.", Toast.LENGTH_LONG).show()
                     Singleton.fragmentMask.setLatLng(Singleton.userLatLng)
@@ -90,9 +103,10 @@ class MainActivity : AppCompatActivity() {
 
         // locationManager 를 이용하려면 메인액티비티에서 getSystemService 를 받아와야 함.
         Singleton.locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        Singleton.Activity = this
 
         // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김 ==> 마스크 쪽을 옮길 수도 있음.
-        if(Singleton.isGpsOn()) {
+        if(!Singleton.isGpsOn()) {
             showLocationDialog()
         }
 
