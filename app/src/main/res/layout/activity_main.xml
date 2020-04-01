@@ -15,13 +15,23 @@
 
      </FrameLayout>
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <nl.joery.animatedbottombar.AnimatedBottomBar
         android:id="@+id/navigationView"
+        android:background="#FFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="#ffffff"
-        app:menu="@menu/menu_bottomnavigationview"/>
+        app:abb_selectedTabType="icon"
+        app:abb_indicatorAppearance="round"
+        app:abb_indicatorColor="#5EABE8"
+        app:abb_tabColorSelected="#5EABE8"
+        app:abb_tabAnimation="slide"
+        app:abb_tabAnimationSelected="slide"
+        app:abb_indicatorLocation="top"
+        app:abb_indicatorMargin="16dp"
+        app:abb_indicatorHeight="4dp"
+        app:abb_tabs="@menu/menu_bottomnavigationview"
+        app:abb_selectedIndex="0" />
+
+
 
 </LinearLayout>

@@ -40,7 +40,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation 'com.github.PhilJay:MpAndroidChart:v3.1.0'
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
-
+    implementation 'nl.joery.animatedbottombar:library:1.0.8'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }

@@ -33,11 +33,14 @@
         android:id="@+id/dialogPiechart"
         android:layout_width="match_parent"
         android:layout_height="170sp"
+
         />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="25sp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="3sp">
 
 
 
@@ -48,7 +51,7 @@
             android:layout_gravity="center_vertical"
             android:textStyle="bold"
             android:textColor="#7C7979"
-            android:layout_marginLeft="50sp"
+            android:layout_marginLeft="100sp"
             android:textSize="16sp"
             android:text="누적 확진환자"/>
         <TextView
@@ -62,8 +65,9 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="25sp"
         android:orientation="horizontal"
+        android:layout_marginBottom="3sp"
 
         >
 
@@ -72,29 +76,30 @@
             android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginLeft="50sp"
-            android:textColor="#E18585"
-            android:textSize="14sp"
+            android:layout_marginLeft="100sp"
+            android:textColor="#F00"
+            android:textSize="12sp"
             android:text="전일 대비 증감" />
         <TextView
             android:id="@+id/dialogBeforeNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
-            android:textColor="#E18585"
-            android:textSize="18sp" />
+            android:textColor="#F00"
+            android:textSize="12sp" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="25sp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="3sp">
 
         <TextView
             android:id="@+id/dialogDeadText"
             android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginLeft="50sp"
+            android:layout_marginLeft="100sp"
             android:textColor="#7C7979"
             android:textSize="16sp"
             android:text="사망자"/>
@@ -109,8 +114,9 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="25sp"
         android:orientation="horizontal"
+        android:layout_marginBottom="3sp"
         >
 
         <TextView
@@ -118,7 +124,7 @@
             android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginLeft="50sp"
+            android:layout_marginLeft="100sp"
             android:textColor="#7C7979"
             android:textSize="16sp"
             android:text="누적 격리해제"/>
@@ -133,7 +139,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="25sp"
         android:orientation="horizontal">
 
         <TextView
@@ -141,7 +147,7 @@
             android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginLeft="50sp"
+            android:layout_marginLeft="100sp"
             android:textColor="#7C7979"
             android:textSize="16sp"
             android:text="10만명당 발생률"/>

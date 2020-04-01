@@ -12,6 +12,8 @@ import com.example.coronaapp.world.CustomProgressCircle
 import com.example.coronaapp.world.FragmentWorld
 import com.example.coronaapp.world.WorldCrawling
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
+import nl.joery.animatedbottombar.AnimatedBottomBar
 import java.io.IOException
 
 
@@ -20,58 +22,8 @@ class MainActivity : AppCompatActivity() {
     private var content: FrameLayout? = null
     private var lastClickedTime: Long = 0L
 
-    private val ItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
-//        // duplicate click prevent
-//        if (SystemClock.elapsedRealtime() - lastClickedTime < 1000){
-//            return@OnNavigationItemSelectedListener false
-//        }
-//
-//        lastClickedTime = SystemClock.elapsedRealtime()
 
-        when(item.itemId){
-            R.id.korea->{
-                val fragment = FragmentKorea.Companion.newInstance()
-                addFragment(fragment)
-                return@OnNavigationItemSelectedListener true
-            }
-
-            R.id.world->{
-
-                val fragment = FragmentWorld()
-
-                if(Singleton.coronaList == null){
-                    try {
-                        Log.d("크롤링","onCreate")
-                        WorldCrawling(this,this,fragment).execute("https://www.worldometers.info/coronavirus/")
-                    }catch (e : IOException) {
-                        e.printStackTrace()
-                    }
-                }
-                else{
-                    addFragment(fragment)
-                }
-
-                //addFragment(fragment)
-                Log.d("worldclick","worldclcc")
-                return@OnNavigationItemSelectedListener true
-            }
-
-            R.id.mask->{
-                val fragment = FragmentMask()
-                addFragment(fragment)
-                return@OnNavigationItemSelectedListener true
-            }
-
-            R.id.help->{
-                val fragment = FragmentHelp()
-                addFragment(fragment)
-                return@OnNavigationItemSelectedListener true
-            }
-
-        }
-        false
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,8 +34,51 @@ class MainActivity : AppCompatActivity() {
 
         //Singleton()
 
-        val navigation = findViewById<BottomNavigationView>(R.id.navigationView)
-        navigation.setOnNavigationItemSelectedListener(ItemSelectedListener)
+        navigationView.setOnTabInterceptListener(object : AnimatedBottomBar.OnTabInterceptListener {
+            override fun onTabIntercepted(
+                lastIndex: Int,
+                lastTab: AnimatedBottomBar.Tab?,
+                newIndex: Int,
+                newTab: AnimatedBottomBar.Tab
+            ): Boolean {
+                if (newTab.id == R.id.korea) {
+                    val fragment = FragmentKorea()
+                    addFragment(fragment)
+                    // e.g. show a dialog
+
+                }
+                if (newTab.id == R.id.world)
+                {
+                    val fragment = FragmentWorld()
+
+                    if(Singleton.coronaList == null){
+                        try {
+                            Log.d("크롤링","onCreate")
+                            WorldCrawling(this@MainActivity,this@MainActivity,fragment).execute("https://www.worldometers.info/coronavirus/")
+                        }catch (e : IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+                    else{
+                        addFragment(fragment)
+                    }
+
+                }
+                if (newTab.id == R.id.mask)
+                {
+                    val fragment = FragmentMask()
+                    addFragment(fragment)
+                }
+                if (newTab.id == R.id.help)
+                {
+                    val fragment = FragmentHelp()
+                    addFragment(fragment)
+                }
+                return true
+            }
+
+        })
+
 
         val fragment = FragmentKorea.Companion.newInstance()
 

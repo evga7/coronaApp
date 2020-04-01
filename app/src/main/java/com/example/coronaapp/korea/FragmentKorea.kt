@@ -155,18 +155,18 @@ class FragmentKorea : Fragment() {
                 val dialogView = layoutInflater.inflate(R.layout.dialog, null)
                 dialogView.dialogText.setText(Singleton.coList3!![i].city)
 
-                dialogView.dialogInfectNum.setText(Singleton.coList3!![i].num)
+                dialogView.dialogInfectNum.setText(Singleton.coList3!![i].num+"명")
 
                 dialogView.dialogBeforeNum.setText(Singleton.coList3!![i].before)
 
 
-                dialogView.dialogDeadNum.setText(Singleton.coList3!![i].dead)
+                dialogView.dialogDeadNum.setText(Singleton.coList3!![i].dead+"명")
 
 
-                dialogView.dialogUnIsolatedNum.setText(Singleton.coList3!![i].unIsolated)
+                dialogView.dialogUnIsolatedNum.setText(Singleton.coList3!![i].unIsolated+"명")
 
 
-                dialogView.dialogIncidenceNum.setText(Singleton.coList3!![i].incidenceRate)
+                dialogView.dialogIncidenceNum.setText(Singleton.coList3!![i].incidenceRate+"명")
 
 
                 var pieChart : PieChart
