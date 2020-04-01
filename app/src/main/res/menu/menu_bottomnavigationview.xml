@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/korea"
-        android:icon="@drawable/icon3"
+        android:icon="@drawable/koricon"
         android:title="한국" />
     <item
         android:id="@+id/world"
@@ -11,7 +11,7 @@
         android:title="세계" />
     <item
         android:id="@+id/mask"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/infoicon"
         android:title="마스크" />
 
     <item

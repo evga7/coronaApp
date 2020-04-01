@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.danielstone.materialaboutlibrary.MaterialAboutFragment
 import com.example.coronaapp.korea.FragmentKorea
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
 import com.example.coronaapp.world.CustomProgressCircle
@@ -96,6 +97,7 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
         .commit()
     }
+
 }
 
 

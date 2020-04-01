@@ -43,4 +43,6 @@ dependencies {
     implementation 'nl.joery.animatedbottombar:library:1.0.8'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.github.daniel-stoneuk:material-about-library:2.4.2'
+
 }

@@ -194,7 +194,7 @@ class FragmentKorea : Fragment() {
 
                 pieChart.description.setEnabled(false)
 
-                val legend = pieChart.legend.setEnabled(false)
+                pieChart.legend.setEnabled(false)
                 pieChart.setData(pieda)
 
 
