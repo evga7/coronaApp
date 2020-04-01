@@ -1,44 +1,37 @@
 package com.example.coronaapp
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
-import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.Mask.FragmentMask
 import com.example.coronaapp.Mask.GpsTracker
-import com.example.coronaapp.Mask.Pharmacy
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.naver.maps.geometry.LatLng
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.lang.Exception
-import java.net.URL
-import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
 
     // 확인할, 확인이 필요한 권한의 목록 생성
-    var permission_list = arrayOf(
+    private var permission_list = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
+    // 사용자 기기의 위치 정보를 받아올 객체 인스턴스.
     private var gpsTracker: GpsTracker? = null
-    private lateinit var locationManager: LocationManager
 
     private val ItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
@@ -95,13 +88,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김. ==> 다이얼로그로 바꿔야할 것 같음
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        // locationManager 를 이용하려면 메인액티비티에서 getSystemService 를 받아와야 함.
+        Singleton.locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            intent.addCategory(Intent.CATEGORY_DEFAULT)
-            startActivity(intent)
+        // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김 ==> 마스크 쪽을 옮길 수도 있음.
+        if(Singleton.isGpsOn()) {
+            showLocationDialog()
         }
 
         content = findViewById(R.id.frameLayout)
@@ -143,7 +135,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // GPS 가 켜져 있지 않을 경우에 설정을 물어볼 다이얼로그
+    private fun showLocationDialog() {
 
+        val inflater = this@MainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.notice_dialog, null)
+
+        val locationDialog = AlertDialog.Builder(this@MainActivity)
+            .setMessage("마스크 재고 현황을 확인하기 위해서는\n" +
+                    "\"위치 정보\"를 사용으로 설정해주셔야 합니다." +
+                    "\n\n\n \"위치 정보\" 를 사용으로 설정해주시겠습니까? ")
+            .setPositiveButton("예") { dialog, which ->
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                startActivity(intent)
+            }
+            .setNeutralButton("아니요") { dialog, which ->
+            }
+            .create()
+
+        // 여백 눌러도 창 안없어지게
+        locationDialog.setCancelable(false)
+        locationDialog.setView(view)
+        locationDialog.show()
+
+    }
 
 }
 

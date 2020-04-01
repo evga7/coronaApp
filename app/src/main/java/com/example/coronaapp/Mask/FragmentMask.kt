@@ -22,16 +22,15 @@ import com.naver.maps.map.util.MarkerIcons
 import kotlinx.android.synthetic.main.fragment_mask.*
 import java.util.*
 
-
 class FragmentMask : Fragment(), OnMapReadyCallback {
 
     // 네이버맵 객체
-    var navermap: NaverMap? = null
+    private var navermap: NaverMap? = null
 
     // 네이버 맵뷰
     private lateinit var mapView: MapView
 
-    var listenerer: (()->Unit)? = null
+    private var listenerer: (()->Unit)? = null
 
     // onAttach 를 통해서 Context 를 얻어옴.
     private lateinit var mContext: Context
@@ -39,12 +38,14 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     // 네이버 FusedLocationSource
     private lateinit var locationSource: FusedLocationSource
 
-    // 네이버 위치 오버레이
+    // 네이버 위치 오버레이 ==> 설명 추가해야 함
     private lateinit var locationOverlay: LocationOverlay
+
+    // 네이버 위치 유아이세팅 ==> 설명 추가해야 함
     private lateinit var uiSettings: UiSettings
 
     // 마스크 판매처(약국) 정보를 담을 리스트
-    var array : ArrayList<Pharmacy>? = null
+    private var array : ArrayList<Pharmacy>? = null
 
     // 사용자의 위도와 경도
     private var latitude: Double? = null
@@ -73,7 +74,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        showDialog()
+        showNoticeDialog()
 
         locationSource =
             FusedLocationSource(this,
@@ -225,7 +226,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         Log.d("order", "onMapReady")
     }
 
-    fun showDialog() {
+    // 마스크 지도 이용전 보일 공지사항을 보일 다이얼로그
+    fun showNoticeDialog() {
         // 여기가 문제.
         val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.notice_dialog, null)

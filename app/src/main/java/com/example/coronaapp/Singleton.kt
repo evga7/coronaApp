@@ -1,12 +1,12 @@
 package com.example.coronaapp
 
+import android.location.LocationManager
 import android.os.AsyncTask
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.coronaapp.Mask.FragmentMask
 import com.example.coronaapp.Mask.Pharmacy
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.NaverMap
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -16,11 +16,13 @@ import java.util.ArrayList
 
 class Singleton {
 
+    // 동반자 객체, 코틀린에는 static 이 없음 대신 그 대안으로 object 를 제공함.
     companion object {
 
         lateinit var userLatLng: LatLng
         val pharmacy = ArrayList<Pharmacy>()
         val fragmentMask = FragmentMask()
+        lateinit var locationManager: LocationManager
 
         // 대한민국의 위도 및 경도를 벗어났을 경우 초기화하는 함수 - Mask
         fun checkKoreaLatLng(userLatLng: LatLng) : Boolean {
@@ -33,6 +35,7 @@ class Singleton {
             return false
         }
 
+        //공공데이터 정보를 얻어옴.
         fun getPharmacyData(latitude:String, longitude:String, Activity: AppCompatActivity) {
 
             class GetPharmacy: AsyncTask<Void, Void, Void>() {
@@ -129,6 +132,16 @@ class Singleton {
 
             val getPharmacy = GetPharmacy()
             getPharmacy.execute()
+        }
+
+        // 현재 GPS 가 켜져 있는지 아닌지 확인
+        fun isGpsOn() : Boolean {
+
+            if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                return false
+            }
+
+            return true
         }
 
     }
