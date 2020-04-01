@@ -59,9 +59,10 @@ class FragmentWorld : Fragment() {
         worldRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
             adapter = WorldAdapter(Singleton.coronaList!!)
-            addItemDecoration(
-                DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
-            )
+            // 구분선
+//            addItemDecoration(
+//                DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
+//            )
         }
 
         return rootView

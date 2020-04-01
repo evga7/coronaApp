@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         val fragment = FragmentKorea.Companion.newInstance()
 
-        if (Singleton.coList==null){
+        if (Singleton.coList == null){
             koreaAsyncMainData(this,this,fragment).execute("http://ncov.mohw.go.kr")
         }
 

@@ -4,15 +4,11 @@ import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TableRow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coronaapp.R
-import kotlinx.android.synthetic.main.fragment_world.view.*
 import kotlinx.android.synthetic.main.world_list.view.*
 
 class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter<WorldAdapter.WorldViewHolder>() {
@@ -23,48 +19,35 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
 
     //items -> textview
     override fun onBindViewHolder(holder: WorldViewHolder, pos: Int) {
-        val recyclerviewColor = arrayListOf<String>("#B1BCBE")
 
         //한번만 바인
         holder.setIsRecyclable(false)
         holder.bind(worldItems[pos])
 
-//        if (holder.totalCases.text.length == 2){
-//            val Params = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT,1f).apply {
-//                topMargin = 0
-//                bottomMargin = 0
-//                leftMargin = 0
-//                rightMargin = 0
-//            }
-//            holder.totalCases.setPadding(0,20,0,0)
-//            holder.totalCases.layoutParams = Params
-//        }
-//        if (holder.totalDeaths.text.length == 2){
-//            val Params = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT,1f).apply {
-//                width = 0
-//                weight = 1f
-//                gravity = Gravity.CENTER
-//                topMargin = 7
-//                bottomMargin = 7
-//            }
-//
-//            holder.totalDeaths.layoutParams = Params
-//        }
-
-
         // + 부분부터 색깔 변환
-        if ('+' in holder.totalCases.text){
+        if ('+' in holder.totalCases.text) {
             val totalCasesPlus = holder.totalCases.text.indexOf('+')
-            val spannableCases = SpannableString(holder.totalCases.text)
-            spannableCases.setSpan(ForegroundColorSpan(Color.RED), totalCasesPlus, holder.totalCases.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            holder.totalCases.setText(spannableCases, TextView.BufferType.SPANNABLE)
+            SpannableString(holder.totalCases.text).let { spannableCases ->
+                spannableCases.setSpan(ForegroundColorSpan(Color.RED), totalCasesPlus, holder.totalCases.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                holder.totalCases.setText(spannableCases, TextView.BufferType.SPANNABLE)
+            }
         }
 
-        if ('+' in holder.totalDeaths.text){
+        if ('+' in holder.totalDeaths.text) {
             val totalDeathsPlus = holder.totalDeaths.text.indexOf('+')
-            val spannableDeaths = SpannableString(holder.totalDeaths.text)
-            spannableDeaths.setSpan(ForegroundColorSpan(Color.RED), totalDeathsPlus, holder.totalDeaths.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            holder.totalDeaths.setText(spannableDeaths, TextView.BufferType.SPANNABLE)
+            SpannableString(holder.totalDeaths.text).let { spannableDeaths ->
+                spannableDeaths.setSpan(ForegroundColorSpan(Color.RED), totalDeathsPlus, holder.totalDeaths.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                holder.totalDeaths.setText(spannableDeaths, TextView.BufferType.SPANNABLE)
+            }
+        }
+
+        // RecyclerView color add
+        if(pos % 2 == 1)
+        {
+            holder.itemView.coronaTable.setBackgroundColor(Color.parseColor("#E1F5FE"))
+        }
+        else{
+            holder.itemView.coronaTable.setBackgroundColor(Color.parseColor("#B3E5FC"))
         }
 
     }
@@ -90,3 +73,6 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
     }
 
 }
+
+
+
