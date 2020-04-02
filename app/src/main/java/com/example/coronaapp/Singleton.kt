@@ -46,25 +46,28 @@ class Singleton {
             var lat: Double = latitude
             var lng: Double = longitude
 
+            if(isGpsOn()) {
+                // 사용자 위치 얻기
+                if(!search) {
+                    gpsTracker = GpsTracker(Activity)
+                    userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
+                    lat = userLatLng.latitude
+                    lng = userLatLng.longitude
+                    Log.d("isGpsOn&&!search", " GPS 정보를 가져옵니다!!!!!!!!!!! ${lat}, ${lng}")
+                }
+            }
+
             class GetPharmacy: AsyncTask<Void, Void, Void>() {
 
                 // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
                 override fun doInBackground(vararg params: Void?): Void? {
 
-                    if(isGpsOn()) {
-                        // 사용자 위치 얻기
-                        if(!search) {
-                            gpsTracker = GpsTracker(Activity)
-                            userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
-                            lat = userLatLng.latitude
-                            lng = userLatLng.longitude
-                        }
-                    }
+                    Log.d("order", "doInBackground 시작!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ${lat}, ${lng}")
 
                     var temp: String=""
                     try {
-                        Log.d("try", " 정보를 가져옵니다!!! ")
-                        val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+lat.toString()+"&lng="+lng.toString()+"&m=1500").openStream()
+                        Log.d("try", " 정보를 가져옵니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ${lat}, ${lng}")
+                        val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+lat.toString()+"&lng="+lng.toString()+"&m=1600").openStream()
                         val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
                         var line:String?=read.readLine()
                         while(line!=null){
@@ -134,7 +137,7 @@ class Singleton {
                     }
 
                     Log.e("pharmacy", pharmacy.toString())
-                    Log.d("order", "doInBackground 끝!!")
+                    Log.d("order", "doInBackground 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ${lat}, ${lng}")
                     return null
                 }
 
@@ -143,7 +146,8 @@ class Singleton {
                     super.onPostExecute(result)
                     fragmentMask.setLatLng(userLatLng)
                     fragmentMask.setPharmacyArray(pharmacy)
-                    // pharmacy.clear()
+
+                    Log.d("order", "doInBackground 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ${lat}, ${lng}")
 
                     if (!search) {
                         Activity.supportFragmentManager.beginTransaction()

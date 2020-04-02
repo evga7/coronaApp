@@ -49,8 +49,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     private var array : ArrayList<Pharmacy>? = null
 
     // 사용자의 위도와 경도
-    private var latitude: Double? = null
-    private var longitude: Double? = null
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
 
     private val markers = mutableListOf<Marker>()
 
@@ -62,7 +62,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             return
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d("order", "onRequestPermissionsResult")
+        Log.d("order", "onRequestPermissionsResult!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // Fragment 를 Activity 에 attach 할 때 호출
@@ -70,7 +70,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
-        Log.d("order", "onAttach")
+        Log.d("order", "onAttach!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // 초기화 리소스들이 들어가는 곳
@@ -84,13 +84,13 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 LOCATION_PERMISSION_REQUEST_CODE
             )
 
-        Log.d("order", "onCreate")
+        Log.d("order", "onCreate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // Layout 을 inflate 하는 곳, View 객체를 얻어서 초기화
     // XML 로 만들어 놓은 View 를 inflater 를 활용하여 생성할 수 있음.
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d("order", "onCreateView")
+        Log.d("order", "onCreateView!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         return inflater.inflate(R.layout.fragment_mask, container, false)
     }
 
@@ -99,13 +99,14 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         mapView = map_view
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+        Log.d("order", "onViewCreated!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // Fragment 화면에 표시될 때 호출
     override fun onStart() {
         super.onStart()
         mapView.onStart()
-        Log.d("order", "onStart")
+        Log.d("order", "onStart!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // Fragment 화면에 로딩이 끝났을 때 호출
@@ -133,34 +134,26 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         stockInfo.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 stockInfo.visibility = View.INVISIBLE
-                stockButton.visibility = View.VISIBLE
-            }
-        })
-
-        stockButton.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                stockButton.visibility = View.INVISIBLE
-                stockInfo.visibility = View.VISIBLE
             }
         })
 
 
         //mapView.getMapAsync(this)
-        Log.d("order", "onResume")
+        Log.d("order", "onResume!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // 화면이 중지되면 호출되는 함수.
     override fun onPause() {
         super.onPause()
         mapView.onPause()
-        Log.d("order", "onPause")
+        Log.d("order", "onPause!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // Fragment 화면 삭제
     override fun onStop() {
         super.onStop()
         mapView.onStop()
-        Log.d("order", "onStop")
+        Log.d("order", "onStop!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // Fragment 완전히 종료할 때 호출
@@ -169,17 +162,19 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         super.onDestroy()
         mapView.onDestroy()
         array?.clear()
-        Log.d("order", "onDestroy")
+        Log.d("order", "onDestroy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         mapView.onSaveInstanceState(outState)
+        Log.d("order", "onSaveInstanceState!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+        Log.d("order", "onLowMemory!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     fun getNaverMap() : NaverMap {
@@ -188,6 +183,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
     // NaverMap 객체가 준비되면 onMapReady 콜백 메서드가 호출됨. 비동기.
     override fun onMapReady(naverMap: NaverMap) {
+
+        Log.d("order", "onMapReady 시작!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
         // if (Singleton.navermap == null) Singleton.navermap = naverMap
         navermap = naverMap
@@ -212,8 +209,6 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         }
         mapListener?.invoke()
 
-        Log.d("order", "onMapReady 시작!!")
-
         // GPS 가 켜져 있지 않은 경우, 위치 오버레이 객체를 지정하고 지도에 띄움. (위치오버레이 == 유저)
         locationOverlay = naverMap.locationOverlay
         locationOverlay.isVisible = true
@@ -227,7 +222,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         // 사용자로부터 받은 위치를 지도 실행시 보이는 최초 위치로 둠.
         Log.d("cameraUpdate", "${latitude},  ${longitude}")
-        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 13.7)
+        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 13.0)
         naverMap.moveCamera(cameraUpdate)
 
         // !!!!!!!!!!!!!!!마커 그리는 부분 ==> 함수로 따로 빼놓으면 좋을 것 같음.
@@ -237,7 +232,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 //            infoWindow.close()
 //        }
 
-        Log.d("order", "onMapReady")
+        Log.d("order", "onMapReady 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
     // 마스크 지도 이용전 보일 공지사항을 보일 다이얼로그
@@ -278,10 +273,11 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     private fun createMarker() {
 
         if(array == null) {
-            Log.d("createMarker", " array == null ")
+            Log.d("createMarker", " array == null !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             return
         }
 
+        Log.d("createMarker", " array !!== null !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 어레이 사이${array!!.size}")
         // 마커 위에 띄울 약국정보창(말풍선 같이 생김).
         val infoWindow = InfoWindow()
         infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
@@ -363,7 +359,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                     tag = it.name + " ($tmp) " + "\n정보없음"
                 }
                 else {
-                    tag = it.name + "($tmp)" + "\n입고시간 : " + it.stock_at //+ stat
+                    tag = it.name + "($tmp)" + "\n주소 : " + it.addr + "\n입고시간 : " + it.stock_at
                 }
 
                 this.onClickListener = markerListener
@@ -374,7 +370,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         markers.forEach{ marker ->
 
-            Log.d("markers.forEach", " 마커를 찍습니다!! ")
+            Log.d("markers.forEach", " 마커를 찍습니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ")
             marker.map = navermap
 
         }
