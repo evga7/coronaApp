@@ -135,7 +135,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         textInfo.setText(info)
 
-        stockInfo.setOnClickListener(object : View.OnClickListener{
+        stockInfoClose.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 stockInfo.visibility = View.INVISIBLE
             }
@@ -208,6 +208,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 longitude = coord.longitude
                 Singleton.search = true
                 Singleton.getPharmacyData(coord.latitude, coord.longitude)
+                stockInfo.visibility = View.VISIBLE
             }
         }
         mapListener?.invoke()
