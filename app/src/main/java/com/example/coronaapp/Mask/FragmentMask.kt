@@ -2,7 +2,9 @@ package com.example.coronaapp.Mask
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,10 +16,7 @@ import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
-import com.naver.maps.map.overlay.InfoWindow
-import com.naver.maps.map.overlay.LocationOverlay
-import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.Overlay
+import com.naver.maps.map.overlay.*
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 import kotlinx.android.synthetic.main.fragment_mask.*
@@ -53,6 +52,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     private var longitude: Double = 0.0
 
     private val markers = mutableListOf<Marker>()
+
+    private var userMarker: Marker? = null
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
@@ -201,6 +202,13 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 // Singleton.pharmacy.clear()
                 Log.d("setOnMapClickListener", "${coord.latitude},  ${coord.longitude}")
                 Singleton.userLatLng = LatLng(coord.latitude, coord.longitude)
+
+                userMarker?.icon = OverlayImage.fromResource(R.drawable.pointer1)
+                userMarker?.width = 50
+                userMarker?.height = 80
+                userMarker?.position = LatLng(coord.latitude, coord.longitude)
+                userMarker?.map = navermap
+
                 latitude = coord.latitude
                 longitude = coord.longitude
                 Singleton.search = true
