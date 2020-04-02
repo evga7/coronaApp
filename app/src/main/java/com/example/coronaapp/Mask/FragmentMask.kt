@@ -8,11 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.*
 import com.naver.maps.map.util.FusedLocationSource
@@ -54,6 +54,11 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     private val markers = mutableListOf<Marker>()
 
     private var userMarker: Marker? = null
+
+    private lateinit var cameraUpdate: CameraUpdate
+
+    private val REASON_GESTURE: Int = 2000
+    private var cameraChangedReason: Int = 0
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
@@ -141,6 +146,18 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             }
         })
 
+        stockInfo.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+            }
+        })
+
+        searchButton.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                Singleton.getPharmacyData(userChoice.latitude, userChoice.longitude)
+                searchButton.visibility = View.INVISIBLE
+                stockInfo.visibility = View.VISIBLE
+            }
+        })
 
         //mapView.getMapAsync(this)
         Log.d("order", "onResume!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -201,22 +218,33 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             // navermap.locationTrackingMode = LocationTrackingMode.Follow
 
             navermap.setOnMapClickListener{ pointF, coord ->
-                Toast.makeText(mContext, "${coord.latitude}, ${coord.longitude}", Toast.LENGTH_LONG).show()
-                Log.d("setOnMapClickListener", "${coord.latitude},  ${coord.longitude}")
+                // Toast.makeText(mContext, "${coord.latitude}, ${coord.longitude}", Toast.LENGTH_LONG).show()
+                // Log.d("setOnMapClickListener", "${coord.latitude},  ${coord.longitude}")
                 Singleton.userLatLng = LatLng(coord.latitude, coord.longitude)
                 latitude = coord.latitude
                 longitude = coord.longitude
                 Singleton.search = true
-                Singleton.getPharmacyData(coord.latitude, coord.longitude)
-                stockInfo.visibility = View.VISIBLE
+                cameraUpdate = CameraUpdate.scrollAndZoomTo(LatLng(coord.latitude, coord.longitude), 13.0)
+                    .animate(CameraAnimation.Linear)
+                navermap.moveCamera(cameraUpdate)
+                searchButton.visibility = View.VISIBLE
+                userChoice = LatLng(coord.latitude, coord.longitude)
             }
         }
         mapListener?.invoke()
 
+//        navermap.addOnCameraIdleListener {
+//            //Toast.makeText(context, "멈추었습니다. ${navermap.cameraPosition.target.latitude}, ${navermap.cameraPosition.target.longitude}", Toast.LENGTH_SHORT).show()
+//            Singleton.search = true
+//            searchButton.visibility = View.VISIBLE
+//            userChoice = LatLng(navermap.cameraPosition.target.latitude, navermap.cameraPosition.target.longitude)
+//            // Singleton.getPharmacyData(navermap.cameraPosition.target.latitude, navermap.cameraPosition.target.longitude)
+//        }
+
         // GPS 가 켜져 있지 않은 경우, 위치 오버레이 객체를 지정하고 지도에 띄움. (위치오버레이 == 유저)
         locationOverlay = naverMap.locationOverlay
         locationOverlay.isVisible = true
-        locationOverlay.position = LatLng(latitude!!, longitude!!)
+        locationOverlay.position = LatLng(latitude, longitude)
 
         naverMap.locationSource = locationSource
         //네이버맵으로부터 UiSettings 를 가져옴
@@ -224,10 +252,23 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         // 현위치 버튼을 보이게 함.
         uiSettings.isLocationButtonEnabled = true
 
+//        navermap.addOnCameraChangeListener { reason, animated ->
+//            //Toast.makeText(context, "카메라 이동 완료", Toast.LENGTH_SHORT).show()
+//            cameraChangedReason = reason
+//            if(cameraChangedReason == CameraUpdate.REASON_DEVELOPER) {
+//                Toast.makeText(context, "카메라 이동 완료", Toast.LENGTH_SHORT).show()
+//                val target = navermap.cameraPosition.target
+//                userChoice = LatLng(target.latitude, target.longitude)
+//            }
+//        }
+
         // 사용자로부터 받은 위치를 지도 실행시 보이는 최초 위치로 둠.
         Log.d("cameraUpdate", "${latitude},  ${longitude}")
-        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 13.0)
+        cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 13.0)
         naverMap.moveCamera(cameraUpdate)
+
+        // 카메라 범위를 대한민국으로 한정
+        naverMap.extent = LatLngBounds(LatLng(31.43, 122.37), LatLng(44.35, 132.0))
 
         // !!!!!!!!!!!!!!!마커 그리는 부분 ==> 함수로 따로 빼놓으면 좋을 것 같음.
         createMarker()
@@ -249,7 +290,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             .setTitle("공지 사항")
             .setMessage("\n\n판매정보 출처는 \"건강보험심사평가원\" 입니다." +
                     "\n\n5 - 10분의 오차가 있을 수 있으므로 마스크 수량 정보는 참고만을 부탁드리겠습니다." +
-                    "\n\n화면상단 요일별 구매 가능 출생년도 끝자리를 꼭 확인해주세요.")
+                    "\n\n화면상단 요일별 구매 가능 출생년도 끝자리를 꼭 확인해주세요." +
+                    "\n\n\"위치 설정\"이 되어 있지 않다면 찾고자 하는 장소를 한 번 터치 후 찾기 버튼을 눌러주세요.")
             .setPositiveButton("확 인") { dialog, which ->
             }
             //.setNeutralButton("취소", null)
@@ -325,23 +367,19 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 // var stat : String? = null
 
                 if (it.remain_stat == "plenty") {
-                    iconTintColor = Color.GREEN
-                    // stat = "\n수량 : 100개 이상"
+                    iconTintColor = Color.rgb(48,211, 90)
                 }
 
                 else if(it.remain_stat == "some") {
                     iconTintColor = Color.YELLOW
-                    // stat = "\n수량 : 30개 이상 100개 미만"
                 }
 
                 else if(it.remain_stat == "few") {
                     iconTintColor = Color.RED
-                    // stat = "\n수량 : 2개 이상 30개 미만"
                 }
 
                 else {
                     iconTintColor = Color.GRAY
-                    // stat = "\n수량 : 판매중지"
                 }
 
                 width = 50

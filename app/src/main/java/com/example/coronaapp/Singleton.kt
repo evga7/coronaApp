@@ -5,7 +5,7 @@ import android.os.AsyncTask
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.coronaapp.Mask.FragmentMask
-import com.example.coronaapp.Mask.GpsTracker
+import com.example.coronaapp.Mask.GpsLocation
 import com.example.coronaapp.Mask.Pharmacy
 import com.naver.maps.geometry.LatLng
 import org.json.JSONObject
@@ -27,7 +27,7 @@ class Singleton {
         lateinit var Activity: AppCompatActivity
         var search: Boolean = true
         // 사용자 기기의 위치 정보를 받아올 객체 인스턴스.
-        private var gpsTracker: GpsTracker? = null
+        private var gpsLocation: GpsLocation? = null
 
         var nDialog: Boolean = true
 
@@ -51,8 +51,9 @@ class Singleton {
             if(isGpsOn()) {
                 // 사용자 위치 얻기
                 if(!search) {
-                    gpsTracker = GpsTracker(Activity)
-                    userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
+                    gpsLocation =
+                        GpsLocation(Activity)
+                    userLatLng = LatLng(gpsLocation!!.latitude, gpsLocation!!.longitude)
                     lat = userLatLng.latitude
                     lng = userLatLng.longitude
                     Log.d("isGpsOn&&!search", " GPS 정보를 가져옵니다!!!!!!!!!!! ${lat}, ${lng}")

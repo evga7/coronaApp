@@ -12,7 +12,6 @@
         android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -31,7 +30,6 @@
                 android:layout_weight="1"
                 app:srcCompat="@drawable/daycheck" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -56,30 +54,26 @@
         android:textColor="#FFFFFF"
         android:text="@string/find"
         android:textSize="15sp"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:layout_margin="110dp"/>
-
     <FrameLayout
         android:id="@+id/stockInfo"
         android:layout_width="100dp"
         android:layout_height="120dp"
         android:layout_margin="8dp"
         android:layout_gravity="bottom|end">
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/stock8" />
-
+            app:srcCompat="@drawable/stock7" />
         <ImageView
             android:id="@+id/stockInfoClose"
             android:layout_width="12dp"
             android:layout_height="10dp"
             android:layout_gravity="top|end"
             android:layout_margin="9dp"
-            app:srcCompat="@drawable/closeicon2" />
-
+            app:srcCompat="@drawable/closeicon2"/>
     </FrameLayout>
 
 </FrameLayout>

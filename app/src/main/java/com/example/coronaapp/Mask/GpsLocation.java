@@ -13,7 +13,7 @@ import android.os.IBinder;
 import androidx.core.content.ContextCompat;
 import android.util.Log;
 
-public class GpsTracker extends Service implements LocationListener {
+public class GpsLocation extends Service implements LocationListener {
 
     private final Context mContext;
     Location location;
@@ -25,7 +25,7 @@ public class GpsTracker extends Service implements LocationListener {
     protected LocationManager locationManager;
 
 
-    public GpsTracker(Context context) {
+    public GpsLocation(Context context) {
         this.mContext = context;
         getLocation();
     }
@@ -50,7 +50,6 @@ public class GpsTracker extends Service implements LocationListener {
 
                 if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                         hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
-
                     ;
                 } else
                     return null;
@@ -150,7 +149,7 @@ public class GpsTracker extends Service implements LocationListener {
     {
         if(locationManager != null)
         {
-            locationManager.removeUpdates(GpsTracker.this);
+            locationManager.removeUpdates(GpsLocation.this);
         }
     }
 
