@@ -136,9 +136,9 @@ class MainActivity : AppCompatActivity() {
         val view = inflater.inflate(R.layout.notice_dialog, null)
 
         val locationDialog = AlertDialog.Builder(this@MainActivity)
-            .setMessage("마스크 재고 현황을 확인하기 위해서는\n" +
+            .setMessage("\n\n마스크 재고 현황을 확인하기 위해서는\n" +
                     "\"위치 정보\"를 사용으로 설정해주셔야 합니다." +
-                    "\n\n\n \"위치 정보\" 를 사용으로 설정해주시겠습니까? ")
+                    "\n\n\n \"위치 정보\"를 설정해주시겠습니까? ")
             .setPositiveButton("예") { dialog, which ->
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 intent.addCategory(Intent.CATEGORY_DEFAULT)

@@ -29,6 +29,8 @@ class Singleton {
         // 사용자 기기의 위치 정보를 받아올 객체 인스턴스.
         private var gpsTracker: GpsTracker? = null
 
+        var nDialog: Boolean = true
+
         // 대한민국의 위도 및 경도를 벗어났을 경우 초기화하는 함수 - Mask
         fun checkKoreaLatLng(userLatLng: LatLng) : Boolean {
 

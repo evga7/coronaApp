@@ -11,7 +11,7 @@
         android:title="WORLD" />
     <item
         android:id="@+id/mask"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/maskicon"
         android:title="MASK" />
 
     <item

@@ -18,17 +18,14 @@
         android:layout_height="55dp"
         android:layout_margin="10dp"
         android:orientation="horizontal"
-        android:background="@drawable/edge" >
-
-
+        android:background="@drawable/masktopinfo" >
         <LinearLayout
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
@@ -39,7 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/textInfo"
                 android:layout_width="wrap_content"
@@ -48,17 +44,49 @@
                 android:textColor="#FFFFFF"
                 android:textSize="15dp"
                 android:text="" />
-
         </LinearLayout>
-
     </LinearLayout>
 
     <ImageView
         android:id="@+id/stockInfo"
         android:layout_width="100dp"
         android:layout_height="120dp"
-        android:layout_margin="12dp"
         android:layout_gravity="bottom|end"
-        app:srcCompat="@drawable/stock4" />
+        android:layout_margin="10dp"
+        app:srcCompat="@drawable/stock4"/>
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@drawable/masksearch"
+        android:textColor="#FFFFFF"
+        android:text="@string/find"
+        android:textSize="15sp"
+        android:visibility="visible"
+        android:layout_margin="110dp"/>
+
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom|end">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/stock8" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="12dp"
+            android:layout_height="10dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="10.5dp"
+            app:srcCompat="@drawable/closeicon2" />
+
+    </FrameLayout>
 
 </FrameLayout>

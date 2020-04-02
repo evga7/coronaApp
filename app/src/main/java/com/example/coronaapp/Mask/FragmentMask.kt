@@ -2,9 +2,7 @@ package com.example.coronaapp.Mask
 
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.media.Image
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -51,6 +49,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
 
+    private var userChoice: LatLng = LatLng(0.0,0.0)
+
     private val markers = mutableListOf<Marker>()
 
     private var userMarker: Marker? = null
@@ -78,7 +78,10 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        showNoticeDialog()
+        if (Singleton.nDialog) {
+            showNoticeDialog()
+            Singleton.nDialog = false
+        }
 
         locationSource =
             FusedLocationSource(this,
@@ -195,20 +198,12 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
             navermap.locationSource = locationSource
             navermap.uiSettings.isLocationButtonEnabled = true
             navermap.locationOverlay.isVisible = true
-            navermap.locationTrackingMode = LocationTrackingMode.Follow
+            // navermap.locationTrackingMode = LocationTrackingMode.Follow
 
             navermap.setOnMapClickListener{ pointF, coord ->
                 Toast.makeText(mContext, "${coord.latitude}, ${coord.longitude}", Toast.LENGTH_LONG).show()
-                // Singleton.pharmacy.clear()
                 Log.d("setOnMapClickListener", "${coord.latitude},  ${coord.longitude}")
                 Singleton.userLatLng = LatLng(coord.latitude, coord.longitude)
-
-                userMarker?.icon = OverlayImage.fromResource(R.drawable.pointer1)
-                userMarker?.width = 50
-                userMarker?.height = 80
-                userMarker?.position = LatLng(coord.latitude, coord.longitude)
-                userMarker?.map = navermap
-
                 latitude = coord.latitude
                 longitude = coord.longitude
                 Singleton.search = true
