@@ -26,21 +26,11 @@ class Singleton {
         lateinit var locationManager: LocationManager
         lateinit var Activity: AppCompatActivity
         var search: Boolean = true
-        // 사용자 기기의 위치 정보를 받아올 객체 인스턴스.
+
+        // 사용자 기기의 위치 정보를 받아올 객체 인스턴스
         private var gpsLocation: GpsLocation? = null
 
         var nDialog: Boolean = true
-
-        // 대한민국의 위도 및 경도를 벗어났을 경우 초기화하는 함수 - Mask
-        fun checkKoreaLatLng(userLatLng: LatLng) : Boolean {
-
-            // 대한민국의 위도 및 경도 범위
-            if (userLatLng.latitude >= 33.0 && userLatLng.latitude <= 43.0)
-                if (userLatLng.longitude >= 124.0 && userLatLng.longitude <= 132.0)
-                    return true
-
-            return false
-        }
 
         //공공데이터 정보를 얻어옴.
         fun getPharmacyData(latitude:Double, longitude:Double) {
@@ -56,7 +46,7 @@ class Singleton {
                     userLatLng = LatLng(gpsLocation!!.latitude, gpsLocation!!.longitude)
                     lat = userLatLng.latitude
                     lng = userLatLng.longitude
-                    Log.d("isGpsOn&&!search", " GPS 정보를 가져옵니다!!!!!!!!!!! ${lat}, ${lng}")
+                    // Log.d("isGpsOn&&!search", " GPS 정보를 가져옵니다!!!!!!!!!!! ${lat}, ${lng}")
                 }
             }
 
@@ -65,11 +55,11 @@ class Singleton {
                 // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
                 override fun doInBackground(vararg params: Void?): Void? {
 
-                    Log.d("order", "doInBackground 시작!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ${lat}, ${lng}")
+                    // Log.d("order", "doInBackground 시작!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ${lat}, ${lng}")
 
                     var temp: String=""
                     try {
-                        Log.d("try", " 정보를 가져옵니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ${lat}, ${lng}")
+                        // Log.d("try", " 정보를 가져옵니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ${lat}, ${lng}")
                         val stream = URL("https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+lat.toString()+"&lng="+lng.toString()+"&m=1600").openStream()
                         val read = BufferedReader(InputStreamReader(stream, "UTF-8"))
                         var line:String?=read.readLine()
@@ -79,7 +69,7 @@ class Singleton {
                         }
                     }
                     catch (e : Exception){
-                        Log.e("error", e.toString())
+                        // Log.e("error", e.toString())
                     }
 
                     val json = JSONObject(temp)
@@ -99,7 +89,7 @@ class Singleton {
                         return null
                     }
                     catch (e: java.lang.Exception) {
-                        Log.e("Error", e.toString())
+                        // Log.e("Error", e.toString())
                     }
 
                     val count = json.get("count").toString().toInt()
@@ -109,14 +99,14 @@ class Singleton {
 
                         for(i in 0..(count - 1)) {
                             val upperObjet = upperArray.getJSONObject(i)
-                            Log.d("CHECK", upperObjet.toString())
+                            // Log.d("CHECK", upperObjet.toString())
                             pharmacy.add(
                                 Pharmacy(
                                     upperObjet.getString("addr"),
                                     upperObjet.getString("lat").toDouble(),
                                     upperObjet.getString("lng").toDouble(),
                                     upperObjet.getString("name"),
-                                    //upperObjet.getString("remain_stat"), // Caused by: org.json.JSONException: No value for remain_stat 해결방안 찾아야 함.
+                                    //upperObjet.getString("remain_stat"), // Caused by: org.json.JSONException: No value for remain_stat 해결방안
                                     upperObjet.optString("remain_stat", "남은 재고 정보 없음"),
                                     //upperObjet.getString("stock_at"),
                                     upperObjet.optString("stock_at", "입고 시간 정보 없음"),
@@ -139,8 +129,8 @@ class Singleton {
                         )
                     }
 
-                    Log.e("pharmacy", pharmacy.toString())
-                    Log.d("order", "doInBackground 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ${lat}, ${lng}")
+                    // Log.e("pharmacy", pharmacy.toString())
+                    // Log.d("order", "doInBackground 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ${lat}, ${lng}")
                     return null
                 }
 
@@ -150,7 +140,7 @@ class Singleton {
                     fragmentMask.setLatLng(userLatLng)
                     fragmentMask.setPharmacyArray(pharmacy)
 
-                    Log.d("order", "doInBackground 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ${lat}, ${lng}")
+                    // Log.d("order", "doInBackground 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ${lat}, ${lng}")
 
                     if (!search) {
                         Activity.supportFragmentManager.beginTransaction()

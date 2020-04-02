@@ -10,10 +10,8 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,17 +45,13 @@ class MainActivity : AppCompatActivity() {
             R.id.mask->{
 
                 if(Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
-                    // 사용자 인근 마스크 판매점 얻고 맵에 그림.
-                    // Log.d("최초좌표확인", "사용자가 GPS를 켰습니다.")
-                    // Toast.makeText(this, "사용자가 GPS를 켰습니다.", Toast.LENGTH_LONG).show()
+                    // 사용자 인근 마스크 판매점 얻고 맵에 그림
                     Singleton.search = false
                     Singleton.getPharmacyData(0.0,0.0)
                 }
                 else { // GPS 가 켜져 있지 않은 경우
                     // 강남역 좌표
-                    // Log.d("최초좌표확인", "사용자가 GPS를 켜지 않았습니다.")
                     Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
-                    // Toast.makeText(this, "사용자가 GPS를 켜지 않았습니다.", Toast.LENGTH_LONG).show()
                     Singleton.fragmentMask.setLatLng(Singleton.userLatLng)
                     Singleton.fragmentMask.setPharmacyArray(null)
                     addFragment(Singleton.fragmentMask)
@@ -107,7 +101,6 @@ class MainActivity : AppCompatActivity() {
             //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
             .commit()
-        Log.d("order", "addFragment 끝")
     }
 
     // 사용자에게 권한을 확인할 함수. onCreate 에서 호출, 마시멜로우 이상부터 확인해야함.
@@ -151,7 +144,6 @@ class MainActivity : AppCompatActivity() {
         locationDialog.setCancelable(false)
         locationDialog.setView(view)
         locationDialog.show()
-
     }
 
 }
