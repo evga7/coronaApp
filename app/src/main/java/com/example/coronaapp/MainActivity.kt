@@ -30,9 +30,6 @@ class MainActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    // 사용자 기기의 위치 정보를 받아올 객체 인스턴스.
-    private var gpsTracker: GpsTracker? = null
-
     private val ItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
         when(item.itemId){
@@ -50,35 +47,18 @@ class MainActivity : AppCompatActivity() {
 
             R.id.mask->{
 
-//                // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김 ==> 마스크 쪽을 옮길 수도 있음.
-//                if(!Singleton.isGpsOn()) {
-//                    showLocationDialog()
-//                }
-//                // 최초 좌표 확인 ==> GPS On/Off 상태를 반환해주는 메서드 필요!!
-//                if(Singleton.checkKoreaLatLng(Singleton.userLatLng)) {
-//                    // 사용자 인근 마스크 판매점 얻고 맵에 그림.
-//                    Log.d("최초좌표확인", "사용자가 GPS를 켰습니다.")
-//                    Toast.makeText(this, "사용자가 GPS를 켰습니다.", Toast.LENGTH_LONG).show()
-//                    Singleton.getPharmacyData(Singleton.userLatLng.latitude.toString(), Singleton.userLatLng.longitude.toString(), this)
-//                }
-
                 if(Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
-
-                    // 사용자 위치 얻기
-                    gpsTracker = GpsTracker(this@MainActivity)
-                    Singleton.userLatLng = LatLng(gpsTracker!!.latitude, gpsTracker!!.longitude)
-
                     // 사용자 인근 마스크 판매점 얻고 맵에 그림.
                     Log.d("최초좌표확인", "사용자가 GPS를 켰습니다.")
                     Toast.makeText(this, "사용자가 GPS를 켰습니다.", Toast.LENGTH_LONG).show()
-                    Singleton.getPharmacyData(Singleton.userLatLng.latitude.toString(), Singleton.userLatLng.longitude.toString())
+                    Singleton.search = false
+                    Singleton.getPharmacyData(0.0,0.0)
                 }
-
                 else { // GPS 가 켜져 있지 않은 경우
                     // 강남역 좌표
                     Log.d("최초좌표확인", "사용자가 GPS를 켜지 않았습니다.")
                     Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
-                    Toast.makeText(this, "사용자가 GPS를 껐습니다.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "사용자가 GPS를 켜지 않았습니다.", Toast.LENGTH_LONG).show()
                     Singleton.fragmentMask.setLatLng(Singleton.userLatLng)
                     Singleton.fragmentMask.setPharmacyArray(null)
                     addFragment(Singleton.fragmentMask)

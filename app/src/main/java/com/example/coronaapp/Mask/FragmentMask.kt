@@ -26,7 +26,7 @@ import java.util.*
 class FragmentMask : Fragment(), OnMapReadyCallback {
 
     // 네이버맵 객체
-    private var navermap: NaverMap? = null
+    private lateinit var navermap: NaverMap
 
     // 네이버 맵뷰
     private lateinit var mapView: MapView
@@ -51,6 +51,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     // 사용자의 위도와 경도
     private var latitude: Double? = null
     private var longitude: Double? = null
+
+    private val markers = mutableListOf<Marker>()
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
@@ -143,7 +145,6 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         })
 
 
-
         //mapView.getMapAsync(this)
         Log.d("order", "onResume")
     }
@@ -181,6 +182,10 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         mapView.onLowMemory()
     }
 
+    fun getNaverMap() : NaverMap {
+        return navermap
+    }
+
     // NaverMap 객체가 준비되면 onMapReady 콜백 메서드가 호출됨. 비동기.
     override fun onMapReady(naverMap: NaverMap) {
 
@@ -189,20 +194,20 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         // 임시, 터치한 화면의 좌표를 토스트 창으로 둠.
         mapListener = {
             //네이버맵에 locationSource 를 지정
-            navermap!!.locationSource = locationSource
-            navermap!!.uiSettings.isLocationButtonEnabled = true
-            navermap!!.locationOverlay.isVisible = true
-            navermap!!.locationTrackingMode = LocationTrackingMode.Follow
+            navermap.locationSource = locationSource
+            navermap.uiSettings.isLocationButtonEnabled = true
+            navermap.locationOverlay.isVisible = true
+            navermap.locationTrackingMode = LocationTrackingMode.Follow
 
-            navermap?.setOnMapClickListener{ pointF, coord ->
+            navermap.setOnMapClickListener{ pointF, coord ->
                 Toast.makeText(mContext, "${coord.latitude}, ${coord.longitude}", Toast.LENGTH_LONG).show()
                 // Singleton.pharmacy.clear()
                 Log.d("setOnMapClickListener", "${coord.latitude},  ${coord.longitude}")
                 Singleton.userLatLng = LatLng(coord.latitude, coord.longitude)
                 latitude = coord.latitude
                 longitude = coord.longitude
-                Singleton.getPharmacyData(coord.latitude.toString(), coord.longitude.toString())
-                onMapReady(naverMap)
+                Singleton.search = true
+                Singleton.getPharmacyData(coord.latitude, coord.longitude)
             }
         }
         mapListener?.invoke()
@@ -213,14 +218,6 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         locationOverlay = naverMap.locationOverlay
         locationOverlay.isVisible = true
         locationOverlay.position = LatLng(latitude!!, longitude!!)
-//        if(latitude == 37.49796323 && longitude == 127.02779767) {
-//            locationOverlay.isVisible = false
-//            locationOverlay.position = LatLng(latitude!!, longitude!!)
-//        }
-//        else {
-//            locationOverlay.isVisible = true
-//            locationOverlay.position = LatLng(latitude!!, longitude!!)
-//        }
 
         naverMap.locationSource = locationSource
         //네이버맵으로부터 UiSettings 를 가져옴
@@ -230,7 +227,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         // 사용자로부터 받은 위치를 지도 실행시 보이는 최초 위치로 둠.
         Log.d("cameraUpdate", "${latitude},  ${longitude}")
-        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 15.0)
+        val cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 13.7)
         naverMap.moveCamera(cameraUpdate)
 
         // !!!!!!!!!!!!!!!마커 그리는 부분 ==> 함수로 따로 빼놓으면 좋을 것 같음.
@@ -306,7 +303,17 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
             true
         }
-        val markers = mutableListOf<Marker>()
+
+
+        if(markers.isNotEmpty()) { // 예전 infoWindow 는 어떻게 지움?
+            Log.d("markers.forEach", "우선 예전 마커를 지웁니다.")
+            markers.forEach { marker ->
+                marker.map = null
+            }
+            markers.clear()
+            Log.d("markers의 사이즈", "${markers.size}, +++++++++++++++++++++++++++++++++++++++")
+        }
+
         array!!.forEach {
 
             Log.d("array!!.forEach", " array!!.forEach ")
@@ -362,6 +369,9 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 this.onClickListener = markerListener
             }
         }
+
+        array!!.clear()
+
         markers.forEach{ marker ->
 
             Log.d("markers.forEach", " 마커를 찍습니다!! ")
