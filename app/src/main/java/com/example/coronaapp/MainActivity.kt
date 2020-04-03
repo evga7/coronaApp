@@ -1,18 +1,15 @@
 package com.example.coronaapp
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.danielstone.materialaboutlibrary.MaterialAboutFragment
+import com.example.coronaapp.help.FragmentHelp
 import com.example.coronaapp.korea.FragmentKorea
 import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
-import com.example.coronaapp.world.CustomProgressCircle
 import com.example.coronaapp.world.FragmentWorld
 import com.example.coronaapp.world.WorldCrawling
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import nl.joery.animatedbottombar.AnimatedBottomBar
 import java.io.IOException
