@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +49,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     private var longitude: Double = 0.0
 
     private var userChoice: LatLng = LatLng(0.0,0.0)
+    private var choiceMarker = Marker()
 
     private val markers = mutableListOf<Marker>()
 
@@ -144,8 +144,18 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 Singleton.getPharmacyData(userChoice.latitude, userChoice.longitude)
                 searchButton.visibility = View.INVISIBLE
                 stockInfo.visibility = View.VISIBLE
+                choiceMarker.map = null
             }
         })
+
+        choiceMarker.onClickListener = Overlay.OnClickListener { overlay ->
+
+            if(choiceMarker.map != null) {
+                choiceMarker.map = null
+                searchButton.visibility = View.INVISIBLE
+            }
+            true
+        }
 
     }
 
@@ -198,11 +208,16 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 latitude = coord.latitude
                 longitude = coord.longitude
                 Singleton.search = true
-                cameraUpdate = CameraUpdate.scrollAndZoomTo(LatLng(coord.latitude, coord.longitude), 13.0)
+                cameraUpdate = CameraUpdate.scrollAndZoomTo(LatLng(coord.latitude, coord.longitude), 14.0)
                     .animate(CameraAnimation.Linear)
                 navermap.moveCamera(cameraUpdate)
                 searchButton.visibility = View.VISIBLE
                 userChoice = LatLng(coord.latitude, coord.longitude)
+                choiceMarker.iconTintColor = Color.rgb(94, 171, 232)
+                choiceMarker.position = LatLng(latitude, longitude)
+                choiceMarker.width = 80
+                choiceMarker.height = 120
+                choiceMarker.map = navermap
             }
         }
         mapListener?.invoke()
@@ -219,14 +234,13 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         uiSettings.isLocationButtonEnabled = true
 
         // 사용자로부터 받은 위치를 지도 실행시 보이는 최초 위치로 둠.
-        Log.d("cameraUpdate", "${latitude},  ${longitude}")
         cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 13.0)
         naverMap.moveCamera(cameraUpdate)
 
         // 카메라 범위를 대한민국으로 한정
         naverMap.extent = LatLngBounds(LatLng(31.43, 122.37), LatLng(44.35, 132.0))
 
-        // !!!!!!!!!!!!!!!마커 그리는 부분 ==> 함수로 따로 빼놓으면 좋을 것 같음.
+        // 마커 그리는 함수.
         createMarker()
 
         /* // 네이버맵 클릭 시 열린 infoWindow 를 닫게 함.
