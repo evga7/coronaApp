@@ -3,6 +3,7 @@ package com.example.coronaapp.korea
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Layout
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
@@ -129,29 +131,26 @@ class FragmentKorea : Fragment() {
         val textView = TextView(koreaFragView.context)
         var tempStr : String
         textView.setTextColor(Color.GREEN)
+        var j = 1
         for (i in 0..17) {
-            tempStr = Singleton.coList2!![i].title + "\n" + Singleton.coList2!![i].num + "\n" + Singleton.coList2!![i].before
-            val sp = SpannableStringBuilder(tempStr)
-            sp.setSpan(
-                ForegroundColorSpan(Color.RED),
-                Singleton.coList2!![i].title.length,
-                Singleton.coList2!![i].title.length + Singleton.coList2!![i].num.length + 1,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            val dd=koreaFragView.resources.getIdentifier("cityButton"+(i+1),"id",context?.packageName.toString())
-            koreaFragView.findViewById<Button>(dd).setText(sp)
+            val textId1 = koreaFragView.resources.getIdentifier("cityText" + j,"id", context?.packageName.toString())
+            val textId2 = koreaFragView.resources.getIdentifier("cityText" + (j+1),"id", context?.packageName.toString())
+            val textId3 = koreaFragView.resources.getIdentifier("cityText" + (j+2),"id", context?.packageName.toString())
+            koreaFragView.findViewById<TextView>(textId1).setText(Singleton.coList2?.get(i)?.title)
+            koreaFragView.findViewById<TextView>(textId2).setText(Singleton.coList2?.get(i)?.num)
+            koreaFragView.findViewById<TextView>(textId3).setText(Singleton.coList2?.get(i)?.before)
+            j+=3
         }
 
 
 
-
         for (i in 0..17) {
-            val buttonId = koreaFragView.resources.getIdentifier(
+            val layoutId = koreaFragView.resources.getIdentifier(
                 "cityButton" + (i + 1),
                 "id",
                 context?.packageName.toString()
             )
-            koreaFragView.findViewById<Button>(buttonId).setOnClickListener{
+            koreaFragView.findViewById<LinearLayout>(layoutId).setOnClickListener{
                 val dialogView = layoutInflater.inflate(R.layout.dialog, null)
                 dialogView.dialogText.setText(Singleton.coList3!![i].city)
 

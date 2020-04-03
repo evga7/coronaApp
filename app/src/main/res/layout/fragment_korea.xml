@@ -509,22 +509,48 @@
                             android:layout_height="match_parent">
 
 
-                            <Button
+                            <LinearLayout
                                 android:id="@+id/cityButton1"
                                 android:layout_width="60sp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="50sp"
                                 android:layout_marginStart="116dp"
-                                android:layout_marginLeft="116dp"
+                                android:layout_marginLeft="100dp"
                                 android:layout_marginTop="148dp"
                                 android:layout_marginEnd="233dp"
                                 android:layout_marginRight="233dp"
                                 android:background="#00FF0000"
-                                android:text="공백"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton2"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -534,12 +560,38 @@
                                 android:layout_marginEnd="86dp"
                                 android:layout_marginRight="86dp"
                                 android:background="#00FF0000"
-                                android:text="공백"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton3"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -549,12 +601,40 @@
                                 android:layout_marginEnd="137dp"
                                 android:layout_marginRight="137dp"
                                 android:background="#00ff0000"
-                                android:text="공백"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText9"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+
+
+                            <LinearLayout
                                 android:id="@+id/cityButton4"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -563,13 +643,40 @@
                                 android:layout_marginTop="138dp"
                                 android:layout_marginEnd="304dp"
                                 android:layout_marginRight="304dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText11"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+
+                            <LinearLayout
                                 android:id="@+id/cityButton5"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -578,13 +685,39 @@
                                 android:layout_marginTop="403dp"
                                 android:layout_marginEnd="262dp"
                                 android:layout_marginRight="262dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText13"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText14"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton6"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -593,13 +726,39 @@
                                 android:layout_marginTop="297dp"
                                 android:layout_marginEnd="216dp"
                                 android:layout_marginRight="216dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText16"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText17"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText18"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton7"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -608,13 +767,39 @@
                                 android:layout_marginTop="345dp"
                                 android:layout_marginEnd="57dp"
                                 android:layout_marginRight="57dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText19"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText20"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText21"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton8"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -623,13 +808,39 @@
                                 android:layout_marginTop="233dp"
                                 android:layout_marginEnd="233dp"
                                 android:layout_marginRight="233dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText22"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText23"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText24"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton9"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -638,13 +849,39 @@
                                 android:layout_marginTop="92dp"
                                 android:layout_marginEnd="244dp"
                                 android:layout_marginRight="244dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText25"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText26"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText27"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton10"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -653,13 +890,39 @@
                                 android:layout_marginTop="140dp"
                                 android:layout_marginEnd="146dp"
                                 android:layout_marginRight="146dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText28"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText29"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText30"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton11"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -668,13 +931,39 @@
                                 android:layout_marginTop="233dp"
                                 android:layout_marginEnd="184dp"
                                 android:layout_marginRight="184dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText31"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText32"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText33"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton12"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -683,13 +972,39 @@
                                 android:layout_marginTop="264dp"
                                 android:layout_marginEnd="266dp"
                                 android:layout_marginRight="266dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText34"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText35"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText36"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton13"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -698,13 +1013,39 @@
                                 android:layout_marginTop="358dp"
                                 android:layout_marginEnd="233dp"
                                 android:layout_marginRight="233dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText37"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText38"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText39"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton14"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -713,13 +1054,39 @@
                                 android:layout_marginTop="451dp"
                                 android:layout_marginEnd="293dp"
                                 android:layout_marginRight="293dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText40"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText41"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText42"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton15"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -728,13 +1095,39 @@
                                 android:layout_marginTop="257dp"
                                 android:layout_marginEnd="113dp"
                                 android:layout_marginRight="113dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText43"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText44"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText45"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton16"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -743,13 +1136,39 @@
                                 android:layout_marginTop="380dp"
                                 android:layout_marginEnd="165dp"
                                 android:layout_marginRight="165dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText46"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText47"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText48"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton17"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -758,13 +1177,39 @@
                                 android:layout_marginTop="523dp"
                                 android:layout_marginEnd="285dp"
                                 android:layout_marginRight="285dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <Button
+                                <TextView
+                                    android:id="@+id/cityText49"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText50"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText51"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:id="@+id/cityButton18"
                                 android:layout_width="60sp"
                                 android:layout_height="wrap_content"
@@ -773,11 +1218,38 @@
                                 android:layout_marginTop="486dp"
                                 android:layout_marginEnd="113dp"
                                 android:layout_marginRight="113dp"
-                                android:background="#00ff0000"
-                                android:text="공백"
+                                android:background="#00FF0000"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/cityText52"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText53"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#F00"
+                                    android:textSize="12dp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/cityText54"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000"
+                                    android:textSize="12dp"
+                                    />
+                            </LinearLayout>
+
 
                             <TextView
                                 android:id="@+id/textView"
