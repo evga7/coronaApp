@@ -18,18 +18,20 @@ class FragmentHelp : Fragment()  {
         var helpview=inflater.inflate(R.layout.fragment_help, container, false)
 
         helpview.devlayout.setOnClickListener{
-
-
-
             val fragment =devfrag()
-
             val fragmentManager = fragmentManager
-            val transaction =
-                fragmentManager!!.beginTransaction()
-
+            val transaction =  fragmentManager!!.beginTransaction()
             transaction.replace(R.id.frameLayout,fragment,fragment.javaClass.simpleName)?.commit()
             transaction.addToBackStack(null)
 
+        }
+        helpview.maillayout.setOnClickListener{
+            val email = Intent(Intent.ACTION_SEND)
+            email.type = "plain/text"
+            val address = arrayOf("evga7@sju.ac.kr")
+            email.putExtra(Intent.EXTRA_EMAIL, address)
+            email.putExtra(Intent.EXTRA_SUBJECT, "문의하기")
+            startActivity(email)
         }
 
 

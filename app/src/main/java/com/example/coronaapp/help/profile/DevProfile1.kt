@@ -29,6 +29,7 @@ class DevProfile1: Fragment() {
             .addGooglePlayStoreLink("8002078663318221363")
             .addGitHubLink("user")
             .addFacebookLink("user")
+            .addEmailLink("evga7@naver.com")
             .addFiveStarsAction()
             .setWrapScrollView(true)
             .setLinksAnimated(true)
