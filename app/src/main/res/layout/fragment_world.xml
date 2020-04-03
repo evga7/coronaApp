@@ -24,7 +24,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif"
-                android:layout_margin ="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
 
                 android:text="세계 코로나 환자 현황"
                 android:textSize="20dp"
@@ -32,6 +34,18 @@
                 android:drawableLeft="@drawable/world_title_customise"
                 android:drawablePadding="5dp"
                 android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/worldDayInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif"
+                android:textSize="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+
                 />
 
             <TextView
@@ -48,7 +62,6 @@
 
 
             <TableLayout
-                android:background="@drawable/round_border"
                 android:id="@+id/totalTable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,7 +126,9 @@
                 <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:background="@drawable/round_title_bottom"
+                    >
 
 
                     <TextView

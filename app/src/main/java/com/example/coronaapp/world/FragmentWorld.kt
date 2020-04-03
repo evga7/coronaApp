@@ -53,6 +53,7 @@ class FragmentWorld : Fragment() {
         rootView.b.text = Singleton.totalCasesSum
         rootView.c.text = Singleton.totalDeathsSum
         rootView.d.text = Singleton.totalRecoveredSum
+        rootView.worldDayInfo.text = Singleton.worldDayInfo
 
         // RecyclerView
         val worldRecyclerView = rootView.findViewById(R.id.worldrecyclerview) as RecyclerView

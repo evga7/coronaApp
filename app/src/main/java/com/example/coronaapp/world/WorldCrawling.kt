@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
+import kotlinx.android.synthetic.main.fragment_korea.view.*
 import org.jsoup.Jsoup
 import java.io.IOException
 import kotlin.collections.ArrayList
@@ -30,6 +31,48 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
             //val data = doc.select("#main_table_countries > tbody > tr")
             //val data = doc.select("#main_table_countries_yesterday > tbody > tr")
             val data = doc.select("#main_table_countries_today > tbody > tr")
+
+            val dayInfo = doc.select("div.content-inner")
+
+            //Log.d("데이터2",data2.text())
+
+            var cnt = 0
+            for (item in dayInfo.select("div")){
+                //Log.d("데이터2",item.text())
+                if (cnt == 2){
+                    item.text().let { info ->
+                        val infoSplit = info.split(" ")
+
+                        val year = infoSplit[4].substring(0, infoSplit[4].length - 1) // 년도
+                        //val month = infoSplit[2]// 월
+                        val month = infoSplit[2].let {mon->
+                            when{
+                                mon == "January" -> "01"
+                                mon == "February" -> "02"
+                                mon == "March" -> "03"
+                                mon == "April" -> "04"
+                                mon == "May" -> "05"
+                                mon == "June" -> "06"
+                                mon == "July" -> "07"
+                                mon == "August" -> "08"
+                                mon == "September" -> "09"
+                                mon == "October" -> "10"
+                                mon == "November" -> "11"
+                                mon == "December" -> "12"
+                                else -> mon
+                            }
+                        }
+
+                        val day = infoSplit[3].substring(0, infoSplit[3].length - 1) // 날짜
+                        val time = infoSplit[5].substring(0, infoSplit[2].length - 1) // 시간
+                        val worldTime = infoSplit[6] //세계표준시간
+
+                        Singleton.worldDayInfo = "   ( " + year + ". " + month + ". " + day + "  " + time + " " + "세계표준시간" + " )"
+                    }
+                    break
+                }
+                cnt++
+            }
 
             var country :String
             var totalCases : String
