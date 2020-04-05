@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.coronaapp.R
+import com.example.coronaapp.help.fragment.devfrag
+import com.example.coronaapp.help.fragment.licensesfrag
+import kotlinx.android.synthetic.main.fragment_help.*
 import kotlinx.android.synthetic.main.fragment_help.view.*
+import kotlinx.android.synthetic.main.fragment_help.view.licensesLayout
 
 class FragmentHelp : Fragment()  {
 
@@ -18,12 +20,19 @@ class FragmentHelp : Fragment()  {
         var helpview=inflater.inflate(R.layout.fragment_help, container, false)
 
         helpview.devlayout.setOnClickListener{
-            val fragment =devfrag()
+            val fragment = devfrag()
             val fragmentManager = fragmentManager
             val transaction =  fragmentManager!!.beginTransaction()
             transaction.replace(R.id.frameLayout,fragment,fragment.javaClass.simpleName)?.commit()
             transaction.addToBackStack(null)
 
+        }
+        helpview.licensesLayout.setOnClickListener{
+            val fragment = licensesfrag()
+            val fragmentManager = fragmentManager
+            val transaction =  fragmentManager!!.beginTransaction()
+            transaction.replace(R.id.frameLayout,fragment,fragment.javaClass.simpleName)?.commit()
+            transaction.addToBackStack(null)
         }
         helpview.maillayout.setOnClickListener{
             val email = Intent(Intent.ACTION_SEND)

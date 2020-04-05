@@ -1,4 +1,4 @@
-package com.example.coronaapp.help
+package com.example.coronaapp.help.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,6 @@ import com.example.coronaapp.R
 import com.example.coronaapp.help.profile.DevProfile1
 import com.example.coronaapp.help.profile.DevProfile2
 import com.example.coronaapp.help.profile.DevProfile3
-import com.vansuita.materialabout.builder.AboutBuilder
-import com.vansuita.materialabout.views.AboutView
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.developer.view.*
 
 class devfrag : Fragment() {

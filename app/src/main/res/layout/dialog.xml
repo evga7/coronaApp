@@ -2,6 +2,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
 
     android:layout_height="wrap_content"
@@ -10,19 +12,45 @@
     >
 
 
-
-
-
-    <TextView
-        android:id="@+id/dialogText"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#4C62DF"
-        android:gravity="center"
-        android:text="알　　림"
-        android:textColor="#ffffff"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:background="#5EABE8">
+
+        <ImageView
+            android:id="@+id/dialogCloseImage"
+            android:layout_width="25sp"
+            android:layout_height="40dp"
+
+
+            android:layout_marginStart="351dp"
+            android:layout_marginLeft="351dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/closeicon" />
+
+        <TextView
+            android:id="@+id/dialogText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="174dp"
+            android:layout_marginLeft="174dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="174dp"
+            android:layout_marginRight="174dp"
+            android:text="알　　림"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <View
         android:id="@+id/view3"
@@ -167,6 +195,8 @@
         android:layout_width="wrap_content"
         android:layout_height="30sp"
         android:layout_weight="1" />
+
+
 
 
 </LinearLayout>

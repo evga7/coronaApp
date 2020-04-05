@@ -53,7 +53,7 @@
                         android:id="@+id/imageView3"
                         android:layout_width="50sp"
                         android:layout_height="50sp"
-                        app:srcCompat="@drawable/mask3" />
+                        app:srcCompat="@drawable/koreaimage" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -80,6 +80,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/licensesLayout"
                     android:layout_width="match_parent"
                     android:layout_height="50sp"
                     android:layout_marginLeft="10sp"
@@ -87,16 +88,11 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="20sp"
-                        android:layout_height="20sp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:layout_marginLeft="20sp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/licensesicon" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -104,14 +100,9 @@
                             android:text="Licenses"
                             android:layout_marginLeft="30sp"
                             android:textStyle="bold"
-                            android:textSize="20sp"/>
+                            android:textSize="20sp"
+                            android:layout_gravity="center"/>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="30sp"
-                            android:text="0.1" />
-                    </LinearLayout>
 
 
 
@@ -125,8 +116,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="20sp"
-                        android:layout_height="20sp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:layout_marginLeft="20sp"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/manicon" />
@@ -160,11 +151,11 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="20sp"
-                        android:layout_height="20sp"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
                         android:layout_marginLeft="20sp"
                         android:layout_gravity="center"
-                        app:srcCompat="@mipmap/email" />
+                        app:srcCompat="@drawable/emailicon" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

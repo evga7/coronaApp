@@ -43,9 +43,9 @@
                     >
                     <ImageView
                         android:id="@+id/imageView2"
-                        android:layout_width="60sp"
+                        android:layout_width="50sp"
                         android:layout_height="50sp"
-                        app:srcCompat="@drawable/mask3"
+                        app:srcCompat="@drawable/koreaimage"
                         android:layout_gravity="center_horizontal"/>
                     <TextView
                         android:id="@+id/titleText"
@@ -519,35 +519,32 @@
                                 android:layout_marginEnd="233dp"
                                 android:layout_marginRight="233dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -560,35 +557,32 @@
                                 android:layout_marginEnd="86dp"
                                 android:layout_marginRight="86dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText6"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -601,37 +595,33 @@
                                 android:layout_marginEnd="137dp"
                                 android:layout_marginRight="137dp"
                                 android:background="#00ff0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText7"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText8"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText9"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
-
 
 
                             <LinearLayout
@@ -644,35 +634,32 @@
                                 android:layout_marginEnd="304dp"
                                 android:layout_marginRight="304dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText10"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText11"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText12"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
 
@@ -686,35 +673,32 @@
                                 android:layout_marginEnd="262dp"
                                 android:layout_marginRight="262dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText13"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText14"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText15"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -727,35 +711,32 @@
                                 android:layout_marginEnd="216dp"
                                 android:layout_marginRight="216dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText16"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText17"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText18"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -768,35 +749,32 @@
                                 android:layout_marginEnd="57dp"
                                 android:layout_marginRight="57dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText19"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText20"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText21"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -809,35 +787,32 @@
                                 android:layout_marginEnd="233dp"
                                 android:layout_marginRight="233dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText22"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText23"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText24"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -850,35 +825,32 @@
                                 android:layout_marginEnd="244dp"
                                 android:layout_marginRight="244dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText25"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText26"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText27"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -891,35 +863,32 @@
                                 android:layout_marginEnd="146dp"
                                 android:layout_marginRight="146dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText28"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText29"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText30"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -932,35 +901,32 @@
                                 android:layout_marginEnd="184dp"
                                 android:layout_marginRight="184dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText31"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText32"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText33"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -973,35 +939,32 @@
                                 android:layout_marginEnd="266dp"
                                 android:layout_marginRight="266dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText34"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText35"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText36"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -1014,35 +977,32 @@
                                 android:layout_marginEnd="233dp"
                                 android:layout_marginRight="233dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText37"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText38"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText39"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -1055,35 +1015,32 @@
                                 android:layout_marginEnd="293dp"
                                 android:layout_marginRight="293dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText40"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText41"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText42"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -1096,35 +1053,32 @@
                                 android:layout_marginEnd="113dp"
                                 android:layout_marginRight="113dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText43"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText44"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText45"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -1137,35 +1091,32 @@
                                 android:layout_marginEnd="165dp"
                                 android:layout_marginRight="165dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText46"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText47"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText48"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -1178,35 +1129,32 @@
                                 android:layout_marginEnd="285dp"
                                 android:layout_marginRight="285dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText49"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText50"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText51"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -1219,35 +1167,32 @@
                                 android:layout_marginEnd="113dp"
                                 android:layout_marginRight="113dp"
                                 android:background="#00FF0000"
+                                android:gravity="center"
+                                android:orientation="vertical"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <TextView
                                     android:id="@+id/cityText52"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText53"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#F00"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
 
                                 <TextView
                                     android:id="@+id/cityText54"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#000"
-                                    android:textSize="12dp"
-                                    />
+                                    android:textSize="12dp" />
                             </LinearLayout>
 
 
@@ -1255,12 +1200,14 @@
                                 android:id="@+id/textView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="87dp"
-                                android:layout_marginLeft="87dp"
-                                android:layout_marginTop="29dp"
-                                android:layout_marginEnd="57dp"
-                                android:layout_marginRight="57dp"
+
+                                android:layout_marginStart="64dp"
+                                android:layout_marginLeft="64dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="70dp"
+                                android:layout_marginRight="70dp"
                                 android:text="시도를 눌러서 상세현황을 확인할 수 있습니다."
+                                android:textStyle="bold"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />

@@ -152,8 +152,8 @@ class FragmentKorea : Fragment() {
             )
             koreaFragView.findViewById<LinearLayout>(layoutId).setOnClickListener{
                 val dialogView = layoutInflater.inflate(R.layout.dialog, null)
-                dialogView.dialogText.setText(Singleton.coList3!![i].city)
 
+                dialogView.dialogText.setText(Singleton.coList3!![i].city)
                 dialogView.dialogInfectNum.setText(Singleton.coList3!![i].num+"명")
 
                 dialogView.dialogBeforeNum.setText(Singleton.coList3!![i].before)
@@ -198,9 +198,12 @@ class FragmentKorea : Fragment() {
 
 
                 val builder = AlertDialog.Builder(this.context).setView(dialogView)
-                builder.show()
+                var buildershow = builder.show()
+                dialogView.dialogCloseImage.setOnClickListener{
+                    buildershow.dismiss()         }
 
             }
+
         }
 
 
