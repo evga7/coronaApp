@@ -142,6 +142,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         //addFragment(fragment)
+        //사용자에게 위치 권한 설정을 물어봄.
+        checkPermission()
 
     }
 
