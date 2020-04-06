@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CoronaApp</string>
+    <string name="find">여기서 찾기</string>
+    <string name="close"> X </string>
 </resources>

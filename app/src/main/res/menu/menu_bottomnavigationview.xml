@@ -3,21 +3,21 @@
 
     <item
         android:id="@+id/korea"
-        android:icon="@drawable/koricon"
-        android:title="한국" />
+        android:icon="@android:drawable/presence_online"
+        android:title="KOREA" />
     <item
         android:id="@+id/world"
-        android:icon="@drawable/bottom_world"
-        android:title="세계" />
+        android:icon="@android:drawable/ic_notification_clear_all"
+        android:title="WORLD" />
     <item
         android:id="@+id/mask"
-        android:icon="@drawable/infoicon"
-        android:title="마스크" />
+        android:icon="@drawable/mask3"
+        android:title="MASK" />
 
     <item
         android:id="@+id/help"
         android:icon="@android:drawable/btn_star_big_off"
-        android:title="더보기" />
+        android:title="HELP" />
 
 
 </menu>

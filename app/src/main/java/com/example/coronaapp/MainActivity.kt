@@ -1,23 +1,11 @@
 package com.example.coronaapp
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.help.FragmentHelp
-import com.example.coronaapp.help.fragment.devfrag
-import com.example.coronaapp.korea.FragmentKorea
-import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
-import com.example.coronaapp.world.FragmentWorld
-import com.example.coronaapp.world.WorldCrawling
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_korea.*
-import nl.joery.animatedbottombar.AnimatedBottomBar
-import java.io.IOException
-
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,9 +32,19 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // locationManager 를 이용하려면 메인액티비티에서 getSystemService 를 받아와야 함.
+        Singleton.locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        Singleton.Activity = this
+
+        // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김 ==> 마스크 쪽을 옮길 수도 있음.
+        if(!Singleton.isGpsOn()) {
+            showLocationDialog()
+        }
 
         content = findViewById(R.id.frameLayout)
 
@@ -122,8 +120,48 @@ class MainActivity : AppCompatActivity() {
 
 }
 
+    // 사용자에게 권한을 확인할 함수. onCreate 에서 호출, 마시멜로우 이상부터 확인해야함.
+    private fun checkPermission() {
+        // 실행한 기기의 안드로이드 버전이 마시멜로우 보다 낮으면 검사를 하지 않음.
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return
+        }
 
+        for(permission : String in permission_list) {
 
+            val chk = PermissionChecker.checkCallingOrSelfPermission(this@MainActivity, permission)
 
+            if(chk == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(permission_list,0)
+                break
+            }
+        }
+    }
 
+    // GPS 가 켜져 있지 않을 경우에 설정을 물어볼 다이얼로그
+    private fun showLocationDialog() {
+
+        val inflater = this@MainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.notice_dialog, null)
+
+        val locationDialog = AlertDialog.Builder(this@MainActivity)
+            .setMessage("\n\n마스크 재고 현황을 확인하기 위해서는\n" +
+                    "\"위치 정보\"를 사용으로 설정해주셔야 합니다." +
+                    "\n\n\n \"위치 정보\"를 설정해주시겠습니까? ")
+            .setPositiveButton("예") { dialog, which ->
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                startActivity(intent)
+            }
+            .setNeutralButton("아니요") { dialog, which ->
+            }
+            .create()
+
+        // 여백 눌러도 창 안없어지게
+        locationDialog.setCancelable(false)
+        locationDialog.setView(view)
+        locationDialog.show()
+    }
+
+}
 
