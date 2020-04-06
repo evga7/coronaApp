@@ -22,6 +22,7 @@ import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
 import com.example.coronaapp.world.FragmentWorld
 import com.example.coronaapp.world.WorldCrawling
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.naver.maps.geometry.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
 import nl.joery.animatedbottombar.AnimatedBottomBar
 import java.io.IOException
@@ -104,9 +105,22 @@ class MainActivity : AppCompatActivity() {
                 }
                 if (newTab.id == R.id.mask)
                 {
-                    Singleton.backframent=0
-                    currentfragment = FragmentMask()
-                    addFragment(currentfragment)
+//                    Singleton.backframent=0
+//                    currentfragment = FragmentMask()
+//                    addFragment(currentfragment)
+                    if(Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
+                        // 사용자 인근 마스크 판매점 얻고 맵에 그림
+                        Singleton.search = false
+                        Singleton.getPharmacyData(0.0,0.0)
+                    }
+                    else { // GPS 가 켜져 있지 않은 경우
+                        // 강남역 좌표
+                        Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
+                        Singleton.fragmentMask.setLatLng(Singleton.userLatLng)
+                        Singleton.fragmentMask.setPharmacyArray(null)
+                        addFragment(Singleton.fragmentMask)
+                    }
+
                 }
                 if (newTab.id == R.id.help)
                 {
