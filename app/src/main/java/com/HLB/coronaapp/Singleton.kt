@@ -52,28 +52,32 @@ class Singleton {
 
         fun getPharmacyData(latitude:Double, longitude:Double, context: Context) {
 
+            progressCircle.show(context)
+
             var lat: Double = latitude
             var lng: Double = longitude
 
             if(isGpsOn()) {
                 // 사용자 위치 얻기
                 if(!search) {
-                    gpsLocation =
-                        GpsLocation(Activity)
-                    userLatLng = LatLng(
-                        gpsLocation!!.latitude, gpsLocation!!.longitude)
-                    lat = userLatLng.latitude
-                    lng = userLatLng.longitude
+                    while(lat == 0.0 && lng == 0.0) {
+
+                        gpsLocation =
+                            GpsLocation(Activity)
+                        userLatLng = LatLng(
+                            gpsLocation!!.latitude, gpsLocation!!.longitude)
+                        lat = userLatLng.latitude
+                        lng = userLatLng.longitude
+
+                    }
                     // Log.d("isGpsOn&&!search", " GPS 정보를 가져옵니다!!!!!!!!!!! ${lat}, ${lng}")
                 }
             }
 
             class GetPharmacy: AsyncTask<Void, Void, Void>() {
-                val dialogContext : Context = context
 
                 override fun onPreExecute() {
                     super.onPreExecute()
-                    progressCircle.show(dialogContext)
                 }
                 // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
                 override fun doInBackground(vararg params: Void?): Void? {
