@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.MainActivity
 import com.example.coronaapp.R
+import com.example.coronaapp.Singleton
 import com.example.coronaapp.help.profile.DevProfile1
 import com.example.coronaapp.help.profile.DevProfile2
 import com.example.coronaapp.help.profile.DevProfile3
@@ -13,6 +16,7 @@ import kotlinx.android.synthetic.main.developer.view.*
 
 class devfrag : Fragment() {
 
+    var mBackWait:Long = 0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var devview = inflater.inflate(R.layout.developer, container, false)
         devview.devHong.setOnClickListener{
@@ -20,6 +24,7 @@ class devfrag : Fragment() {
             val fragmentManager = fragmentManager
             val transaction =
                 fragmentManager!!.beginTransaction()
+            Singleton.backframent=1
             transaction.replace(R.id.frameLayout,fragment,fragment.javaClass.simpleName)?.commit()
             transaction.addToBackStack(null)
         }
@@ -28,6 +33,7 @@ class devfrag : Fragment() {
             val fragmentManager = fragmentManager
             val transaction =
                 fragmentManager!!.beginTransaction()
+            Singleton.backframent=1
             transaction.replace(R.id.frameLayout,fragment,fragment.javaClass.simpleName)?.commit()
             transaction.addToBackStack(null)
         }
@@ -36,6 +42,7 @@ class devfrag : Fragment() {
             val fragmentManager = fragmentManager
             val transaction =
                 fragmentManager!!.beginTransaction()
+            Singleton.backframent=1
             transaction.replace(R.id.frameLayout,fragment,fragment.javaClass.simpleName)?.commit()
             transaction.addToBackStack(null)
         }
@@ -45,3 +52,4 @@ class devfrag : Fragment() {
 
 
 }
+

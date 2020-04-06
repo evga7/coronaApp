@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.MainActivity
 import com.example.coronaapp.R
+import com.example.coronaapp.Singleton
 import com.example.coronaapp.help.fragment.devfrag
 import com.example.coronaapp.help.fragment.licensesfrag
 import kotlinx.android.synthetic.main.fragment_help.*
@@ -23,6 +25,7 @@ class FragmentHelp : Fragment()  {
             val fragment = devfrag()
             val fragmentManager = fragmentManager
             val transaction =  fragmentManager!!.beginTransaction()
+            Singleton.backframent=1
             transaction.replace(R.id.frameLayout,fragment,fragment.javaClass.simpleName)?.commit()
             transaction.addToBackStack(null)
 
@@ -31,6 +34,7 @@ class FragmentHelp : Fragment()  {
             val fragment = licensesfrag()
             val fragmentManager = fragmentManager
             val transaction =  fragmentManager!!.beginTransaction()
+            Singleton.backframent=1
             transaction.replace(R.id.frameLayout,fragment,fragment.javaClass.simpleName)?.commit()
             transaction.addToBackStack(null)
         }

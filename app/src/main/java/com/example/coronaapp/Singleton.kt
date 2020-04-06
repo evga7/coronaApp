@@ -1,5 +1,6 @@
 package com.example.coronaapp
 
+import androidx.fragment.app.Fragment
 import com.example.coronaapp.korea.FragmentKorea
 import com.example.coronaapp.world.Information
 
@@ -15,5 +16,6 @@ class Singleton {
         var coList: ArrayList<FragmentKorea.Item>?=null
         var coList2: ArrayList<FragmentKorea.Item>?=null
         var coList3: ArrayList<FragmentKorea.CityItem> ?=null
+        var backframent = 0
     }
 }
