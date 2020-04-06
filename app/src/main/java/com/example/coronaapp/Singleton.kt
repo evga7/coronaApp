@@ -1,9 +1,19 @@
 package com.example.coronaapp
 
+import android.location.LocationManager
+import android.os.AsyncTask
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.Mask.FragmentMask
+import com.example.coronaapp.Mask.GpsLocation
+import com.example.coronaapp.Mask.Pharmacy
 import com.example.coronaapp.korea.FragmentKorea
 import com.example.coronaapp.world.Information
-
+import com.naver.maps.geometry.LatLng
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.URL
 
 
 class Singleton {

@@ -1,11 +1,30 @@
 package com.example.coronaapp
 
+import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.LocationManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
+import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
+import com.example.coronaapp.Mask.FragmentMask
+import com.example.coronaapp.help.FragmentHelp
+import com.example.coronaapp.korea.FragmentKorea
+import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
+import com.example.coronaapp.world.FragmentWorld
+import com.example.coronaapp.world.WorldCrawling
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
+import nl.joery.animatedbottombar.AnimatedBottomBar
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +33,10 @@ class MainActivity : AppCompatActivity() {
 
     var currentfragment=Fragment()
     var mBackWait:Long = 0
-
+    private var permission_list = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
     override fun onBackPressed() {
         if (Singleton.backframent==0) {
             if (System.currentTimeMillis() - mBackWait >= 2000) {
@@ -70,7 +92,6 @@ class MainActivity : AppCompatActivity() {
                     Singleton.backframent=0
                     if(Singleton.coronaList == null){
                         try {
-                            Log.d("크롤링","onCreate")
                             WorldCrawling(this@MainActivity,this@MainActivity,currentfragment).execute("https://www.worldometers.info/coronavirus/")
                         }catch (e : IOException) {
                             e.printStackTrace()
@@ -118,7 +139,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-}
+
 
     // 사용자에게 권한을 확인할 함수. onCreate 에서 호출, 마시멜로우 이상부터 확인해야함.
     private fun checkPermission() {

@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/korea"
-        android:icon="@android:drawable/presence_online"
+        android:icon="@drawable/koricon"
         android:title="KOREA" />
     <item
         android:id="@+id/world"
-        android:icon="@android:drawable/ic_notification_clear_all"
+        android:icon="@drawable/bottom_world"
         android:title="WORLD" />
     <item
         android:id="@+id/mask"
