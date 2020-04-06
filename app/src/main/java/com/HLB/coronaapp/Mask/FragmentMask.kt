@@ -1,4 +1,4 @@
-package com.example.coronaapp.Mask
+package com.HLB.coronaapp.Mask
 
 import android.app.AlertDialog
 import android.content.Context
@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
-import com.example.coronaapp.Singleton
+import com.HLB.coronaapp.Singleton
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.geometry.LatLngBounds
 import com.naver.maps.map.*

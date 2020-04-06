@@ -1,4 +1,4 @@
-package com.example.coronaapp.help
+package com.HLB.coronaapp.help
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.MainActivity
+import com.HLB.coronaapp.MainActivity
 import com.example.coronaapp.R
-import com.example.coronaapp.Singleton
-import com.example.coronaapp.help.fragment.devfrag
-import com.example.coronaapp.help.fragment.licensesfrag
+import com.HLB.coronaapp.Singleton
+import com.HLB.coronaapp.help.fragment.devfrag
+import com.HLB.coronaapp.help.fragment.licensesfrag
 import kotlinx.android.synthetic.main.fragment_help.*
 import kotlinx.android.synthetic.main.fragment_help.view.*
 import kotlinx.android.synthetic.main.fragment_help.view.licensesLayout

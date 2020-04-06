@@ -1,4 +1,4 @@
-package com.example.coronaapp.korea
+package com.HLB.coronaapp.korea
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -15,8 +15,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
-import com.example.coronaapp.Singleton
-import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
+import com.HLB.coronaapp.Singleton
+import com.HLB.coronaapp.korea.koreaAsync.koreaAsyncMainData
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData

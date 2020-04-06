@@ -1,4 +1,4 @@
-package com.example.coronaapp.world
+package com.HLB.coronaapp.world
 
 import android.graphics.Color
 import android.text.Spannable
@@ -62,7 +62,7 @@ class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter
         val totalDeaths= itemView.totalDeaths
         val totalRecovered = itemView.totalRecovered
 
-        fun bind(listInfo:Information){
+        fun bind(listInfo: Information){
             number?.text = listInfo.num.toString()
             country?.text = listInfo.country
             totalCases?.text = listInfo.totalCases

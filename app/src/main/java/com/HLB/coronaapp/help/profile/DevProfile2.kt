@@ -1,4 +1,4 @@
-package com.example.coronaapp.help.profile
+package com.HLB.coronaapp.help.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.example.coronaapp.R
 import com.vansuita.materialabout.builder.AboutBuilder
 import com.vansuita.materialabout.views.AboutView
 
-class DevProfile1: Fragment() {
+class DevProfile2: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,12 +21,12 @@ class DevProfile1: Fragment() {
         view1 = AboutBuilder.with(this.context)
             .setPhoto(R.mipmap.profile_picture)
             .setCover(R.mipmap.profile_cover)
-            .setName("홍원표")
+            .setName("이영남")
             .setSubTitle("Sejong University")
-            .setBrief("초보개발자이자 취준생 입니다.")
+            .setBrief("소개")
             .setAppIcon(R.mipmap.ic_launcher)
-            .addGitHubLink("evga7")
-            .addEmailLink("evga7@naver.com")
+            .addGitHubLink("")
+            .addEmailLink("")
             .setWrapScrollView(true)
             .setLinksAnimated(true)
             .setShowAsCard(true)

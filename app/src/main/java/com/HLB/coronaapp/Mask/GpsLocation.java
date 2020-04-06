@@ -1,4 +1,4 @@
-package com.example.coronaapp.Mask;
+package com.HLB.coronaapp.Mask;
 
 import android.app.Service;
 import android.location.LocationListener;

@@ -1,4 +1,4 @@
-package com.example.coronaapp
+package com.HLB.coronaapp
 
 import android.Manifest
 import android.content.Context
@@ -15,12 +15,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.Mask.FragmentMask
-import com.example.coronaapp.help.FragmentHelp
-import com.example.coronaapp.korea.FragmentKorea
-import com.example.coronaapp.korea.koreaAsync.koreaAsyncMainData
-import com.example.coronaapp.world.FragmentWorld
-import com.example.coronaapp.world.WorldCrawling
+import com.HLB.coronaapp.Mask.FragmentMask
+import com.HLB.coronaapp.help.FragmentHelp
+import com.HLB.coronaapp.korea.FragmentKorea
+import com.HLB.coronaapp.korea.koreaAsync.koreaAsyncMainData
+import com.HLB.coronaapp.world.FragmentWorld
+import com.HLB.coronaapp.world.WorldCrawling
+import com.example.coronaapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.naver.maps.geometry.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
     override fun onBackPressed() {
-        if (Singleton.backframent==0) {
+        if (Singleton.backframent ==0) {
             if (System.currentTimeMillis() - mBackWait >= 2000) {
                 mBackWait = System.currentTimeMillis()
                 Toast.makeText(this, "뒤로가기 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
@@ -81,16 +82,20 @@ class MainActivity : AppCompatActivity() {
             ): Boolean {
                 if (newTab.id == R.id.korea) {
                     currentfragment = FragmentKorea.Companion.newInstance()
-                    Singleton.backframent=0
+                    Singleton.backframent =0
                     addFragment(currentfragment)
                 }
                 if (newTab.id == R.id.world)
                 {
                     currentfragment = FragmentWorld()
-                    Singleton.backframent=0
+                    Singleton.backframent =0
                     if(Singleton.coronaList == null){
                         try {
-                            WorldCrawling(this@MainActivity,this@MainActivity,currentfragment).execute("https://www.worldometers.info/coronavirus/")
+                            WorldCrawling(
+                                this@MainActivity,
+                                this@MainActivity,
+                                currentfragment
+                            ).execute("https://www.worldometers.info/coronavirus/")
                         }catch (e : IOException) {
                             e.printStackTrace()
                         }
@@ -102,17 +107,22 @@ class MainActivity : AppCompatActivity() {
                 }
                 if (newTab.id == R.id.mask)
                 {
-                    Singleton.backframent=0
+                    Singleton.backframent =0
 
                     if(Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
                         // 사용자 인근 마스크 판매점 얻고 맵에 그림
                         Singleton.search = false
-                        Singleton.getPharmacyData(0.0,0.0)
+                        Singleton.getPharmacyData(
+                            0.0,
+                            0.0
+                        )
                     }
                     else { // GPS 가 켜져 있지 않은 경우
                         // 강남역 좌표
                         Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
-                        Singleton.fragmentMask.setLatLng(Singleton.userLatLng)
+                        Singleton.fragmentMask.setLatLng(
+                            Singleton.userLatLng
+                        )
                         Singleton.fragmentMask.setPharmacyArray(null)
                         addFragment(Singleton.fragmentMask)
                     }
@@ -120,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 if (newTab.id == R.id.help)
                 {
-                    Singleton.backframent=0
+                    Singleton.backframent =0
                     currentfragment = FragmentHelp()
                     addFragment(currentfragment)
                 }
@@ -133,8 +143,12 @@ class MainActivity : AppCompatActivity() {
         val fragment = FragmentKorea.Companion.newInstance()
 
         if (Singleton.coList == null){
-            currentfragment=FragmentKorea()
-            koreaAsyncMainData(this,this,fragment).execute("http://ncov.mohw.go.kr")
+            currentfragment= FragmentKorea()
+            koreaAsyncMainData(
+                this,
+                this,
+                fragment
+            ).execute("http://ncov.mohw.go.kr")
         }
 
         //addFragment(fragment)

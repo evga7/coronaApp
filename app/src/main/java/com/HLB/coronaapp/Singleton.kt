@@ -1,14 +1,14 @@
-package com.example.coronaapp
+package com.HLB.coronaapp
 
 import android.location.LocationManager
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.example.coronaapp.Mask.FragmentMask
-import com.example.coronaapp.Mask.GpsLocation
-import com.example.coronaapp.Mask.Pharmacy
-import com.example.coronaapp.korea.FragmentKorea
-import com.example.coronaapp.world.Information
+import com.HLB.coronaapp.Mask.FragmentMask
+import com.HLB.coronaapp.Mask.GpsLocation
+import com.HLB.coronaapp.Mask.Pharmacy
+import com.HLB.coronaapp.korea.FragmentKorea
+import com.HLB.coronaapp.world.Information
+import com.example.coronaapp.R
 import com.naver.maps.geometry.LatLng
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -55,7 +55,8 @@ class Singleton {
                 if(!search) {
                     gpsLocation =
                         GpsLocation(Activity)
-                    userLatLng = LatLng(gpsLocation!!.latitude, gpsLocation!!.longitude)
+                    userLatLng = LatLng(
+                        gpsLocation!!.latitude, gpsLocation!!.longitude)
                     lat = userLatLng.latitude
                     lng = userLatLng.longitude
                     // Log.d("isGpsOn&&!search", " GPS 정보를 가져옵니다!!!!!!!!!!! ${lat}, ${lng}")
@@ -149,20 +150,27 @@ class Singleton {
                 // doInBackground 작업이 끝나면 실행되는 메서드.
                 override fun onPostExecute(result: Void?) {
                     super.onPostExecute(result)
-                    fragmentMask.setLatLng(userLatLng)
-                    fragmentMask.setPharmacyArray(pharmacy)
+                    fragmentMask.setLatLng(
+                        userLatLng
+                    )
+                    fragmentMask.setPharmacyArray(
+                        pharmacy
+                    )
 
                     // Log.d("order", "doInBackground 끝!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ${lat}, ${lng}")
 
                     if (!search) {
                         Activity.supportFragmentManager.beginTransaction()
                             //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-                            .replace(R.id.frameLayout, fragmentMask, fragmentMask.javaClass.simpleName)
+                            .replace(
+                                R.id.frameLayout,
+                                fragmentMask, fragmentMask.javaClass.simpleName)
                             //.commit() // 네비게이션 누르고 바로 최근 앱 버튼을 눌렀을 때 에러가 발생할 수 있음.
                             .commitAllowingStateLoss() // 위의 에러를 이 줄로써 해결함.
                     }
                     else {
-                        fragmentMask.onMapReady(fragmentMask.getNaverMap())
+                        fragmentMask.onMapReady(
+                            fragmentMask.getNaverMap())
                         search = false
                     }
                 }

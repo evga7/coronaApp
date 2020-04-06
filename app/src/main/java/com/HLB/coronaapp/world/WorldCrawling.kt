@@ -1,4 +1,4 @@
-package com.example.coronaapp.world
+package com.HLB.coronaapp.world
 
 import android.content.Context
 import android.os.AsyncTask
@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
-import com.example.coronaapp.Singleton
+import com.HLB.coronaapp.Singleton
 import org.jsoup.Jsoup
 import java.io.IOException
 import kotlin.collections.ArrayList
@@ -106,7 +106,13 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
                     newDeaths += "+0"
                 }
 
-                val total = Information(null,country,totalCases + '\n' + newCases,totalDeaths + '\n' + newDeaths, totalRecovered)
+                val total = Information(
+                    null,
+                    country,
+                    totalCases + '\n' + newCases,
+                    totalDeaths + '\n' + newDeaths,
+                    totalRecovered
+                )
 
                 infoList.add(total)
 
@@ -150,7 +156,15 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
                 infoList[i].num = i+1
             }
 
-            infoList.add(Information(0,(countCnt - 2).toString(),totalCasesSum,totalDeathsSum,totalRecoveredSum))
+            infoList.add(
+                Information(
+                    0,
+                    (countCnt - 2).toString(),
+                    totalCasesSum,
+                    totalDeathsSum,
+                    totalRecoveredSum
+                )
+            )
 
         }catch (e : IOException) {
             e.printStackTrace()

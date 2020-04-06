@@ -29,15 +29,19 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="nwpgun3oiw" />
 
-        <activity android:name=".MainActivity"
+        <activity android:name="com.HLB.coronaapp.SplashActivity"
+            android:theme="@style/SplashTheme"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.HLB.coronaapp.MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"
+            />
     </application>
 
 </manifest>

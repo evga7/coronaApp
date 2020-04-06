@@ -1,4 +1,4 @@
-package com.example.coronaapp.world
+package com.HLB.coronaapp.world
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coronaapp.R
-import com.example.coronaapp.Singleton
+import com.HLB.coronaapp.Singleton
 import kotlinx.android.synthetic.main.fragment_world.view.*
 
 class FragmentWorld : Fragment() {
@@ -27,11 +27,17 @@ class FragmentWorld : Fragment() {
         // tablelayout total data add
         if (Singleton.coronaFlag == false){
             Singleton.coronaFlag = true
-            Singleton.countrySum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.country
-            Singleton.totalCasesSum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalCases
-            Singleton.totalDeathsSum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalDeaths
-            Singleton.totalRecoveredSum = Singleton.coronaList?.get(Singleton.coronaList?.size!! - 1)!!.totalRecovered
-            Singleton.coronaList?.remove(Singleton.coronaList?.get(Singleton.coronaList?.size!!-1)!!)
+            Singleton.countrySum = Singleton.coronaList?.get(
+                Singleton.coronaList?.size!! - 1)!!.country
+            Singleton.totalCasesSum = Singleton.coronaList?.get(
+                Singleton.coronaList?.size!! - 1)!!.totalCases
+            Singleton.totalDeathsSum = Singleton.coronaList?.get(
+                Singleton.coronaList?.size!! - 1)!!.totalDeaths
+            Singleton.totalRecoveredSum = Singleton.coronaList?.get(
+                Singleton.coronaList?.size!! - 1)!!.totalRecovered
+            Singleton.coronaList?.remove(
+                Singleton.coronaList?.get(
+                    Singleton.coronaList?.size!!-1)!!)
         }
 
         rootView.a.text = Singleton.countrySum
@@ -44,7 +50,8 @@ class FragmentWorld : Fragment() {
         val worldRecyclerView = rootView.findViewById(R.id.worldrecyclerview) as RecyclerView
         worldRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
-            adapter = WorldAdapter(Singleton.coronaList!!)
+            adapter =
+                WorldAdapter(Singleton.coronaList!!)
 
         }
 

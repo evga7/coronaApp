@@ -1,13 +1,13 @@
-package com.example.coronaapp.korea.koreaAsync
+package com.HLB.coronaapp.korea.koreaAsync
 
 import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
-import com.example.coronaapp.Singleton
-import com.example.coronaapp.korea.FragmentKorea
-import com.example.coronaapp.world.CustomProgressCircle
+import com.HLB.coronaapp.Singleton
+import com.HLB.coronaapp.korea.FragmentKorea
+import com.HLB.coronaapp.world.CustomProgressCircle
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements

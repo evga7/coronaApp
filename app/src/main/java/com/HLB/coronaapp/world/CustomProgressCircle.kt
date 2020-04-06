@@ -1,4 +1,4 @@
-package com.example.coronaapp.world
+package com.HLB.coronaapp.world
 
 import android.app.Dialog
 import android.content.Context
