@@ -28,10 +28,7 @@ import kotlinx.android.synthetic.main.fragment_korea.view.*
 
 class FragmentKorea : Fragment() {
 
-    val weburl = "http://ncov.mohw.go.kr"
-    val TAG = "Main Activity"
 
-    val infoMainText = String()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,19 +42,8 @@ class FragmentKorea : Fragment() {
     companion object {
         fun newInstance(): FragmentKorea {
             val FragmentKorea = FragmentKorea()
-
             val args = Bundle()
             FragmentKorea.arguments = args
-
-//            if (Singleton.coList==null)
-//                koreaAsyncMainData().execute("http://ncov.mohw.go.kr").get()
-            /*
-            if (Singleton.coList2==null)
-                koreaAsyncCityMap().execute("http://ncov.mohw.go.kr").get()
-            if (Singleton.coList3==null)
-                koreaAsyncCityData().execute("http://ncov.mohw.go.kr").get()
-
-             */
             return FragmentKorea
         }
     }

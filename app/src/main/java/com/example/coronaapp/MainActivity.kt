@@ -177,7 +177,7 @@ class MainActivity : AppCompatActivity() {
     private fun showLocationDialog() {
 
         val inflater = this@MainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.notice_dialog, null)
+        val view = inflater.inflate(R.layout.main_notice_dialog, null)
 
         val locationDialog = AlertDialog.Builder(this@MainActivity)
                 locationDialog.setMessage("\n\n마스크 재고 현황을 확인하기 위해서는\n" +
