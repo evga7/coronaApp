@@ -30,7 +30,6 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
-    private var lastClickedTime: Long = 0L
 
     var currentfragment=Fragment()
     var mBackWait:Long = 0
