@@ -7,7 +7,7 @@
         android:title="한국" />
     <item
         android:id="@+id/world"
-        android:icon="@android:drawable/ic_notification_clear_all"
+        android:icon="@drawable/bottom_world"
         android:title="세계" />
     <item
         android:id="@+id/mask"

@@ -64,7 +64,7 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
                         }
 
                         val day = infoSplit[3].substring(0, infoSplit[3].length - 1) // 날짜
-                        val time = infoSplit[5].substring(0, infoSplit[2].length - 1) // 시간
+                        val time = infoSplit[5].substring(0, infoSplit[2].length) // 시간
                         val worldTime = infoSplit[6] //세계표준시간
 
                         Singleton.worldDayInfo = "   ( " + year + ". " + month + ". " + day + "  " + time + " " + "세계표준시간" + " )"
