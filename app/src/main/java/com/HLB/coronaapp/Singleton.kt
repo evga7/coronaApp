@@ -50,7 +50,7 @@ class Singleton {
 
         //공공데이터 정보를 얻어옴.
 
-        fun getPharmacyData(latitude:Double, longitude:Double,act: AppCompatActivity, context: Context) {
+        fun getPharmacyData(latitude:Double, longitude:Double, context: Context) {
 
             var lat: Double = latitude
             var lng: Double = longitude
@@ -70,7 +70,6 @@ class Singleton {
 
             class GetPharmacy: AsyncTask<Void, Void, Void>() {
                 val dialogContext : Context = context
-                val currentActivity:AppCompatActivity = act
 
                 override fun onPreExecute() {
                     super.onPreExecute()

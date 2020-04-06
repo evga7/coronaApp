@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                         Singleton.search = false
                         Singleton.getPharmacyData(
                             0.0,
-                            0.0,this@MainActivity,this@MainActivity
+                            0.0,this@MainActivity
                         )
                     }
                     else { // GPS 가 켜져 있지 않은 경우
