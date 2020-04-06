@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
-import kotlinx.android.synthetic.main.fragment_korea.view.*
 import org.jsoup.Jsoup
 import java.io.IOException
 import kotlin.collections.ArrayList
@@ -28,17 +27,12 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
 
         try{
             val doc = Jsoup.connect(params[0]).get()
-            //val data = doc.select("#main_table_countries > tbody > tr")
-            //val data = doc.select("#main_table_countries_yesterday > tbody > tr")
             val data = doc.select("#main_table_countries_today > tbody > tr")
 
             val dayInfo = doc.select("div.content-inner")
 
-            //Log.d("데이터2",data2.text())
-
             var cnt = 0
             for (item in dayInfo.select("div")){
-                //Log.d("데이터2",item.text())
                 if (cnt == 2){
                     item.text().let { info ->
                         val infoSplit = info.split(" ")
@@ -159,7 +153,6 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
             infoList.add(Information(0,(countCnt - 2).toString(),totalCasesSum,totalDeathsSum,totalRecoveredSum))
 
         }catch (e : IOException) {
-            Log.d("안됨","안딤")
             e.printStackTrace()
         }
 
@@ -177,7 +170,6 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
         progressCircle.dialog.dismiss()
 
         currentActivity.supportFragmentManager.beginTransaction()
-            //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
             .commit()
     }

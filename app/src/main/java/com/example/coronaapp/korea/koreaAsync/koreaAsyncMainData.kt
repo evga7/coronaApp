@@ -13,9 +13,9 @@ import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
 class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment): AsyncTask<String, String, ArrayList<FragmentKorea.Item>>(){ //input, progress update type, result type
-    //private var result : String = ""
+
     val weburl = "http://ncov.mohw.go.kr"
-    val TAG = "Main Activity"
+
     val progressCircle = CustomProgressCircle()
     val dialogContext : Context = context
     val currentActivity:AppCompatActivity = act
@@ -97,9 +97,7 @@ class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment
         {
             val elts3: Elements = doc.select("div#map_city"+i)
             val cityInfo = elts3.select("ul.cityinfo")
-            //val tit = cityInfo.select("span.tit")
             val num = cityInfo.select("span.num")
-            //val before_tit = cityInfo.select("span.sub_tit.red")
             val before_num = cityInfo.select("span.sub_num.red")
             val percentage = elts3.select("p.citytit")
             temp3.add(FragmentKorea.CityItem(elts3.select("h4.cityname").text(),num[0].text(),before_num.text(),num[1].text(),num[2].text(),num[3].text(),percentage.text()))
@@ -108,7 +106,6 @@ class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment
         Singleton.coList3=temp3
 
         return temp
-        //return doc.title()
     }
 
     override fun onPostExecute(result: ArrayList<FragmentKorea.Item>) {
@@ -122,5 +119,4 @@ class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment
             .commit()
 
     }
-    data class Item(val title: String, val num:String, val before: String)
 }
