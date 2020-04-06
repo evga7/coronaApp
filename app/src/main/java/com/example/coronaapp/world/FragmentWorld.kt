@@ -1,36 +1,21 @@
 package com.example.coronaapp.world
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coronaapp.R
 import com.example.coronaapp.Singleton
 import kotlinx.android.synthetic.main.fragment_world.view.*
-import java.io.IOException
 
 class FragmentWorld : Fragment() {
     val url = "https://www.worldometers.info/coronavirus/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        if(Singleton.coronaList == null){
-//            val crawlingData = WorldCrawling(mcontext).execute(url)
-//            try {
-//                //Singleton.coronaList= crawlingData.get()
-//                Log.d("크롤링","onCreate")
-//                //Singleton.coronaList = WorldCrawling(mcontext).execute(url).get()
-//            }catch (e : IOException) {
-//                e.printStackTrace()
-//            }
-//        }
 
     }
 
@@ -60,10 +45,7 @@ class FragmentWorld : Fragment() {
         worldRecyclerView.run {
             layoutManager = LinearLayoutManager(activity)
             adapter = WorldAdapter(Singleton.coronaList!!)
-            // 구분선
-//            addItemDecoration(
-//                DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
-//            )
+
         }
 
         return rootView
