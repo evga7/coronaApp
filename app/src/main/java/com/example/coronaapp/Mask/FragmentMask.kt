@@ -128,22 +128,28 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
         textInfo.setText(info)
 
-        stockInfoClose.setOnClickListener(object : View.OnClickListener{
+        stockInfoClose.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 stockInfo.visibility = View.INVISIBLE
             }
         })
 
-        stockInfo.setOnClickListener(object : View.OnClickListener{
+        stockInfo.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
             }
         })
 
-        searchButton.setOnClickListener(object : View.OnClickListener{
+        searchButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 Singleton.getPharmacyData(userChoice.latitude, userChoice.longitude)
-                searchButton.visibility = View.INVISIBLE
-                stockInfo.visibility = View.VISIBLE
+                search.visibility = View.INVISIBLE
+                choiceMarker.map = null
+            }
+        })
+
+        searchCloseButton.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                search.visibility = View.INVISIBLE
                 choiceMarker.map = null
             }
         })
@@ -152,7 +158,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
             if(choiceMarker.map != null) {
                 choiceMarker.map = null
-                searchButton.visibility = View.INVISIBLE
+                search.visibility = View.INVISIBLE
             }
             true
         }
@@ -211,7 +217,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
                 cameraUpdate = CameraUpdate.scrollAndZoomTo(LatLng(coord.latitude, coord.longitude), 14.0)
                     .animate(CameraAnimation.Linear)
                 navermap.moveCamera(cameraUpdate)
-                searchButton.visibility = View.VISIBLE
+                search.visibility = View.VISIBLE
                 userChoice = LatLng(coord.latitude, coord.longitude)
                 choiceMarker.iconTintColor = Color.rgb(94, 171, 232)
                 choiceMarker.position = LatLng(latitude, longitude)
@@ -234,7 +240,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         uiSettings.isLocationButtonEnabled = true
 
         // 사용자로부터 받은 위치를 지도 실행시 보이는 최초 위치로 둠.
-        cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 13.0)
+        cameraUpdate = CameraUpdate.scrollAndZoomTo(locationOverlay.position, 14.0)
         naverMap.moveCamera(cameraUpdate)
 
         // 카메라 범위를 대한민국으로 한정
