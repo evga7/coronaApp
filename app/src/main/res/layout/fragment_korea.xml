@@ -410,7 +410,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="검사 현황"
+                                    android:text="검사 현황(누적)"
                                     android:textSize="15dp"
                                     android:textStyle="bold"
                                     android:textColor="#ffffff"/>

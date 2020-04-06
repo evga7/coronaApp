@@ -76,11 +76,9 @@ class FragmentKorea : Fragment() {
         koreaFragView.careText3.setText(Singleton.coList!![2].before)
         koreaFragView.deadText1.setText(Singleton.coList!![3].title)
         koreaFragView.deadText2.setText(Singleton.coList!![3].num)
-
         koreaFragView.deadText3.setText(Singleton.coList!![3].before)
         koreaFragView.todayInfedctText.setText(Singleton.coList!![11].title)
         koreaFragView.todayInfedctNumText.setText(Singleton.coList!![11].num)
-
         koreaFragView.todayCureText.setText(Singleton.coList!![12].title)
         koreaFragView.todayCureNumText.setText(Singleton.coList!![12].num)
         var piechart : PieChart
@@ -119,13 +117,13 @@ class FragmentKorea : Fragment() {
         piechart.animateY(2000,Easing.EaseOutQuad)
 
 
-        koreaFragView.currentInfoText1.setText(Singleton.coList!![8].title)
+        koreaFragView.currentInfoText1.setText(Singleton.coList!![8].title.substringAfter(" "))
         koreaFragView.currentInfoText2.setText(Singleton.coList!![8].num)
 
-        koreaFragView.currentInfoText3.setText(Singleton.coList!![9].title)
+        koreaFragView.currentInfoText3.setText(Singleton.coList!![9].title.substringAfter(" "))
         koreaFragView.currentInfoText4.setText(Singleton.coList!![9].num)
 
-        koreaFragView.currentInfoText5.setText(Singleton.coList!![10].title)
+        koreaFragView.currentInfoText5.setText(Singleton.coList!![10].title.substringAfter(" "))
         koreaFragView.currentInfoText6.setText(Singleton.coList!![10].num)
 
         val textView = TextView(koreaFragView.context)

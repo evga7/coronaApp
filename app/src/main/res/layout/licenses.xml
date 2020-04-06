@@ -201,7 +201,7 @@ https://github.com/jrvansuita/MaterialAbout\n\n " />
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Icon made By  By Pixel perfect from www.flaticon.com" />
+                        android:text="Icon made By Pixel perfect from www.flaticon.com" />
 
 
                 </LinearLayout>
