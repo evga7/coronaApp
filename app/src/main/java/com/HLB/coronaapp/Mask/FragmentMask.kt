@@ -142,6 +142,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         searchButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 Singleton.getPharmacyData(userChoice.latitude, userChoice.longitude,mContext)
+                stockInfo.visibility = View.VISIBLE
                 search.visibility = View.INVISIBLE
                 choiceMarker.map = null
             }

@@ -69,11 +69,11 @@
 
         <ImageView
             android:id="@+id/searchCloseButton"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
             android:layout_marginLeft="5dp"
             android:layout_gravity="center|end"
-            app:srcCompat="@drawable/redclose4" />
+            app:srcCompat="@drawable/closeicon" />
 
     </LinearLayout>
 
@@ -90,10 +90,10 @@
             app:srcCompat="@drawable/stock7" />
         <ImageView
             android:id="@+id/stockInfoClose"
-            android:layout_width="12dp"
-            android:layout_height="10dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             android:layout_gravity="top|end"
-            android:layout_margin="9dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/closeicon"/>
     </FrameLayout>
 
