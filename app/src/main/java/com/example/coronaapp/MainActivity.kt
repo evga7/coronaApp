@@ -112,8 +112,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     else { // GPS 가 켜져 있지 않은 경우
                         // 강남역 좌표
-                        Singleton.userLatLng =
-                            com.naver.maps.geometry.LatLng(37.49796323, 127.02779767)
+                        Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
                         Singleton.fragmentMask.setLatLng(Singleton.userLatLng)
                         Singleton.fragmentMask.setPharmacyArray(null)
                         addFragment(Singleton.fragmentMask)

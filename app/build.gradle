@@ -47,8 +47,6 @@ dependencies {
     // 네이버 지도 SDK
     implementation 'com.naver.maps:map-sdk:3.7.1'
 
-    // 위치 반환
-    //implementation("com.google.android.gms:play-services-location:16.0.0")
     // google map api & location
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
