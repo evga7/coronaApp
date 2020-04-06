@@ -108,13 +108,12 @@ class MainActivity : AppCompatActivity() {
                 if (newTab.id == R.id.mask)
                 {
                     Singleton.backframent =0
-
                     if(Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
                         // 사용자 인근 마스크 판매점 얻고 맵에 그림
                         Singleton.search = false
                         Singleton.getPharmacyData(
                             0.0,
-                            0.0
+                            0.0,this@MainActivity,this@MainActivity
                         )
                     }
                     else { // GPS 가 켜져 있지 않은 경우

@@ -1,12 +1,15 @@
 package com.HLB.coronaapp
 
+import android.content.Context
 import android.location.LocationManager
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.HLB.coronaapp.Mask.FragmentMask
 import com.HLB.coronaapp.Mask.GpsLocation
 import com.HLB.coronaapp.Mask.Pharmacy
 import com.HLB.coronaapp.korea.FragmentKorea
+import com.HLB.coronaapp.world.CustomProgressCircle
 import com.HLB.coronaapp.world.Information
 import com.example.coronaapp.R
 import com.naver.maps.geometry.LatLng
@@ -39,13 +42,15 @@ class Singleton {
         lateinit var Activity: AppCompatActivity
         var search: Boolean = true
 
+        val progressCircle = CustomProgressCircle()
         // 사용자 기기의 위치 정보를 받아올 객체 인스턴스
         private var gpsLocation: GpsLocation? = null
 
         var nDialog: Boolean = true
 
         //공공데이터 정보를 얻어옴.
-        fun getPharmacyData(latitude:Double, longitude:Double) {
+
+        fun getPharmacyData(latitude:Double, longitude:Double,act: AppCompatActivity, context: Context) {
 
             var lat: Double = latitude
             var lng: Double = longitude
@@ -64,7 +69,13 @@ class Singleton {
             }
 
             class GetPharmacy: AsyncTask<Void, Void, Void>() {
+                val dialogContext : Context = context
+                val currentActivity:AppCompatActivity = act
 
+                override fun onPreExecute() {
+                    super.onPreExecute()
+                    progressCircle.show(dialogContext)
+                }
                 // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
                 override fun doInBackground(vararg params: Void?): Void? {
 
@@ -149,6 +160,7 @@ class Singleton {
 
                 // doInBackground 작업이 끝나면 실행되는 메서드.
                 override fun onPostExecute(result: Void?) {
+                    progressCircle.dialog.dismiss()
                     super.onPostExecute(result)
                     fragmentMask.setLatLng(
                         userLatLng
