@@ -81,11 +81,9 @@ class MainActivity : AppCompatActivity() {
                 newTab: AnimatedBottomBar.Tab
             ): Boolean {
                 if (newTab.id == R.id.korea) {
-                    currentfragment = FragmentKorea()
+                    currentfragment = FragmentKorea.Companion.newInstance()
                     Singleton.backframent=0
                     addFragment(currentfragment)
-                    // e.g. show a dialog
-
                 }
                 if (newTab.id == R.id.world)
                 {
@@ -105,9 +103,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 if (newTab.id == R.id.mask)
                 {
-//                    Singleton.backframent=0
-//                    currentfragment = FragmentMask()
-//                    addFragment(currentfragment)
+                    Singleton.backframent=0
+
                     if(Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
                         // 사용자 인근 마스크 판매점 얻고 맵에 그림
                         Singleton.search = false
@@ -115,7 +112,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     else { // GPS 가 켜져 있지 않은 경우
                         // 강남역 좌표
-                        Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
+                        Singleton.userLatLng =
+                            com.naver.maps.geometry.LatLng(37.49796323, 127.02779767)
                         Singleton.fragmentMask.setLatLng(Singleton.userLatLng)
                         Singleton.fragmentMask.setPharmacyArray(null)
                         addFragment(Singleton.fragmentMask)
@@ -182,7 +180,7 @@ class MainActivity : AppCompatActivity() {
         val view = inflater.inflate(R.layout.notice_dialog, null)
 
         val locationDialog = AlertDialog.Builder(this@MainActivity)
-            .setMessage("\n\n마스크 재고 현황을 확인하기 위해서는\n" +
+                locationDialog.setMessage("\n\n마스크 재고 현황을 확인하기 위해서는\n" +
                     "\"위치 정보\"를 사용으로 설정해주셔야 합니다." +
                     "\n\n\n \"위치 정보\"를 설정해주시겠습니까? ")
             .setPositiveButton("예") { dialog, which ->

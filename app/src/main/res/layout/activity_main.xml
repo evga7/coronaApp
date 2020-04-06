@@ -29,6 +29,7 @@
         app:abb_indicatorLocation="top"
         app:abb_indicatorMargin="16dp"
         app:abb_indicatorHeight="4dp"
+        app:abb_textSize="15dp"
         app:abb_tabs="@menu/menu_bottomnavigationview"
         app:abb_selectedIndex="0" />
 

@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:overScrollMode="never"
         >
 
 
@@ -90,7 +91,7 @@
                         android:text="국가"
                         android:textColor="#FFFFFF"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="16sp" />
+                        android:textSize="16dp" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -99,7 +100,7 @@
                         android:text="확진자"
                         android:textColor="#FFFFFF"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="16sp" />
+                        android:textSize="16dp" />
 
 
                     <TextView
@@ -109,7 +110,7 @@
                         android:text="사망자"
                         android:textColor="#FFFFFF"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="16sp" />
+                        android:textSize="16dp" />
 
 
                     <TextView
@@ -119,7 +120,7 @@
                         android:text="회복자"
                         android:textColor="#FFFFFF"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="16sp" />
+                        android:textSize="16dp" />
 
                 </TableRow>
 
@@ -137,7 +138,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="16sp" />
+                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/b"
@@ -145,7 +146,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="16sp" />
+                        android:textSize="16dp" />
 
 
                     <TextView
@@ -154,7 +155,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="16sp" />
+                        android:textSize="16dp" />
 
 
                     <TextView
@@ -163,7 +164,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="16sp" />
+                        android:textSize="16dp" />
 
 
 
@@ -196,7 +197,7 @@
                     android:layout_weight="0.4"
                     android:gravity="center_horizontal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -205,7 +206,7 @@
                     android:text="국가"
                     android:textColor="#FFFFFF"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -214,7 +215,7 @@
                     android:text="확진자"
                     android:textColor="#FFFFFF"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
 
                 <TextView
@@ -224,7 +225,7 @@
                     android:text="사망자"
                     android:textColor="#FFFFFF"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
 
                 <TextView
@@ -234,7 +235,7 @@
                     android:text="회복자"
                     android:textColor="#FFFFFF"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
             </TableRow>
             </TableLayout>
@@ -249,6 +250,7 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/round_table_bottom"
 
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

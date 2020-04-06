@@ -73,7 +73,7 @@
             android:layout_height="14dp"
             android:layout_marginLeft="5dp"
             android:layout_gravity="center|end"
-            app:srcCompat="@drawable/closeicon" />
+            app:srcCompat="@drawable/redclose4" />
 
     </LinearLayout>
 
@@ -94,7 +94,7 @@
             android:layout_height="10dp"
             android:layout_gravity="top|end"
             android:layout_margin="9dp"
-            app:srcCompat="@drawable/closeicon2"/>
+            app:srcCompat="@drawable/closeicon"/>
     </FrameLayout>
 
 </FrameLayout>

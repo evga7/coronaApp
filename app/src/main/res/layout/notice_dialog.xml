@@ -4,4 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="공지 사항"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/noticeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:text="
+판매정보 출처는 건강보험심사평가원 입니다.
+    \n\n5 - 10분의 오차가 있을 수 있으므로 마스크 수량 정보는 참고만을 부탁드리겠습니다.
+    \n\n화면상단 요일별 구매 가능 출생년도 끝자리를 꼭 확인해주세요.
+    \n\n위치 설정이 되어 있지 않다면 찾고자 하는 장소를 한 번 터치 후 찾기 버튼을 눌러주세요." />
 </LinearLayout>

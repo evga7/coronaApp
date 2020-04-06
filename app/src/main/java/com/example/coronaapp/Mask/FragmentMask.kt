@@ -261,13 +261,7 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
         // 여기가 문제.
         val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.notice_dialog, null)
-
         val alertDialog = AlertDialog.Builder(mContext)
-            .setTitle("공지 사항")
-            .setMessage("\n\n판매정보 출처는 \"건강보험심사평가원\" 입니다." +
-                    "\n\n5 - 10분의 오차가 있을 수 있으므로 마스크 수량 정보는 참고만을 부탁드리겠습니다." +
-                    "\n\n화면상단 요일별 구매 가능 출생년도 끝자리를 꼭 확인해주세요." +
-                    "\n\n\"위치 설정\"이 되어 있지 않다면 찾고자 하는 장소를 한 번 터치 후 찾기 버튼을 눌러주세요.")
             .setPositiveButton("확 인") { dialog, which ->
             }
             //.setNeutralButton("취소", null)

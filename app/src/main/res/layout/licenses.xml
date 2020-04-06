@@ -155,7 +155,7 @@ https://github.com/jrvansuita/MaterialAbout\n\n " />
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginRight="10dp"
-                        app:srcCompat="@drawable/closeicon2" />
+                        app:srcCompat="@drawable/closeicon" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -165,7 +165,46 @@ https://github.com/jrvansuita/MaterialAbout\n\n " />
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
 
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        app:srcCompat="@drawable/worldicon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Icon made By Vectors Market from www.flaticon.com" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        app:srcCompat="@drawable/redclose4" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Icon made By  By Pixel perfect from www.flaticon.com" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
