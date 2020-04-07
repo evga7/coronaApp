@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.HLB.coronaapp.world.worldadata.Information
+import com.HLB.coronaapp.world.worldData.Information
 import com.HLB.coronaapp.R
 import kotlinx.android.synthetic.main.world_list.view.*
 

@@ -1,4 +1,4 @@
-package com.HLB.coronaapp.world.worldadata
+package com.HLB.coronaapp.world.worldData
 
 fun CountryTrans(c:String):String =
     when{
@@ -207,5 +207,10 @@ fun CountryTrans(c:String):String =
         c == "CAR" -> "중앙아프리카공화국"
         c == "St. Barth" -> "생바르텔레미"
         c == "Bangladesh" -> "방글라데시"
+        c == "South Sudan" -> "남수단"
+        c == "Saint Pierre Miquelon" -> "세인트 피에르 미퀠론"
+        c == "Falkland Islands" -> "포틀랜드\n제도"
+        c == "Western Sahara" -> "서사하라"
+        c == "Sao Tome and Principe" -> "상투메프린시페"
         else -> c
     }
