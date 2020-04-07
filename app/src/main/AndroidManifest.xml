@@ -20,7 +20,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/poweroverwhelming"
-        android:label="@string/app_name"
+        android:label="코로나돋보기"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
