@@ -142,9 +142,6 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (newTab.id == R.id.mask) {
                         connectState.register()
-                        if (Singleton.isNetworkConnected == false) {
-
-                        }
                         connectState.unregister()
                         Singleton.backframent = 0
                         if (Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
@@ -155,13 +152,14 @@ class MainActivity : AppCompatActivity() {
                                 0.0, this@MainActivity
                             )
                         } else { // GPS 가 켜져 있지 않은 경우
-                            // 강남역 좌표
-                            Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
-                            Singleton.fragmentMask.setLatLng(
-                                Singleton.userLatLng
-                            )
-                            Singleton.fragmentMask.setPharmacyArray(null)
-                            addFragment(Singleton.fragmentMask)
+                            showLocationDialog()
+//                            // 강남역 좌표
+//                            Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
+//                            Singleton.fragmentMask.setLatLng(
+//                                Singleton.userLatLng
+//                            )
+//                            Singleton.fragmentMask.setPharmacyArray(null)
+                           addFragment(currentfragment)
                         }
 
                     }
