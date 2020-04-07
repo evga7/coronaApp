@@ -40,14 +40,14 @@
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/infoDialogText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="앱을 업데이트 해주세요" />
+        />
 
     <Button
         android:id="@+id/updateOkButton"

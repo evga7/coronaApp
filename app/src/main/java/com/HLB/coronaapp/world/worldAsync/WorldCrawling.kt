@@ -188,7 +188,7 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
 
         currentActivity.supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
 }
