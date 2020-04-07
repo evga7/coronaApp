@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import com.HLB.coronaapp.singleton.Singleton
 import com.HLB.coronaapp.help.profile.DevProfile1
 import com.HLB.coronaapp.help.profile.DevProfile2

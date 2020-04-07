@@ -11,7 +11,7 @@ import android.os.Build
 import android.view.LayoutInflater
 import androidx.annotation.NonNull
 import androidx.core.content.res.ResourcesCompat
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import kotlinx.android.synthetic.main.progress_circle.view.*
 
 class CustomProgressCircle {

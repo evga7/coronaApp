@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import com.HLB.coronaapp.singleton.Singleton
 import com.HLB.coronaapp.world.recyclerview.WorldAdapter
 import kotlinx.android.synthetic.main.fragment_world.view.*

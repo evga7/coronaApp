@@ -10,7 +10,7 @@ import com.HLB.coronaapp.mask.Pharmacy
 import com.HLB.coronaapp.korea.FragmentKorea
 import com.HLB.coronaapp.progresscircle.CustomProgressCircle
 import com.HLB.coronaapp.world.worldadata.Information
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import com.naver.maps.geometry.LatLng
 import org.json.JSONObject
 import java.io.BufferedReader

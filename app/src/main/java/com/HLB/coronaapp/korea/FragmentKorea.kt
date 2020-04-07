@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import com.HLB.coronaapp.singleton.Singleton
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import com.vansuita.materialabout.builder.AboutBuilder
 import com.vansuita.materialabout.views.AboutView
 

@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import com.HLB.coronaapp.singleton.Singleton
 import com.HLB.coronaapp.korea.FragmentKorea
 import com.HLB.coronaapp.progresscircle.CustomProgressCircle

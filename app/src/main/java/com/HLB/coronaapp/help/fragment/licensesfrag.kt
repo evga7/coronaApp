@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.R
-import com.HLB.coronaapp.help.profile.DevProfile1
-import com.HLB.coronaapp.help.profile.DevProfile2
-import com.HLB.coronaapp.help.profile.DevProfile3
-import kotlinx.android.synthetic.main.developer.view.*
+import com.HLB.coronaapp.R
+
 
 class licensesfrag : Fragment() {
 

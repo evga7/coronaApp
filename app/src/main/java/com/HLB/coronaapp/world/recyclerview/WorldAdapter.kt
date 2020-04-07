@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.HLB.coronaapp.world.worldadata.Information
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import kotlinx.android.synthetic.main.world_list.view.*
 
 class WorldAdapter(val worldItems:ArrayList<Information>) : RecyclerView.Adapter<WorldAdapter.WorldViewHolder>() {
