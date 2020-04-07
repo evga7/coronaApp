@@ -23,7 +23,7 @@ class DevProfile2: Fragment() {
             .setCover(R.mipmap.profile_cover)
             .setName("이영남")
             .setSubTitle("Sejong University")
-            .setBrief("")
+            .setBrief("주니어 개발자")
             .setAppIcon(R.mipmap.ic_launcher)
             .addGitHubLink("flylofty")
             .addEmailLink("ljh596088@sju.ac.kr")

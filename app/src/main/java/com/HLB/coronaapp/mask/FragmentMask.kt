@@ -77,8 +77,6 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("onCreate","${savedInstanceState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
         if (Singleton.nDialog) {
             showNoticeDialog()
             Singleton.nDialog = false
@@ -191,8 +189,6 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-
-        Log.d("onSaveInstanceState","${outState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
         mapView.onSaveInstanceState(outState)
     }

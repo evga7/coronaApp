@@ -60,8 +60,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.d("onSaveInstanceState","${savedInstanceState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
         // locationManager 를 이용하려면 메인액티비티에서 getSystemService 를 받아와야 함.
         Singleton.locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         Singleton.Activity = this
@@ -119,13 +117,14 @@ class MainActivity : AppCompatActivity() {
                         )
                     }
                     else { // GPS 가 켜져 있지 않은 경우
-                        // 강남역 좌표
-                        Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
-                        Singleton.fragmentMask.setLatLng(
-                            Singleton.userLatLng
-                        )
-                        Singleton.fragmentMask.setPharmacyArray(null)
-                        addFragment(Singleton.fragmentMask)
+                        showLocationDialog()
+//                        // 강남역 좌표
+//                        Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
+//                        Singleton.fragmentMask.setLatLng(
+//                            Singleton.userLatLng
+//                        )
+//                        Singleton.fragmentMask.setPharmacyArray(null)
+//                        addFragment(Singleton.fragmentMask)
                     }
 
                 }
@@ -209,11 +208,6 @@ class MainActivity : AppCompatActivity() {
         locationDialog.setCancelable(false)
         locationDialog.setView(view)
         locationDialog.show()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d("onSaveInstanceState","${outState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
 }

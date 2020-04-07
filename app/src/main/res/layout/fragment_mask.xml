@@ -29,7 +29,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/daycheck" />
+                app:srcCompat="@drawable/check3" />
 
         </LinearLayout>
 

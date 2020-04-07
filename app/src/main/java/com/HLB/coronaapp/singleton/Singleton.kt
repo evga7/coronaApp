@@ -49,7 +49,6 @@ class Singleton {
         var nDialog: Boolean = true
 
         //공공데이터 정보를 얻어옴.
-
         fun getPharmacyData(latitude:Double, longitude:Double, context: Context) {
 
             progressCircle.show(context)
@@ -57,28 +56,36 @@ class Singleton {
             var lat: Double = latitude
             var lng: Double = longitude
 
-            if(isGpsOn()) {
-                // 사용자 위치 얻기
-                if(!search) {
-                    while(lat == 0.0 && lng == 0.0) {
-                        gpsLocation = GpsLocation(Activity)
-                        userLatLng = LatLng(gpsLocation!!.latitude, gpsLocation!!.longitude)
-                        lat = userLatLng.latitude
-                        lng = userLatLng.longitude
-                    }
-                    // Log.d("isGpsOn&&!search", " GPS 정보를 가져옵니다!!!!!!!!!!! ${lat}, ${lng}")
-                }
-            }
+//            if(isGpsOn()) {
+//                // 사용자 위치 얻기
+//                if(!search) {
+//                    while(lat == 0.0 && lng == 0.0) {
+//                        gpsLocation = GpsLocation(Activity)
+//                        userLatLng = LatLng(gpsLocation!!.latitude, gpsLocation!!.longitude)
+//                        lat = userLatLng.latitude
+//                        lng = userLatLng.longitude
+//                    }
+//                }
+//            }
 
             class GetPharmacy: AsyncTask<Void, Void, Void>() {
 
                 override fun onPreExecute() {
                     super.onPreExecute()
+                    if(isGpsOn()) {
+                        // 사용자 위치 얻기
+                        if(!search) {
+                            while(lat == 0.0 && lng == 0.0) {
+                                gpsLocation = GpsLocation(Activity)
+                                userLatLng = LatLng(gpsLocation!!.latitude, gpsLocation!!.longitude)
+                                lat = userLatLng.latitude
+                                lng = userLatLng.longitude
+                            }
+                        }
+                    }
                 }
                 // 새로운 스레드가 발생하여 일반 스레드에서 처리가 됨.
                 override fun doInBackground(vararg params: Void?): Void? {
-
-                    // Log.d("order", "doInBackground 시작!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ${lat}, ${lng}")
 
                     var temp: String=""
                     try {
