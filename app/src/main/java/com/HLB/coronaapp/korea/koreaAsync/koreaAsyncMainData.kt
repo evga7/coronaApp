@@ -1,5 +1,6 @@
 package com.HLB.coronaapp.korea.koreaAsync
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import com.HLB.coronaapp.R
 import com.HLB.coronaapp.singleton.Singleton
 import com.HLB.coronaapp.korea.FragmentKorea
 import com.HLB.coronaapp.progresscircle.CustomProgressCircle
+import kotlinx.android.synthetic.main.update_dialog.view.*
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
@@ -102,9 +104,7 @@ class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment
             val percentage = elts3.select("p.citytit")
             temp3.add(FragmentKorea.CityItem(elts3.select("h4.cityname").text(),num[0].text(),before_num.text(),num[1].text(),num[2].text(),num[3].text(),percentage.text()))
         }
-
         Singleton.coList3=temp3
-
         return temp
     }
 
@@ -112,11 +112,94 @@ class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment
         //문서제목 출력
         super.onPostExecute(result)
         progressCircle.dialog.dismiss()
+        var i =0
+        var flag=0
+        for (i in 0..12)
+        {
+            if (i==4)
+            {
+                if (Singleton.coList?.get(4)!!.title=="")
+                {
+                    flag=1
+                    break
+                }
+            }
+            else if ((i<4||(i>4&&i<8)))
+            {
+                if (Singleton.coList?.get(i)!!.title==""|| Singleton.coList?.get(i)!!.num==""|| Singleton.coList?.get(i)!!.before=="") {
+                    flag = 1
+                    break
+                }
+            }
+            else if (i>7)
+            {
+                if (Singleton.coList?.get(i)!!.title==""|| Singleton.coList?.get(i)!!.num=="")
+                {
+                    flag=1
+                    break
+                }
+            }
+        }
+        if (Singleton.coList?.size!=13||Singleton.coList2?.size!=18||Singleton.coList3?.size!=18)
+        {
+            flag=1;
+        }
+        if (flag==0) {
+            for (i in 0..Singleton.coList2!!.size - 1) {
+                if (Singleton.coList2?.get(i)!!.title == "" || Singleton.coList2?.get(i)!!.num == "" || Singleton.coList2?.get(
+                        i
+                    )!!.before == ""
+                ) {
+                    flag = 1
+                    break
+                }
+            }
+        }
+        if (flag==0) {
+            for (i in 0..Singleton.coList3!!.size - 1) {
+                if (i == 17) {
+                    if (Singleton.coList3?.get(i)!!.city == "" || Singleton.coList3?.get(i)!!.num == "" || Singleton.coList3?.get(
+                            i
+                        )!!.before == "" ||
+                        Singleton.coList3?.get(i)!!.before == "" || Singleton.coList3?.get(i)!!.dead == "" || Singleton.coList3?.get(
+                            i
+                        )!!.unIsolated == "" ||
+                        Singleton.coList3?.get(i)!!.cityPencentage == ""
+                    ) {
+                        flag = 1
+                        break
+                    }
+                }
+                if (Singleton.coList3?.get(i)!!.city == "" || Singleton.coList3?.get(i)!!.num == "" || Singleton.coList3?.get(
+                        i
+                    )!!.before == "" ||
+                    Singleton.coList3?.get(i)!!.before == "" || Singleton.coList3?.get(i)!!.dead == "" || Singleton.coList3?.get(
+                        i
+                    )!!.unIsolated == "" ||
+                    Singleton.coList3?.get(i)!!.incidenceRate == "" || Singleton.coList3?.get(i)!!.cityPencentage == ""
+                ) {
+                    flag = 1
+                    break
+                }
+            }
+        }
+        if (flag==1)
+        {
+            val dialogView =currentActivity.layoutInflater.inflate(R.layout.update_dialog, null)
 
-        currentActivity.supportFragmentManager.beginTransaction()
-            //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-            .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
-            .commitAllowingStateLoss()
+            val builder = AlertDialog.Builder(dialogContext).setView(dialogView)
+            builder.show()
+            dialogView.updateOkButton.setOnClickListener {
+                System.exit(0)
+            }
+
+        }
+        else {
+            currentActivity.supportFragmentManager.beginTransaction()
+                //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+                .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
+                .commitAllowingStateLoss()
+        }
 
     }
 }
