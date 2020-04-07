@@ -3,8 +3,11 @@ package com.HLB.coronaapp.korea.koreaAsync
 import android.app.AlertDialog
 import android.content.Context
 import android.os.AsyncTask
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.HLB.coronaapp.NetworkConnectionState
 import com.HLB.coronaapp.R
 import com.HLB.coronaapp.singleton.Singleton
 import com.HLB.coronaapp.korea.FragmentKorea
@@ -22,6 +25,9 @@ class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment
     val dialogContext : Context = context
     val currentActivity:AppCompatActivity = act
     val fragment:Fragment = frg
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    val connectState = NetworkConnectionState(dialogContext)
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 
     override fun onPreExecute() {
         super.onPreExecute()
@@ -189,6 +195,7 @@ class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment
 
             val builder = AlertDialog.Builder(dialogContext).setView(dialogView)
             builder.show()
+            dialogView.infoDialogText.setText("앱을 업데이트 해주세요")
             dialogView.updateOkButton.setOnClickListener {
                 System.exit(0)
             }

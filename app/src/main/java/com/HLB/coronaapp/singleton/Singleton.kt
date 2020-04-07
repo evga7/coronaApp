@@ -22,7 +22,10 @@ class Singleton {
 
     // 동반자 객체, 코틀린에는 static 이 없음 대신 그 대안으로 object 를 제공함.
     companion object {
+        // 네트워크 상태
+        var isNetworkConnected: Boolean? = null
 
+        //world
         var coronaList: ArrayList<Information>? = null
         var coronaFlag:Boolean = false
         var countrySum:String? = null

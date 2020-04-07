@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
@@ -25,12 +28,17 @@ import com.HLB.coronaapp.world.worldAsync.WorldCrawling
 import com.HLB.coronaapp.R
 import com.naver.maps.geometry.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.update_dialog.view.*
 import nl.joery.animatedbottombar.AnimatedBottomBar
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    val connectState = NetworkConnectionState(this@MainActivity)
+
 
     var currentfragment=Fragment()
     var mBackWait:Long = 0
@@ -56,105 +64,122 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.d("onSaveInstanceState","${savedInstanceState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-        // locationManager 를 이용하려면 메인액티비티에서 getSystemService 를 받아와야 함.
-        Singleton.locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        Singleton.Activity = this
-
-        // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김 ==> 마스크 쪽을 옮길 수도 있음.
-        if(!Singleton.isGpsOn()) {
-            showLocationDialog()
+        val cm: ConnectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo: NetworkInfo? = cm.activeNetworkInfo ?: null
+        if (networkInfo==null)
+        {
+            val dialogView =this.layoutInflater.inflate(R.layout.update_dialog, null)
+            val builder = android.app.AlertDialog.Builder(this).setView(dialogView)
+            builder.show()
+            dialogView.infoDialogText.setText("인터넷이 접속되어있어야 가능합니다\n인터넷에 접속해주세요.")
+            dialogView.updateOkButton.setOnClickListener {
+                System.exit(0)
+            }
         }
+        else {
+            if (Singleton.coList == null) {
+                val fragment = FragmentKorea.Companion.newInstance()
+                currentfragment = FragmentKorea()
+                koreaAsyncMainData(
+                    this,
+                    this,
+                    fragment
+                ).execute("http://ncov.mohw.go.kr")
+            }
+            Log.d("onSaveInstanceState", "${savedInstanceState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-        content = findViewById(R.id.frameLayout)
+            // locationManager 를 이용하려면 메인액티비티에서 getSystemService 를 받아와야 함.
+            Singleton.locationManager =
+                getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            Singleton.Activity = this
 
-        //Singleton()
-
-        navigationView.setOnTabInterceptListener(object : AnimatedBottomBar.OnTabInterceptListener {
-            override fun onTabIntercepted(
-                lastIndex: Int,
-                lastTab: AnimatedBottomBar.Tab?,
-                newIndex: Int,
-                newTab: AnimatedBottomBar.Tab
-            ): Boolean {
-                if (newTab.id == R.id.korea) {
-                    currentfragment = FragmentKorea.Companion.newInstance()
-                    Singleton.backframent =0
-                    addFragment(currentfragment)
-                }
-                if (newTab.id == R.id.world)
-                {
-                    currentfragment = FragmentWorld()
-                    Singleton.backframent =0
-                    if(Singleton.coronaList == null){
-                        try {
-                            WorldCrawling(
-                                this@MainActivity,
-                                this@MainActivity,
-                                currentfragment
-                            ).execute("https://www.worldometers.info/coronavirus/")
-                        }catch (e : IOException) {
-                            e.printStackTrace()
-                        }
-                    }
-                    else{
-                        addFragment(currentfragment)
-                    }
-
-                }
-                if (newTab.id == R.id.mask)
-                {
-                    Singleton.backframent =0
-                    if(Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
-                        // 사용자 인근 마스크 판매점 얻고 맵에 그림
-                        Singleton.search = false
-                        Singleton.getPharmacyData(
-                            0.0,
-                            0.0,this@MainActivity
-                        )
-                    }
-                    else { // GPS 가 켜져 있지 않은 경우
-                        // 강남역 좌표
-                        Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
-                        Singleton.fragmentMask.setLatLng(
-                            Singleton.userLatLng
-                        )
-                        Singleton.fragmentMask.setPharmacyArray(null)
-                        addFragment(Singleton.fragmentMask)
-                    }
-
-                }
-                if (newTab.id == R.id.help)
-                {
-                    Singleton.backframent =0
-                    currentfragment = FragmentHelp()
-                    addFragment(currentfragment)
-                }
-                return true
+            // 위치가 켜져 있지 않은 경우 위치 설정창으로 넘김 ==> 마스크 쪽을 옮길 수도 있음.
+            if (!Singleton.isGpsOn()) {
+                showLocationDialog()
             }
 
-        })
+            content = findViewById(R.id.frameLayout)
+
+            //Singleton()
+
+            navigationView.setOnTabInterceptListener(object :
+                AnimatedBottomBar.OnTabInterceptListener {
+                override fun onTabIntercepted(
+                    lastIndex: Int,
+                    lastTab: AnimatedBottomBar.Tab?,
+                    newIndex: Int,
+                    newTab: AnimatedBottomBar.Tab
+                ): Boolean {
+                    if (newTab.id == R.id.korea) {
+                        currentfragment = FragmentKorea.Companion.newInstance()
+                        Singleton.backframent = 0
+                        addFragment(currentfragment)
+                    }
+                    if (newTab.id == R.id.world) {
+                        currentfragment = FragmentWorld()
+                        Singleton.backframent = 0
+                        if (Singleton.coronaList == null) {
+                            try {
+                                WorldCrawling(
+                                    this@MainActivity,
+                                    this@MainActivity,
+                                    currentfragment
+                                ).execute("https://www.worldometers.info/coronavirus/")
+                            } catch (e: IOException) {
+                                e.printStackTrace()
+                            }
+                        } else {
+                            addFragment(currentfragment)
+                        }
+
+                    }
+                    if (newTab.id == R.id.mask) {
+                        connectState.register()
+                        if (Singleton.isNetworkConnected == false) {
+
+                        }
+                        connectState.unregister()
+                        Singleton.backframent = 0
+                        if (Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
+                            // 사용자 인근 마스크 판매점 얻고 맵에 그림
+                            Singleton.search = false
+                            Singleton.getPharmacyData(
+                                0.0,
+                                0.0, this@MainActivity
+                            )
+                        } else { // GPS 가 켜져 있지 않은 경우
+                            // 강남역 좌표
+                            Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
+                            Singleton.fragmentMask.setLatLng(
+                                Singleton.userLatLng
+                            )
+                            Singleton.fragmentMask.setPharmacyArray(null)
+                            addFragment(Singleton.fragmentMask)
+                        }
+
+                    }
+                    if (newTab.id == R.id.help) {
+                        Singleton.backframent = 0
+                        currentfragment = FragmentHelp()
+                        addFragment(currentfragment)
+                    }
+                    return true
+                }
+
+            })
 
 
-        val fragment = FragmentKorea.Companion.newInstance()
-
-        if (Singleton.coList == null){
-            currentfragment= FragmentKorea()
-            koreaAsyncMainData(
-                this,
-                this,
-                fragment
-            ).execute("http://ncov.mohw.go.kr")
+            //addFragment(fragment)
+            //사용자에게 위치 권한 설정을 물어봄.
+            checkPermission()
         }
-
-        //addFragment(fragment)
-        //사용자에게 위치 권한 설정을 물어봄.
-        checkPermission()
 
     }
 
@@ -162,8 +187,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName).commit()
-
-
     }
 
 
@@ -215,6 +238,8 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         Log.d("onSaveInstanceState","${outState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
+
+
 
 }
 
