@@ -1,4 +1,4 @@
-package com.HLB.coronaapp.world
+package com.HLB.coronaapp.progresscircle
 
 import android.app.Dialog
 import android.content.Context

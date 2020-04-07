@@ -1,16 +1,15 @@
-package com.HLB.coronaapp
+package com.HLB.coronaapp.singleton
 
 import android.content.Context
 import android.location.LocationManager
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.HLB.coronaapp.Mask.FragmentMask
-import com.HLB.coronaapp.Mask.GpsLocation
-import com.HLB.coronaapp.Mask.Pharmacy
+import com.HLB.coronaapp.mask.FragmentMask
+import com.HLB.coronaapp.mask.GpsLocation
+import com.HLB.coronaapp.mask.Pharmacy
 import com.HLB.coronaapp.korea.FragmentKorea
-import com.HLB.coronaapp.world.CustomProgressCircle
-import com.HLB.coronaapp.world.Information
+import com.HLB.coronaapp.progresscircle.CustomProgressCircle
+import com.HLB.coronaapp.world.worldadata.Information
 import com.example.coronaapp.R
 import com.naver.maps.geometry.LatLng
 import org.json.JSONObject
@@ -42,7 +41,8 @@ class Singleton {
         lateinit var Activity: AppCompatActivity
         var search: Boolean = true
 
-        val progressCircle = CustomProgressCircle()
+        val progressCircle =
+            CustomProgressCircle()
         // 사용자 기기의 위치 정보를 받아올 객체 인스턴스
         private var gpsLocation: GpsLocation? = null
 

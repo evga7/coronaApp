@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.HLB.coronaapp.MainActivity
 import com.example.coronaapp.R
-import com.HLB.coronaapp.Singleton
+import com.HLB.coronaapp.singleton.Singleton
 import com.HLB.coronaapp.help.profile.DevProfile1
 import com.HLB.coronaapp.help.profile.DevProfile2
 import com.HLB.coronaapp.help.profile.DevProfile3

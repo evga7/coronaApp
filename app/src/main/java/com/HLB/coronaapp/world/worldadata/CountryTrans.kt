@@ -1,4 +1,4 @@
-package com.HLB.coronaapp.world
+package com.HLB.coronaapp.world.worldadata
 
 fun CountryTrans(c:String):String =
     when{

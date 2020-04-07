@@ -1,12 +1,14 @@
-package com.HLB.coronaapp.world
+package com.HLB.coronaapp.world.worldAsync
 
 import android.content.Context
 import android.os.AsyncTask
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.HLB.coronaapp.progresscircle.CustomProgressCircle
 import com.example.coronaapp.R
-import com.HLB.coronaapp.Singleton
+import com.HLB.coronaapp.singleton.Singleton
+import com.HLB.coronaapp.world.worldadata.CountryTrans
+import com.HLB.coronaapp.world.worldadata.Information
 import org.jsoup.Jsoup
 import java.io.IOException
 import kotlin.collections.ArrayList
@@ -88,7 +90,8 @@ class WorldCrawling(act:AppCompatActivity, context: Context,frg:Fragment) : Asyn
                 totalRecovered = datum.select("td")[5].text().trim()
 
                 // 영어 -> 한글
-                country = CountryTrans(country)
+                country =
+                    CountryTrans(country)
 
                 if(totalCases.length == 0){
                      totalCases += '0'

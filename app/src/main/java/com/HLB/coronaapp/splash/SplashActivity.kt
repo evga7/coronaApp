@@ -1,9 +1,10 @@
-package com.HLB.coronaapp
+package com.HLB.coronaapp.splash
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import com.HLB.coronaapp.MainActivity
 
 class SplashActivity : AppCompatActivity() {
 

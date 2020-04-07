@@ -15,14 +15,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
-import com.HLB.coronaapp.Mask.FragmentMask
 import com.HLB.coronaapp.help.FragmentHelp
 import com.HLB.coronaapp.korea.FragmentKorea
 import com.HLB.coronaapp.korea.koreaAsync.koreaAsyncMainData
+import com.HLB.coronaapp.singleton.Singleton
 import com.HLB.coronaapp.world.FragmentWorld
-import com.HLB.coronaapp.world.WorldCrawling
+import com.HLB.coronaapp.world.worldAsync.WorldCrawling
 import com.example.coronaapp.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.naver.maps.geometry.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
 import nl.joery.animatedbottombar.AnimatedBottomBar
