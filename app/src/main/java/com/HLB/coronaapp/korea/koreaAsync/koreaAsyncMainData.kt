@@ -116,7 +116,7 @@ class koreaAsyncMainData(act: AppCompatActivity, context: Context, frg: Fragment
         currentActivity.supportFragmentManager.beginTransaction()
             //.setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.frameLayout, fragment, fragment.javaClass.simpleName)
-            .commit()
+            .commitAllowingStateLoss()
 
     }
 }

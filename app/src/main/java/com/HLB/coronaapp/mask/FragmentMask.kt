@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,6 +76,8 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
     // 초기화 리소스들이 들어가는 곳
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("onCreate","${savedInstanceState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
         if (Singleton.nDialog) {
             showNoticeDialog()
@@ -188,6 +191,9 @@ class FragmentMask : Fragment(), OnMapReadyCallback {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+
+        Log.d("onSaveInstanceState","${outState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
         mapView.onSaveInstanceState(outState)
     }
 

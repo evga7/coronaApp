@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -21,7 +22,7 @@ import com.HLB.coronaapp.korea.koreaAsync.koreaAsyncMainData
 import com.HLB.coronaapp.singleton.Singleton
 import com.HLB.coronaapp.world.FragmentWorld
 import com.HLB.coronaapp.world.worldAsync.WorldCrawling
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import com.naver.maps.geometry.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
 import nl.joery.animatedbottombar.AnimatedBottomBar
@@ -58,6 +59,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Log.d("onSaveInstanceState","${savedInstanceState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
         // locationManager 를 이용하려면 메인액티비티에서 getSystemService 를 받아와야 함.
         Singleton.locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -206,6 +209,11 @@ class MainActivity : AppCompatActivity() {
         locationDialog.setCancelable(false)
         locationDialog.setView(view)
         locationDialog.show()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("onSaveInstanceState","${outState} !!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 
 }

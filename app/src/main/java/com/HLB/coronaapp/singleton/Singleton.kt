@@ -61,14 +61,10 @@ class Singleton {
                 // 사용자 위치 얻기
                 if(!search) {
                     while(lat == 0.0 && lng == 0.0) {
-
-                        gpsLocation =
-                            GpsLocation(Activity)
-                        userLatLng = LatLng(
-                            gpsLocation!!.latitude, gpsLocation!!.longitude)
+                        gpsLocation = GpsLocation(Activity)
+                        userLatLng = LatLng(gpsLocation!!.latitude, gpsLocation!!.longitude)
                         lat = userLatLng.latitude
                         lng = userLatLng.longitude
-
                     }
                     // Log.d("isGpsOn&&!search", " GPS 정보를 가져옵니다!!!!!!!!!!! ${lat}, ${lng}")
                 }
@@ -181,7 +177,7 @@ class Singleton {
                                 R.id.frameLayout,
                                 fragmentMask, fragmentMask.javaClass.simpleName)
                             //.commit() // 네비게이션 누르고 바로 최근 앱 버튼을 눌렀을 때 에러가 발생할 수 있음.
-                            .commitAllowingStateLoss() // 위의 에러를 이 줄로써 해결함.
+                            .commit() // 위의 에러를 이 줄로써 해결함.
                     }
                     else {
                         fragmentMask.onMapReady(

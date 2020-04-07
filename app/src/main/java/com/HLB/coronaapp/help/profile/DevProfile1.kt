@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.coronaapp.R
+import com.HLB.coronaapp.R
 import com.vansuita.materialabout.builder.AboutBuilder
 import com.vansuita.materialabout.views.AboutView
 
@@ -23,7 +23,7 @@ class DevProfile1: Fragment() {
             .setCover(R.mipmap.profile_cover)
             .setName("홍원표")
             .setSubTitle("Sejong University")
-            .setBrief("초보개발자이자 취준생 입니다.")
+            .setBrief("주니어 개발")
             .setAppIcon(R.mipmap.ic_launcher)
             .addGitHubLink("evga7")
             .addEmailLink("evga7@naver.com")
