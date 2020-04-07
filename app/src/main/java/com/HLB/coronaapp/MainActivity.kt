@@ -107,8 +107,6 @@ class MainActivity : AppCompatActivity() {
 
             content = findViewById(R.id.frameLayout)
 
-            //Singleton()
-
             navigationView.setOnTabInterceptListener(object :
                 AnimatedBottomBar.OnTabInterceptListener {
                 override fun onTabIntercepted(
