@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     val connectState = NetworkConnectionState(this@MainActivity)
 
-
+    var currentId = 0
     var currentfragment=Fragment()
     var mBackWait:Long = 0
     private var permission_list = arrayOf(
@@ -121,8 +121,10 @@ class MainActivity : AppCompatActivity() {
                         currentfragment = FragmentKorea.Companion.newInstance()
                         Singleton.backframent = 0
                         addFragment(currentfragment)
+                        currentId=0
                     }
                     if (newTab.id == R.id.world) {
+                        currentId=1
                         currentfragment = FragmentWorld()
                         Singleton.backframent = 0
                         if (Singleton.coronaList == null) {
@@ -141,10 +143,12 @@ class MainActivity : AppCompatActivity() {
 
                     }
                     if (newTab.id == R.id.mask) {
+
                         connectState.register()
                         connectState.unregister()
                         Singleton.backframent = 0
-                        if (Singleton.isGpsOn()) { // GPS 가 켜져있는 경우
+                        if (Singleton.isGpsOn()) {
+                            currentId=2// GPS 가 켜져있는 경우
                             // 사용자 인근 마스크 판매점 얻고 맵에 그림
                             Singleton.search = false
                             Singleton.getPharmacyData(
@@ -153,20 +157,15 @@ class MainActivity : AppCompatActivity() {
                             )
                         } else { // GPS 가 켜져 있지 않은 경우
                             showLocationDialog()
-//                            // 강남역 좌표
-//                            Singleton.userLatLng = LatLng(37.49796323, 127.02779767)
-//                            Singleton.fragmentMask.setLatLng(
-//                                Singleton.userLatLng
-//                            )
-//                            Singleton.fragmentMask.setPharmacyArray(null)
-                           addFragment(currentfragment)
                         }
 
                     }
                     if (newTab.id == R.id.help) {
+
                         Singleton.backframent = 0
                         currentfragment = FragmentHelp()
                         addFragment(currentfragment)
+                        currentId=3
                     }
                     return true
                 }
