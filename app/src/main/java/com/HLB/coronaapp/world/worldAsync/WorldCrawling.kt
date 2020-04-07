@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import com.HLB.coronaapp.progresscircle.CustomProgressCircle
 import com.HLB.coronaapp.R
 import com.HLB.coronaapp.singleton.Singleton
-import com.HLB.coronaapp.world.worldadata.CountryTrans
-import com.HLB.coronaapp.world.worldadata.Information
+import com.HLB.coronaapp.world.worldData.CountryTrans
+import com.HLB.coronaapp.world.worldData.Information
 import org.jsoup.Jsoup
 import java.io.IOException
 import kotlin.collections.ArrayList

@@ -9,7 +9,7 @@ import com.HLB.coronaapp.mask.GpsLocation
 import com.HLB.coronaapp.mask.Pharmacy
 import com.HLB.coronaapp.korea.FragmentKorea
 import com.HLB.coronaapp.progresscircle.CustomProgressCircle
-import com.HLB.coronaapp.world.worldadata.Information
+import com.HLB.coronaapp.world.worldData.Information
 import com.HLB.coronaapp.R
 import com.naver.maps.geometry.LatLng
 import org.json.JSONObject
